@@ -18,6 +18,8 @@ public:
     virtual double GetPosY() = 0;
     virtual double GetPosT() = 0;
     virtual void GetPosition(double &x, double &y, double &thetaInDegs) = 0;
+
+    virtual void SetPosition(double x, double y, double thetaInDegs) = 0;
 protected:
     double *mptrPosition;
 };

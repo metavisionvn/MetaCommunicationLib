@@ -16,7 +16,11 @@ public:
     double GetPosZ();
     virtual void GetPosition(double &x, double &y, double &thetaInDegs) override;
     virtual void GetPosition(double &x, double &y, double &thetaInDegs, double &z);
-private:
+    void GetJointAngle(double &j1, double &j2, double &j3, double &j4);
+
+    void SetPosition(double x, double y, double thetaInDegs) override;
+    void SetPosition(double x, double y, double thetaInDegs, double z);
+    bool SetJointAngle(double joingAngle[], int numberJoint = 4);
 };
 }
 

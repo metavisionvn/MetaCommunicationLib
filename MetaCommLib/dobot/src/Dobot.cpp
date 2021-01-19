@@ -1,9 +1,6 @@
 #include <metacommlib/dobot/Dobot.h>
 #include <metacommlib/dobot/DobotPosition.h>
 
-#include <metacommlib/dobot/DobotType.h>
-#include <metacommlib/dobot/DobotDll.h>
-
 #include <sstream>
 #include <stdio.h>
 #include <string.h>
@@ -26,34 +23,35 @@ Dobot::~Dobot()
 
 }
 
-bool Dobot::Start()
+void Dobot::OnStart()
 {
-    if (mConnectionStatus != RobotConnect_Connected)
+    if (GetConnectionStatus() != RobotConnect_Connected)
     {
-        if (ConnectDobot(0, 115200,0,0) != DobotConnect_NoError) {
-            mConnectionStatus = RobotConnect_DisConnected;
+        RobotConnectionStatus status = RobotConnect_Undefined;
+        if (ConnectDobot(0, 115200, 0, 0) != DobotConnect_NoError) {
+            status = RobotConnect_DisConnected;
         }
         else
-            mConnectionStatus = RobotConnect_Connected;
+            status = RobotConnect_Connected;
+        SetConnectionStatus(status);
     }
-    return (mConnectionStatus == RobotConnect_Connected);
 }
 
-bool Dobot::Stop()
+void Dobot::OnStop()
 {
     DisconnectDobot();
-    return true;
+    SetConnectionStatus(RobotConnect_DisConnected);
 }
 
 bool Dobot::MovePosition(double x, double y, double thetaInDegs)
 {
     //Not change z
     double mCurPosX = 0.0, mCurPosY = 0.0, mCurPosT = 0.0, mCurPosZ = 0.0;
-    GetPosition(mCurPosX, mCurPosY, mCurPosT, mCurPosZ);
+    GetCurrentPosition(mCurPosX, mCurPosY, mCurPosT, mCurPosZ);
     return MovePosition(x, y, thetaInDegs, mCurPosZ);
 }
 
-bool Dobot::GetPosition(double &x, double &y, double &thetaInDegs, double &z)
+bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs, double &z)
 {
     if (UpdateCurrentPosition())
     {
@@ -63,6 +61,17 @@ bool Dobot::GetPosition(double &x, double &y, double &thetaInDegs, double &z)
             position->GetPosition(x, y, thetaInDegs, z);
             return true;
         }
+    }
+    return false;
+}
+
+bool Dobot::GetCurrentJointAngle(double &j1, double &j2, double &j3, double &j4)
+{
+    DobotPosition* position = dynamic_cast<DobotPosition*>(mCurrentPosition);
+    if (position != nullptr)
+    {
+        position->GetJointAngle(j1, j2, j3, j4);
+        return true;
     }
     return false;
 }
@@ -152,17 +161,15 @@ bool Dobot::UpdateCurrentPosition()
     Pose pose;
     while (GetPose(&pose) != DobotCommunicate_NoError) {
     }
-
+    ConvertDobotPoseToRobotPose(pose);
+    OnPositionChanged();
+    return true;
 }
 
 bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs)
 {
-    if (mCurrentPosition != nullptr)
-    {
-        mCurrentPosition->GetPosition(x, y, thetaInDegs);
-        return true;
-    }
-    return false;
+    double z = 0.0;
+    return GetCurrentPosition(x, y, thetaInDegs, z);
 }
 
 bool Dobot::Initialize()
@@ -231,6 +238,22 @@ bool Dobot::Initialize()
     ptpJumpParams.zLimit = 150;
     SetPTPJumpParams(&ptpJumpParams, false, NULL);
     return true;
+}
+
+void Dobot::ConvertDobotPoseToRobotPose(const Pose &dobotPose)
+{
+    //Update current position
+    DobotPosition *pos = dynamic_cast<DobotPosition*>(mCurrentPosition);
+    pos->SetPosition(dobotPose.x, dobotPose.y, dobotPose.r, dobotPose.z);
+    double jointAngle[4];
+    for (int index = 0; index < 4; index++)
+        jointAngle[index] = dobotPose.jointAngle[index];
+    pos->SetJointAngle(jointAngle);
+}
+
+void Dobot::OnDoWork()
+{
+    UpdateCurrentPosition();
 }
 
 }

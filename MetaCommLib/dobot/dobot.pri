@@ -7,27 +7,30 @@ include(src/ComPlatform/ComPlatform.pri)
 include(src/DobotDevice/DobotDevice.pri)
 
 SOURCES += $$PWD/src/DobotDll.cpp \
+           $$PWD/src/DobotFactory.cpp \
            $$PWD/src/Dobot.cpp \
            $$PWD/src/DobotPosition.cpp \
            $$PWD/src/CDobot.cpp \
            $$PWD/src/CDobotConnector.cpp \
            $$PWD/src/CDobotProtocol.cpp \
            $$PWD/src/CDobotCommunicator.cpp \
-           $$PWD/src/UI/DobotControlForm.cpp \
+           $$PWD/src/DobotControlForm.cpp \
 
 HEADERS += $$PWD/src/CDobot.h \
            $$PWD/src/CDobotConnector.h \
            $$PWD/src/CDobotProtocol.h \
            $$PWD/src/CDobotCommunicator.h \
-           $$PWD/src/UI/DobotControlForm.h \
 
-FORMS += $$PWD/src/UI/DobotControlForm.ui
+FORMS += $$PWD/src/DobotControlForm.ui
 
 headers = $$PWD/include/metacommlib/dobot/dobotdll_global.h \
            $$PWD/include/metacommlib/dobot/DobotType.h\
            $$PWD/include/metacommlib/dobot/DobotDll.h \
            $$PWD/include/metacommlib/dobot/Dobot.h \
            $$PWD/include/metacommlib/dobot/DobotPosition.h \
+           $$PWD/include/metacommlib/dobot/DobotFactory.h \
+           $$PWD/include/metacommlib/dobot/DobotControlForm.h \
+
 # Install
 dobot.files = $$headers
 

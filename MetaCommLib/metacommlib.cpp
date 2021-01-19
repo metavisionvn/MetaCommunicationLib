@@ -1,4 +1,4 @@
-#include "metacommlib.h"
+#include <metacommlib/metacommlib.h>
 
 MetaCommLib::MetaCommLib()
 {

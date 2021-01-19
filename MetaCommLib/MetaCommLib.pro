@@ -29,14 +29,18 @@ DestinationDir = $$PWD/../build
 
 SOURCES += \
     IRobot.cpp \
+    IRobotFactory.cpp \
     IRobotPosition.cpp \
+    IRobotUserControl.cpp \
     metacommlib.cpp
 
 HEADERS += \
     $$PWD/include/metacommlib/MetaCommLib_global.h \
     $$PWD/include/metacommlib/IRobot.h \
     $$PWD/include/metacommlib/IRobotPosition.h \
-    $$PWD/include/metacommlib/metacommlib.h
+    $$PWD/include/metacommlib/metacommlib.h \
+    $$PWD/include/metacommlib/IRobotUserControl.h \
+    $$PWD/include/metacommlib/IRobotFactory.h
 
 win32 {
     message("Windows Configuration")

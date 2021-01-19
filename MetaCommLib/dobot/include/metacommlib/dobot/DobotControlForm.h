@@ -2,20 +2,21 @@
 #define DOBOTCONTROLLER_H
 
 #include <QWidget>
-//#include "dobot.h"
+#include <metacommlib/dobot/Dobot.h>
+#include <metacommlib/IRobotUserControl.h>
 
 namespace Ui {
 class DobotController;
 }
 
-class DobotControlForm : public QWidget
+class DobotControlForm : public mtcl::IRobotUserControl
 {
     Q_OBJECT
 public:
     explicit DobotControlForm(QWidget *parent = nullptr);
-    ~DobotControlForm();
+    virtual ~DobotControlForm();
+    bool SetRobot(shared_ptr<mtcl::IRobot> robot) override;
 protected:
-    void closeEvent(QCloseEvent *);
 
 private slots:
     void onChangedMode();
@@ -28,11 +29,11 @@ private slots:
     void onClose();
     void onSuck();
     void onHome();
+    void HandleConnectionStatusChanged(int connectionStatus);
 private:
     void refreshBtn();
-    void initDobot();
     void initControl();
-//    actuator::Dobot mDobot;
+    shared_ptr<mtcl::Dobot> mptrDobot;
 
     Ui::DobotController *ui;
     bool connectStatus;

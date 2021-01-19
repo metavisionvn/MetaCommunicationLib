@@ -1,7 +1,7 @@
 //#include "DobotDll.h"
 //#include "DobotType.h"
 
-#include "DobotControlForm.h"
+#include <metacommlib/dobot/DobotControlForm.h>
 #include "ui_DobotControlForm.h"
 
 #include <QMessageBox>
@@ -10,7 +10,7 @@
 #include <QTimer>
 
 DobotControlForm::DobotControlForm(QWidget *parent)
-    : QWidget(parent)
+    : mtcl::IRobotUserControl(parent)
     , ui(new Ui::DobotController)
     , mIsSucking(false)
 {
@@ -29,46 +29,52 @@ DobotControlForm::DobotControlForm(QWidget *parent)
     //init JOG control
     initControl();
 
-    //getPose Timer
-    QTimer *getPoseTimer = new QTimer(this);
-    getPoseTimer->setObjectName("getPoseTimer");
-    connect(getPoseTimer, SIGNAL(timeout()), this, SLOT(onGetPoseTimer()));
-    getPoseTimer->start(250);
-
-    //not more than 1000
-//    QRegExp regExp("500|0|[-]|[1-9][0-9]{0,2}[.][0-9]{1,3}");
-//    QValidator *validator = new QRegExpValidator(regExp, this);
-//    ui->xPTPEdit->setValidator(validator);
-//    ui->yPTPEdit->setValidator(validator);
-//    ui->zPTPEdit->setValidator(validator);
-//    ui->rPTPEdit->setValidator(validator);
-
     connect(ui->ctrlSuck, SIGNAL(released()), this, SLOT(onSuck()));
 }
 
 DobotControlForm::~DobotControlForm()
 {
-    QTimer *getPoseTimer = findChild<QTimer *>("getPoseTimer");
-    if (getPoseTimer)
-        getPoseTimer->stop();
-    delete ui;
+    if (ui != nullptr)
+    {
+        delete ui;
+        ui = nullptr;
+    }
+}
+
+bool DobotControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
+{
+    bool ret = false;
+    shared_ptr<mtcl::Dobot> derived = dynamic_pointer_cast<mtcl::Dobot>(robot);
+    if (derived != nullptr)
+    {
+        mptrDobot = derived;
+
+        connect(mptrDobot.get(), &mtcl::Dobot::OnPositionChanged, this, &DobotControlForm::onGetPoseTimer);
+        connect(mptrDobot.get(), &mtcl::Dobot::OnMovingStatusChanged, this, &DobotControlForm::onGetPoseTimer);
+        connect(mptrDobot.get(), &mtcl::Dobot::OnConnectionStatusChanged, this, &DobotControlForm::HandleConnectionStatusChanged);
+
+        ret = true;
+    }
+    return ret;
 }
 
 void DobotControlForm::onGetPoseTimer()
 {
-    if (!connectStatus)
+    if (mptrDobot == nullptr)
         return;
-//    actuator::Position pose;
-//    DobotIns().GetCurrentPose(pose);
-//    ui->joint1Label->setText(QString::number(pose.jointAngle[0]));
-//    ui->joint2Label->setText(QString::number(pose.jointAngle[1]));
-//    ui->joint3Label->setText(QString::number(pose.jointAngle[2]));
-//    ui->joint4Label->setText(QString::number(pose.jointAngle[3]));
+    double posX = 0.0, posY = 0.0, posT = 0.0, posZ = 0.0;
+    mptrDobot->GetCurrentPosition(posX, posY, posT, posZ);
+    double j1 = 0.0, j2 = 0.0, j3 = 0.0, j4 = 0.0;
+    mptrDobot->GetCurrentJointAngle(j1, j2, j3, j4);
+    ui->joint1Label->setText(QString::number(j1));
+    ui->joint2Label->setText(QString::number(j2));
+    ui->joint3Label->setText(QString::number(j3));
+    ui->joint4Label->setText(QString::number(j4));
 
-//    ui->xLabel->setText(QString::number(pose.x));
-//    ui->yLabel->setText(QString::number(pose.y));
-//    ui->zLabel->setText(QString::number(pose.z));
-//    ui->rLabel->setText(QString::number(pose.r));
+    ui->xLabel->setText(QString::number(posX));
+    ui->yLabel->setText(QString::number(posY));
+    ui->zLabel->setText(QString::number(posZ));
+    ui->rLabel->setText(QString::number(posT));
 }
 
 void DobotControlForm::onClose()
@@ -78,22 +84,37 @@ void DobotControlForm::onClose()
 
 void DobotControlForm::onSuck()
 {
-//    static bool isSuck = true;
-//    bool isSucking = DobotIns().Suck(isSuck);
-//    if (!isSucking)
-//    {
-//        ui->ctrlSuck->setText("Suck");
-//    }
-//    else
-//    {
-//        ui->ctrlSuck->setText("UnSuck");
-//    }
-//    isSuck = !isSuck;
+    if (mptrDobot == nullptr)
+        return;
+    mptrDobot->CmdSuckOn();
 }
 
 void DobotControlForm::onHome()
 {
 
+}
+
+void DobotControlForm::HandleConnectionStatusChanged(int status)
+{
+    mtcl::Dobot* bot = dynamic_cast<mtcl::Dobot*>(sender());
+    if (bot != nullptr)
+    {
+        connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
+        QString botSerialNumber("");
+        QString botName("");
+        QString botVersion("");
+
+        refreshBtn();
+        if (connectStatus)
+        {
+            botSerialNumber = QString::fromStdString(bot->GetDobotSerialNumber());
+            botName = QString::fromStdString(bot->GetDobotName());
+            botVersion = QString::fromStdString(bot->GetDobotVersion());
+        }
+        ui->deviceSNLabel->setText(botSerialNumber);
+        ui->DeviceNameLabel->setText(botName);
+        ui->DeviceInfoLabel->setText(botVersion);
+    }
 }
 
 void DobotControlForm::onChangedMode()
@@ -121,22 +142,23 @@ void DobotControlForm::onChangedMode()
 
 void DobotControlForm::onConnectDobot()
 {
-//    //connect dobot
-//    if (!connectStatus) {
-//        if (!DobotIns().Connect()) {
-//            QMessageBox::information(this, tr("error"), tr("Connect dobot error!!!"), QMessageBox::Ok);
-//            return;
-//        }
-//        connectStatus = true;
-//        refreshBtn();
-//        initDobot();
-//    } else {
-//        QTimer *getPoseTimer = findChild<QTimer *>("getPoseTimer");
-//        getPoseTimer->stop();
-//        connectStatus = false;
-//        refreshBtn();
-//        DobotIns().Disconnect();
-//    }
+    if (mptrDobot == nullptr)
+    {
+        QMessageBox::information(this, tr("error"), tr("No robot attached!!!"), QMessageBox::Ok);
+        return;
+    }
+
+    if (mptrDobot->GetConnectionStatus() != mtcl::RobotConnect_Connected)
+    {
+        if (!mptrDobot->Start()) {
+            QMessageBox::information(this, tr("error"), tr("Connect dobot failed!!!"), QMessageBox::Ok);
+            return;
+        }
+    }
+    else
+    {
+        mptrDobot->Stop();
+    }
 }
 
 void DobotControlForm::refreshBtn()
@@ -183,14 +205,6 @@ void DobotControlForm::refreshBtn()
     }
 }
 
-void DobotControlForm::initDobot()
-{
-//    DobotIns().Initialize();
-//    ui->deviceSNLabel->setText(QString::fromStdString(DobotIns().GetDobotSerialNumber()));
-//    ui->DeviceNameLabel->setText(QString::fromStdString(DobotIns().GetDobotName()));
-//    ui->DeviceInfoLabel->setText(QString::fromStdString(DobotIns().GetDobotVersion()));
-}
-
 void DobotControlForm::initControl()
 {
     QSignalMapper *signalMapper  = new QSignalMapper(this);
@@ -227,28 +241,27 @@ void DobotControlForm::initControl()
 
 void DobotControlForm::onJOGCtrlBtnPressed(int index)
 {
-//    DobotIns().JogStart(index, ui->teachMode->currentIndex() == 0);
+    if (mptrDobot != nullptr)
+        mptrDobot->CmdJogStart(index, ui->teachMode->currentIndex() == 0);
 }
 
 void DobotControlForm::onJOGCtrlBtnReleased()
 {
-//    DobotIns().JogStop(ui->teachMode->currentIndex() == 0);
+    if (mptrDobot != nullptr)
+        mptrDobot->CmdJogStop(ui->teachMode->currentIndex() == 0);
 }
 
 void DobotControlForm::onPTPsendBtnClicked()
 {
-    ui->sendBtn->setEnabled(false);
+    if (mptrDobot != nullptr)
+    {
+        ui->sendBtn->setEnabled(false);
 
-    float x = ui->ctrlDsbPtpX->value();
-    float y = ui->ctrlDsbPtpY->value();
-    float z = ui->ctrlDsbPtpZ->value();
-    float r = ui->ctrlDsbPtpR->value();
-
-//    DobotIns().PTP(x, y, z, r);
-    ui->sendBtn->setEnabled(true);
-}
-
-void DobotControlForm::closeEvent(QCloseEvent *)
-{
-
+        float x = ui->ctrlDsbPtpX->value();
+        float y = ui->ctrlDsbPtpY->value();
+        float z = ui->ctrlDsbPtpZ->value();
+        float r = ui->ctrlDsbPtpR->value();
+        mptrDobot->CmdPTP(x, y, z, r);
+        ui->sendBtn->setEnabled(true);
+    }
 }

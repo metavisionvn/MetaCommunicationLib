@@ -7,6 +7,7 @@
 #include <QTime>
 #include <QMutex>
 #include <QSignalMapper>
+#include <metacommlib/MetaCommLib_global.h>
 
 // the information of device
 typedef class DeviceInfo {
@@ -21,7 +22,7 @@ public:
     QString localIP;
 }DEV_INFO;
 
-class UdpSearch: public QObject
+class METACOMMLIB_EXPORT UdpSearch: public QObject
 {
     Q_OBJECT
 public:
@@ -47,7 +48,7 @@ private slots:
 private:
 /******************************************************************************/
     UdpSearch(QObject *parent = 0);
-    ~UdpSearch();
+    virtual ~UdpSearch();
 
 /******************************************************************************/
     // search local network card and modify m_socketMap

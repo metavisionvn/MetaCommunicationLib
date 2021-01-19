@@ -1,5 +1,7 @@
 QT += serialport network gui
 
+DEFINES += DOBOTDLL_LIBRARY
+
 INCLUDEPATH += $$PWD/include/
 DEPENDPATH += $$PWD/include/
 
@@ -12,9 +14,9 @@ SOURCES += $$PWD/src/DobotDll.cpp \
            $$PWD/src/CDobotProtocol.cpp \
            $$PWD/src/CDobotCommunicator.cpp \
            $$PWD/src/DobotControlForm.cpp \
-           $$PWD/src/ComPlatform/Message.cpp\
-           $$PWD/src/ComPlatform/Packet.cpp\
-           $$PWD/src/ComPlatform/RingBuffer.cpp\
+           $$PWD/src/ComPlatform/Message.cpp \
+           $$PWD/src/ComPlatform/Packet.cpp \
+           $$PWD/src/ComPlatform/RingBuffer.cpp \
            $$PWD/src/DobotDevice/UdpPort.cpp \
            $$PWD/src/DobotDevice/UdpSearch.cpp
 
@@ -39,6 +41,10 @@ complatform_headers = $$PWD/include/metacommlib/dobot/ComPlatform/Message.h \
 dobotdevice_headers = $$PWD/include/metacommlib/dobot/DobotDevice/UdpPort.h \
                       $$PWD/include/metacommlib/dobot/DobotDevice/UdpSearch.h
 
+HEADERS += $$headers \
+            $$complatform_headers \
+            $$dobotdevice_headers
+
 FORMS += $$PWD/src/DobotControlForm.ui
 
 # Install
@@ -50,12 +56,6 @@ win32 {
     dobot.path = $$(MTVL_INSTALL)/include/metacommlib/dobot/
     complatform.path = $$(MTVL_INSTALL)/include/metacommlib/dobot/ComPlatform
     dobotdevice.path = $$(MTVL_INSTALL)/include/metacommlib/dobot/DobotDevice
-}
-
-android {
-    dobot.path = $$(MTVL_INSTALL_ANDROID)/include/metacommlib/dobot/
-    complatform.path = $$(MTVL_INSTALL_ANDROID)/include/metacommlib/dobot/ComPlatform
-    dobotdevice.path = $$(MTVL_INSTALL_ANDROID)/include/metacommlib/dobot/DobotDevice
 }
 
 linux:!android {

@@ -1,4 +1,4 @@
-QT += gui
+QT += gui core
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +19,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # EIGEN Library Add Eigen Lib to Path of Windows.
-INCLUDEPATH += $$(EIGEN_LIB)
 INCLUDEPATH += $$PWD/include
 
 # include subfolders
@@ -28,19 +27,21 @@ include(dobot/dobot.pri)
 DestinationDir = $$PWD/../build
 
 SOURCES += \
-    IRobot.cpp \
-    IRobotFactory.cpp \
-    IRobotPosition.cpp \
-    IRobotUserControl.cpp \
-    metacommlib.cpp
+            IRobot.cpp \
+            IRobotFactory.cpp \
+            IRobotPosition.cpp \
+            IRobotUserControl.cpp \
+            metacommlib.cpp
 
-HEADERS += \
-    $$PWD/include/metacommlib/MetaCommLib_global.h \
-    $$PWD/include/metacommlib/IRobot.h \
-    $$PWD/include/metacommlib/IRobotPosition.h \
-    $$PWD/include/metacommlib/metacommlib.h \
-    $$PWD/include/metacommlib/IRobotUserControl.h \
-    $$PWD/include/metacommlib/IRobotFactory.h
+headers = \
+        $$PWD/include/metacommlib/MetaCommLib_global.h \
+        $$PWD/include/metacommlib/IRobot.h \
+        $$PWD/include/metacommlib/IRobotPosition.h \
+        $$PWD/include/metacommlib/metacommlib.h \
+        $$PWD/include/metacommlib/IRobotUserControl.h \
+        $$PWD/include/metacommlib/IRobotFactory.h
+
+HEADERS += $$headers
 
 win32 {
     message("Windows Configuration")
@@ -53,7 +54,7 @@ win32 {
     global.path = $$(MTVL_INSTALL)/lib
     INSTALLS += global
 
-    headers.files = $$PWD/include/metacommlib/MetaCommLib_global.h
+    headers.files = $$headers
     headers.path = $$(MTVL_INSTALL)/include/metacommlib
     INSTALLS += headers
 }
@@ -81,7 +82,7 @@ linux:!android {
     global.path = $$(MTVL_INSTALL)/lib
     INSTALLS += global
 
-    headers.files = $$PWD/include/metacommlib/MetaCommLib_global.h
+    headers.files = $$headers
     headers.path = $$(MTVL_INSTALL)/include/metacommlib
     INSTALLS += headers
 }

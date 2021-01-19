@@ -3,15 +3,16 @@
 
 #include <QObject>
 #include <metacommlib/dobot/ComPlatform/Message.h>
+#include <metacommlib/MetaCommLib_global.h>
 
 class QIODevice;
 
-class CDobotProtocol : public QObject
+class METACOMMLIB_EXPORT CDobotProtocol : public QObject
 {
     Q_OBJECT
 public:
     CDobotProtocol();
-    ~CDobotProtocol();
+    virtual ~CDobotProtocol();
 
     Q_INVOKABLE void onInit(void);
 

@@ -4,10 +4,12 @@
 #include "CDobotConnector.h"
 #include "CDobotProtocol.h"
 #include "CDobotCommunicator.h"
+#include <metacommlib/MetaCommLib_global.h>
+#include <QObject>
 
-class QCoreApplication;
+class METACOMMLIB_EXPORT QCoreApplication;
 
-class CDobot : public QObject
+class METACOMMLIB_EXPORT CDobot : public QObject
 {
     Q_OBJECT
 public:
@@ -15,7 +17,7 @@ public:
     void exec(void);
 private:
     CDobot(QObject *parent = 0);
-    ~CDobot();
+    virtual ~CDobot();
 public:
     CDobotConnector *connector;
     QThread *connectorTargetThread;

@@ -3,15 +3,16 @@
 
 #include <QObject>
 #include <QStringList>
+#include <metacommlib/MetaCommLib_global.h>
 
 class QIODevice;
 
-class CDobotConnector : public QObject
+class METACOMMLIB_EXPORT CDobotConnector : public QObject
 {
     Q_OBJECT
 public:
     CDobotConnector();
-    ~CDobotConnector();
+    virtual ~CDobotConnector();
 
     Q_INVOKABLE void onInit(void);
 

@@ -1,6 +1,7 @@
 #ifndef DOBOT_H
 #define DOBOT_H
 
+#include <metacommlib/MetaCommLib_global.h>
 #include <metacommlib/dobot/DobotType.h>
 #include <metacommlib/dobot/DobotDll.h>
 #include <metacommlib/IRobot.h>
@@ -9,7 +10,7 @@ using namespace std;
 
 namespace mtcl {
 
-class Dobot : public IRobot
+class METACOMMLIB_EXPORT Dobot : public IRobot
 {
 public:
     Dobot();

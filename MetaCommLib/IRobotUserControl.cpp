@@ -8,4 +8,9 @@ IRobotUserControl::IRobotUserControl(QWidget* parent)
 
 }
 
+IRobotUserControl::~IRobotUserControl()
+{
+
+}
+
 }

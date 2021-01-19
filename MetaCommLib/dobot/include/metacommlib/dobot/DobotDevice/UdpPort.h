@@ -4,14 +4,15 @@
 #include <QIODevice>
 #include <QUdpSocket>
 #include <QTimer>
+#include <metacommlib/MetaCommLib_global.h>
 
-class UdpPort : public QIODevice
+class METACOMMLIB_EXPORT UdpPort : public QIODevice
 {
     Q_OBJECT
 
 public:
     explicit UdpPort(QObject *parent = 0);
-    ~UdpPort();
+    virtual ~UdpPort();
 
     bool open(OpenMode mode) Q_DECL_OVERRIDE;
     void close() Q_DECL_OVERRIDE;

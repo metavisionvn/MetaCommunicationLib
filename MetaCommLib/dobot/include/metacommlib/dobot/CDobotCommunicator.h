@@ -8,8 +8,9 @@
 #include <metacommlib/dobot/ComPlatform/ProtocolID.h>
 #include <metacommlib/dobot/DobotType.h>
 #include <metacommlib/dobot/ComPlatform/Message.h>
+#include <metacommlib/MetaCommLib_global.h>
 
-class CDobotCommunicator : public QObject
+class METACOMMLIB_EXPORT CDobotCommunicator : public QObject
 {
     Q_OBJECT
 private:
@@ -29,7 +30,7 @@ private:
 
 public:
     CDobotCommunicator();
-    ~CDobotCommunicator();
+    virtual ~CDobotCommunicator();
 
     Q_INVOKABLE void onInit(void);
 

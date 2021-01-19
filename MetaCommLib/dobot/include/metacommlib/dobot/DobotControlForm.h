@@ -4,12 +4,13 @@
 #include <QWidget>
 #include <metacommlib/dobot/Dobot.h>
 #include <metacommlib/IRobotUserControl.h>
+#include <metacommlib/MetaCommLib_global.h>
 
 namespace Ui {
 class DobotController;
 }
 
-class DobotControlForm : public mtcl::IRobotUserControl
+class METACOMMLIB_EXPORT DobotControlForm : public mtcl::IRobotUserControl
 {
     Q_OBJECT
 public:

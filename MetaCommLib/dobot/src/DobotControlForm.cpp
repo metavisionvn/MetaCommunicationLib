@@ -18,18 +18,19 @@ DobotControlForm::DobotControlForm(QWidget *parent)
 
     connectStatus = false;
     //endtype change
-    connect(ui->teachMode, SIGNAL(currentIndexChanged(int)), this, SLOT(onChangedMode()));
+    connect(ui->teachMode, SIGNAL(currentIndexChanged(int)), this, SLOT(HandleChangedMode()));
 
     //connect dobot
-    connect(ui->connectBtn, SIGNAL(clicked(bool)), this, SLOT(onConnectDobot()));
+    connect(ui->connectBtn, SIGNAL(clicked(bool)), this, SLOT(HandleConnectDobot()));
 
     //send PTP data
-    connect(ui->sendBtn, SIGNAL(clicked(bool)), this, SLOT(onPTPsendBtnClicked()));
+    connect(ui->sendBtn, SIGNAL(clicked(bool)), this, SLOT(HandlePTPsendBtnClicked()));
 
     //init JOG control
     initControl();
 
-    connect(ui->ctrlSuck, SIGNAL(released()), this, SLOT(onSuck()));
+    connect(ui->ctrlSuckOn, SIGNAL(released()), this, SLOT(HandleSuckOn()));
+    connect(ui->ctrlSuckOff, SIGNAL(released()), this, SLOT(HandleSuckOff()));
 }
 
 DobotControlForm::~DobotControlForm()
@@ -48,9 +49,7 @@ bool DobotControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
     if (derived != nullptr)
     {
         mptrDobot = derived;
-
-        connect(mptrDobot.get(), &mtcl::Dobot::OnPositionChanged, this, &DobotControlForm::onGetPoseTimer);
-        connect(mptrDobot.get(), &mtcl::Dobot::OnMovingStatusChanged, this, &DobotControlForm::onGetPoseTimer);
+        connect(mptrDobot.get(), &mtcl::Dobot::OnPositionChanged, this, &DobotControlForm::HandlePositionChanged);
         connect(mptrDobot.get(), &mtcl::Dobot::OnConnectionStatusChanged, this, &DobotControlForm::HandleConnectionStatusChanged);
 
         ret = true;
@@ -58,7 +57,7 @@ bool DobotControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
     return ret;
 }
 
-void DobotControlForm::onGetPoseTimer()
+void DobotControlForm::HandlePositionChanged()
 {
     if (mptrDobot == nullptr)
         return;
@@ -82,16 +81,25 @@ void DobotControlForm::onClose()
     this->hide();
 }
 
-void DobotControlForm::onSuck()
+void DobotControlForm::HandleSuckOn()
 {
     if (mptrDobot == nullptr)
         return;
     mptrDobot->CmdSuckOn();
 }
 
+void DobotControlForm::HandleSuckOff()
+{
+    if (mptrDobot == nullptr)
+        return;
+    mptrDobot->CmdSuckOff();
+}
+
 void DobotControlForm::onHome()
 {
-
+    if (mptrDobot == nullptr)
+        return;
+    mptrDobot->CmdMoveToHome();
 }
 
 void DobotControlForm::HandleConnectionStatusChanged(int status)
@@ -117,7 +125,7 @@ void DobotControlForm::HandleConnectionStatusChanged(int status)
     }
 }
 
-void DobotControlForm::onChangedMode()
+void DobotControlForm::HandleChangedMode()
 {
     if (ui->teachMode->currentIndex() == 1) {
         ui->baseAngleAddBtn->setText(tr("X+"));
@@ -140,7 +148,7 @@ void DobotControlForm::onChangedMode()
     }
 }
 
-void DobotControlForm::onConnectDobot()
+void DobotControlForm::HandleConnectDobot()
 {
     if (mptrDobot == nullptr)
     {
@@ -163,46 +171,30 @@ void DobotControlForm::onConnectDobot()
 
 void DobotControlForm::refreshBtn()
 {
+
     if (connectStatus) {
         ui->connectBtn->setText(tr("Disconnect"));
-
-        ui->teachMode->setEnabled(true);
-        ui->baseAngleAddBtn->setEnabled(true);
-        ui->baseAngleSubBtn->setEnabled(true);
-        ui->longArmAddBtn->setEnabled(true);
-        ui->longArmSubBtn->setEnabled(true);
-        ui->shortArmAddBtn->setEnabled(true);
-        ui->shortArmSubBtn->setEnabled(true);
-        ui->rHeadAddBtn->setEnabled(true);
-        ui->rHeadSubBtn->setEnabled(true);
-
-        ui->sendBtn->setEnabled(true);
-        ui->ctrlDsbPtpX->setEnabled(true);
-        ui->ctrlDsbPtpY->setEnabled(true);
-        ui->ctrlDsbPtpZ->setEnabled(true);
-        ui->ctrlDsbPtpR->setEnabled(true);
-
-        ui->ctrlSuck->setEnabled(true);
     } else {
         ui->connectBtn->setText(tr("Connect"));
-
-        ui->teachMode->setEnabled(false);
-        ui->baseAngleAddBtn->setEnabled(false);
-        ui->baseAngleSubBtn->setEnabled(false);
-        ui->longArmAddBtn->setEnabled(false);
-        ui->longArmSubBtn->setEnabled(false);
-        ui->shortArmAddBtn->setEnabled(false);
-        ui->shortArmSubBtn->setEnabled(false);
-        ui->rHeadAddBtn->setEnabled(false);
-        ui->rHeadSubBtn->setEnabled(false);
-
-        ui->sendBtn->setEnabled(false);
-        ui->ctrlDsbPtpX->setEnabled(false);
-        ui->ctrlDsbPtpX->setEnabled(false);
-        ui->ctrlDsbPtpX->setEnabled(false);
-        ui->ctrlDsbPtpX->setEnabled(false);
-        ui->ctrlSuck->setEnabled(false);
     }
+
+    ui->teachMode->setEnabled(connectStatus);
+    ui->baseAngleAddBtn->setEnabled(connectStatus);
+    ui->baseAngleSubBtn->setEnabled(connectStatus);
+    ui->longArmAddBtn->setEnabled(connectStatus);
+    ui->longArmSubBtn->setEnabled(connectStatus);
+    ui->shortArmAddBtn->setEnabled(connectStatus);
+    ui->shortArmSubBtn->setEnabled(connectStatus);
+    ui->rHeadAddBtn->setEnabled(connectStatus);
+    ui->rHeadSubBtn->setEnabled(connectStatus);
+    ui->sendBtn->setEnabled(connectStatus);
+    ui->ctrlDsbPtpX->setEnabled(connectStatus);
+    ui->ctrlDsbPtpY->setEnabled(connectStatus);
+    ui->ctrlDsbPtpZ->setEnabled(connectStatus);
+    ui->ctrlDsbPtpR->setEnabled(connectStatus);
+    ui->ctrlSuckOn->setEnabled(connectStatus);
+    ui->ctrlSuckOff->setEnabled(connectStatus);
+    ui->ctrlBtnHome->setEnabled(connectStatus);
 }
 
 void DobotControlForm::initControl()
@@ -251,7 +243,7 @@ void DobotControlForm::onJOGCtrlBtnReleased()
         mptrDobot->CmdJogStop(ui->teachMode->currentIndex() == 0);
 }
 
-void DobotControlForm::onPTPsendBtnClicked()
+void DobotControlForm::HandlePTPsendBtnClicked()
 {
     if (mptrDobot != nullptr)
     {

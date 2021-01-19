@@ -10,12 +10,12 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void AttachDobotWidget(QWidget* userControl);
-
+protected:
+    void closeEvent(QCloseEvent *event);
 private:
     Ui::MainWindow *ui;
 };

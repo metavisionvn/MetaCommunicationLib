@@ -5,7 +5,7 @@
 
 namespace mtcl {
 
-class DobotFactory : public IRobotFactory
+class METACOMMLIB_EXPORT DobotFactory : public IRobotFactory
 {
 public:
     DobotFactory();

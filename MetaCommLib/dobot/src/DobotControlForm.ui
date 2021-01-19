@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>554</width>
-    <height>585</height>
+    <height>588</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -137,7 +137,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0">
-       <widget class="QPushButton" name="ctrlSuck">
+       <widget class="QPushButton" name="ctrlSuckOn">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -148,11 +148,11 @@
          </font>
         </property>
         <property name="text">
-         <string>Suck</string>
+         <string>Suck On</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="2">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -164,6 +164,22 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="ctrlSuckOff">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Suck Off</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

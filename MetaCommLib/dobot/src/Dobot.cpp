@@ -4,6 +4,8 @@
 #include <sstream>
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
+
 using namespace std;
 
 namespace mtcl {
@@ -20,7 +22,10 @@ Dobot::Dobot()
 
 Dobot::~Dobot()
 {
-
+    if (GetConnectionStatus() == RobotConnect_Connected)
+    {
+        Stop();
+    }
 }
 
 void Dobot::OnStart()
@@ -31,8 +36,10 @@ void Dobot::OnStart()
         if (ConnectDobot(0, 115200, 0, 0) != DobotConnect_NoError) {
             status = RobotConnect_DisConnected;
         }
-        else
+        else{
             status = RobotConnect_Connected;
+            Initialize();
+        }
         SetConnectionStatus(status);
     }
 }
@@ -53,16 +60,12 @@ bool Dobot::MovePosition(double x, double y, double thetaInDegs)
 
 bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs, double &z)
 {
-    if (UpdateCurrentPosition())
+    DobotPosition* position = dynamic_cast<DobotPosition*>(mCurrentPosition);
+    if (position != nullptr)
     {
-        DobotPosition* position = dynamic_cast<DobotPosition*>(mCurrentPosition);
-        if (position != nullptr)
-        {
-            position->GetPosition(x, y, thetaInDegs, z);
-            return true;
-        }
+        position->GetPosition(x, y, thetaInDegs, z);
+        return true;
     }
-    return false;
 }
 
 bool Dobot::GetCurrentJointAngle(double &j1, double &j2, double &j3, double &j4)
@@ -162,7 +165,7 @@ bool Dobot::UpdateCurrentPosition()
     while (GetPose(&pose) != DobotCommunicate_NoError) {
     }
     ConvertDobotPoseToRobotPose(pose);
-    OnPositionChanged();
+    emit OnPositionChanged();
     return true;
 }
 
@@ -244,11 +247,14 @@ void Dobot::ConvertDobotPoseToRobotPose(const Pose &dobotPose)
 {
     //Update current position
     DobotPosition *pos = dynamic_cast<DobotPosition*>(mCurrentPosition);
-    pos->SetPosition(dobotPose.x, dobotPose.y, dobotPose.r, dobotPose.z);
-    double jointAngle[4];
-    for (int index = 0; index < 4; index++)
-        jointAngle[index] = dobotPose.jointAngle[index];
-    pos->SetJointAngle(jointAngle);
+    if (pos != nullptr)
+    {
+        pos->SetPosition(dobotPose.x, dobotPose.y, dobotPose.r, dobotPose.z);
+        double jointAngle[4];
+        for (int index = 0; index < 4; index++)
+            jointAngle[index] = dobotPose.jointAngle[index];
+        pos->SetJointAngle(jointAngle);
+    }
 }
 
 void Dobot::OnDoWork()

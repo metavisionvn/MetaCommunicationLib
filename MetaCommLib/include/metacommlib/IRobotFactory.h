@@ -10,7 +10,7 @@ using namespace std;
 
 namespace mtcl {
 
-class IRobotFactory
+class METACOMMLIB_EXPORT IRobotFactory
 {
 public:
     IRobotFactory();

@@ -9,7 +9,7 @@ using namespace std;
 
 namespace mtcl {
 
-class IRobotUserControl : public QWidget
+class METACOMMLIB_EXPORT IRobotUserControl : public QWidget
 {
     Q_OBJECT
 public:

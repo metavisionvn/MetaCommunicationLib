@@ -5,6 +5,8 @@
 #include <metacommlib/dobot/Dobot.h>
 #include <metacommlib/IRobotUserControl.h>
 #include <metacommlib/MetaCommLib_global.h>
+#include <iostream>
+using namespace std;
 
 namespace Ui {
 class DobotController;
@@ -20,15 +22,16 @@ public:
 protected:
 
 private slots:
-    void onChangedMode();
-    void onConnectDobot();
+    void HandleChangedMode();
+    void HandleConnectDobot();
     void onJOGCtrlBtnPressed(int index);
     void onJOGCtrlBtnReleased();
-    void onPTPsendBtnClicked();
-    void onGetPoseTimer();
+    void HandlePTPsendBtnClicked();
+    void HandlePositionChanged();
 
     void onClose();
-    void onSuck();
+    void HandleSuckOn();
+    void HandleSuckOff();
     void onHome();
     void HandleConnectionStatusChanged(int connectionStatus);
 private:

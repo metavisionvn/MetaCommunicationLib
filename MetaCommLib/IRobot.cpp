@@ -1,4 +1,6 @@
 #include <metacommlib/IRobot.h>
+#include <iostream>
+using namespace std;
 
 namespace mtcl {
 
@@ -14,11 +16,6 @@ IRobot::IRobot()
 
 IRobot::~IRobot()
 {
-    if (mConnectionStatus == RobotConnect_Connected)
-    {
-        Stop();
-    }
-
     if (mBackgroundThread != nullptr)
     {
         delete mBackgroundThread;

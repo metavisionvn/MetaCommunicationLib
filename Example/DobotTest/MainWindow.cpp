@@ -13,6 +13,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+
+}
+
 void MainWindow::AttachDobotWidget(QWidget *userControl)
 {
     ui->mainLayout->addWidget(userControl);

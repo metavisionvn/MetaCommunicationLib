@@ -9,7 +9,7 @@ IRobot::IRobot()
     , mConnectionStatus(RobotConnect_Undefined)
     , mMovingStatus(RobotMoving_Done)
     , mBackgroundThread(nullptr)
-    , mRefreshTimeIntervalInMilisecs(100.0)
+    , mRefreshTimeIntervalInMilisecs(50.0)
 {
 
 }

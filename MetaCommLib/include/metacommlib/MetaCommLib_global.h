@@ -1,0 +1,12 @@
+#ifndef METACOMMLIB_GLOBAL_H
+#define METACOMMLIB_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(METACOMMLIB_LIBRARY)
+#  define METACOMMLIB_EXPORT Q_DECL_EXPORT
+#else
+#  define METACOMMLIB_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // METACOMMLIB_GLOBAL_H

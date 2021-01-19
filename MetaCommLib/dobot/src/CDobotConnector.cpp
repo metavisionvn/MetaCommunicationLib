@@ -1,9 +1,9 @@
-﻿#include "CDobotConnector.h"
+﻿#include <metacommlib/dobot/CDobotConnector.h>
 #include <QSerialPort>
 #include <QSerialPortInfo>
-#include "metacommlib/dobot/DobotType.h"
-#include "DobotDevice/UdpSearch.h"
-#include "DobotDevice/UdpPort.h"
+#include <metacommlib/dobot/DobotType.h>
+#include <metacommlib/dobot/DobotDevice/UdpSearch.h>
+#include <metacommlib/dobot/DobotDevice/UdpPort.h>
 #include <QThread>
 #include <QCoreApplication>
 

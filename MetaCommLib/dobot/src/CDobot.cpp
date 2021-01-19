@@ -1,4 +1,4 @@
-#include "CDobot.h"
+#include <metacommlib/dobot/CDobot.h>
 #include <QCoreApplication>
 #include <QThread>
 

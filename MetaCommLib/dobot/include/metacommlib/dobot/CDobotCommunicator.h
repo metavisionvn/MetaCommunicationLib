@@ -5,9 +5,9 @@
 #include <QTime>
 #include <QTimer>
 #include <QVector>
-#include "ProtocolID.h"
-#include "metacommlib/dobot/DobotType.h"
-#include "Message.h"
+#include <metacommlib/dobot/ComPlatform/ProtocolID.h>
+#include <metacommlib/dobot/DobotType.h>
+#include <metacommlib/dobot/ComPlatform/Message.h>
 
 class CDobotCommunicator : public QObject
 {

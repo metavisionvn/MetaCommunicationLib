@@ -1,4 +1,4 @@
-﻿#include "CDobotCommunicator.h"
+﻿#include <metacommlib/dobot/CDobotCommunicator.h>
 #include <QThread>
 #include <QDebug>
 

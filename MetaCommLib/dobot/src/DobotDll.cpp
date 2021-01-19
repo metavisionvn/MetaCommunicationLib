@@ -1,6 +1,6 @@
-﻿#include "metacommlib/dobot/DobotDll.h"
-#include "metacommlib/dobot/dobotdll_global.h"
-#include "CDobot.h"
+﻿#include <metacommlib/dobot/DobotDll.h>
+#include <metacommlib/dobot/dobotdll_global.h>
+#include <metacommlib/dobot/CDobot.h>
 #include <QThread>
 #include <QCoreApplication>
 #include <QDebug>

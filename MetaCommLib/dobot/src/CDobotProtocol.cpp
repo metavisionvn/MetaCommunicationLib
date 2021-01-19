@@ -1,4 +1,4 @@
-#include "CDobotProtocol.h"
+#include <metacommlib/dobot/CDobotProtocol.h>
 #include <QIODevice>
 #include <QTimer>
 #include <QThread>

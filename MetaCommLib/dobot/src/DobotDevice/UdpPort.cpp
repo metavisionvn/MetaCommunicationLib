@@ -1,6 +1,6 @@
-#include "UdpPort.h"
+#include <metacommlib/dobot/DobotDevice/UdpPort.h>
 #include <QCoreApplication>
-#include "UdpSearch.h"
+#include <metacommlib/dobot/DobotDevice/UdpSearch.h>
 
 UdpPort::UdpPort(QObject *parent):QIODevice(parent)
 {

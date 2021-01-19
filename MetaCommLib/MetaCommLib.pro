@@ -86,10 +86,10 @@ linux:!android {
     INSTALLS += headers
 }
 
-OBJECTS_DIR = $$DestinationDir/obj
-MOC_DIR = $$DestinationDir/moc
-RCC_DIR = $$DestinationDir/qrc
-UI_DIR = $$DestinationDir/ui
+OBJECTS_DIR = $$PWD/../build/obj
+MOC_DIR = $$PWD/../build/moc
+RCC_DIR = $$PWD/../build/qrc
+UI_DIR = $$PWD/../build/ui
 
 #!isEmpty(target.path): INSTALLS += target
 #INSTALLS += target

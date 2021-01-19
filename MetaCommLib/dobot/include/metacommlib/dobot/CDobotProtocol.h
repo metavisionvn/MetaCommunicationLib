@@ -2,7 +2,7 @@
 #define CDOBOTPROTOCOL_H
 
 #include <QObject>
-#include "Message.h"
+#include <metacommlib/dobot/ComPlatform/Message.h>
 
 class QIODevice;
 

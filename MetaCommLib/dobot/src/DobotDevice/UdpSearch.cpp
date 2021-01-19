@@ -1,4 +1,4 @@
-#include "UdpSearch.h"
+#include <metacommlib/dobot/DobotDevice/UdpSearch.h>
 #include <QtNetwork>
 
 // init the static values

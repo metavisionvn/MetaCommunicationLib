@@ -1,4 +1,5 @@
 #include <metacommlib/janome/Janome.h>
+#include <metacommlib/janome/JanomeDecodeMsg.h>
 
 namespace mtcl {
 
@@ -6,7 +7,7 @@ Janome::Janome()
     : IRobot()
     , mIPAddress("")
     , mPort(0)
-
+    , mDecoder(this)
 {
 
 }
@@ -30,6 +31,16 @@ bool Janome::GetCurrentPosition(double &x, double &y, double &thetaInDegs)
 bool Janome::MovePosition(double x, double y, double thetaInDegs)
 {
     return true;
+}
+
+void Janome::SetPosition(double x, double y, double z)
+{
+
+}
+
+void Janome::SetPosition(double x, double y, double z, double thetaIDegs)
+{
+
 }
 
 bool Janome::UpdateCurrentPosition()

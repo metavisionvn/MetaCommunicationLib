@@ -41,6 +41,7 @@ headers = \
         $$PWD/include/metacommlib/metacommlib.h \
         $$PWD/include/metacommlib/IRobotUserControl.h \
         $$PWD/include/metacommlib/IRobotFactory.h
+        $$PWD/include/metacommlib/CommLibDefines.h
 
 HEADERS += $$headers
 

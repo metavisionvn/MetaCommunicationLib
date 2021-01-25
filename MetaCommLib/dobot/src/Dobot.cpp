@@ -63,7 +63,7 @@ bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs, double
     DobotPosition* position = dynamic_cast<DobotPosition*>(mCurrentPosition);
     if (position != nullptr)
     {
-        position->GetPosition(x, y, thetaInDegs, z);
+        position->GetPosition(x, y, z, thetaInDegs);
         return true;
     }
 }

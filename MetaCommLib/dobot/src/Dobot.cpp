@@ -12,9 +12,6 @@ namespace mtcl {
 
 Dobot::Dobot()
     : IRobot()
-    , mDeviceSerialNumber("")
-    , mDeviceName("")
-    , mDeviceVersion("")
     , mIsSucking(false)
 {
     mCurrentPosition = new DobotPosition();
@@ -50,15 +47,7 @@ void Dobot::OnStop()
     SetConnectionStatus(RobotConnect_DisConnected);
 }
 
-bool Dobot::MovePosition(double x, double y, double thetaInDegs)
-{
-    //Not change z
-    double mCurPosX = 0.0, mCurPosY = 0.0, mCurPosT = 0.0, mCurPosZ = 0.0;
-    GetCurrentPosition(mCurPosX, mCurPosY, mCurPosT, mCurPosZ);
-    return MovePosition(x, y, thetaInDegs, mCurPosZ);
-}
-
-bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs, double &z)
+bool Dobot::GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs)
 {
     DobotPosition* position = dynamic_cast<DobotPosition*>(mCurrentPosition);
     if (position != nullptr)
@@ -66,6 +55,7 @@ bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs, double
         position->GetPosition(x, y, z, thetaInDegs);
         return true;
     }
+    return false;
 }
 
 bool Dobot::GetCurrentJointAngle(double &j1, double &j2, double &j3, double &j4)
@@ -79,7 +69,7 @@ bool Dobot::GetCurrentJointAngle(double &j1, double &j2, double &j3, double &j4)
     return false;
 }
 
-bool Dobot::MovePosition(double x, double y, double thetaInDegs, double z)
+bool Dobot::MovePosition(double x, double y, double z, double thetaInDegs)
 {
     PTPCmd ptpCmd;
     ptpCmd.ptpMode = PTPMOVJXYZMode;
@@ -93,19 +83,14 @@ bool Dobot::MovePosition(double x, double y, double thetaInDegs, double z)
     return true;
 }
 
-string Dobot::GetDobotSerialNumber() const
+bool Dobot::MovePosition(unique_ptr<IRobotPosition> position)
 {
-    return mDeviceSerialNumber;
-}
-
-string Dobot::GetDobotName() const
-{
-    return mDeviceName;
-}
-
-string Dobot::GetDobotVersion() const
-{
-    return mDeviceVersion;
+    DobotPosition* pos = dynamic_cast<DobotPosition*>(position.get());
+    if (pos != nullptr)
+    {
+        return MovePosition(pos->GetPosX(), pos->GetPosY(), pos->GetPosZ(), pos->GetPosT());
+    }
+    return false;
 }
 
 void Dobot::CmdJogStart(int index, bool isJoint)
@@ -169,14 +154,9 @@ bool Dobot::UpdateCurrentPosition()
     return true;
 }
 
-bool Dobot::GetCurrentPosition(double &x, double &y, double &thetaInDegs)
-{
-    double z = 0.0;
-    return GetCurrentPosition(x, y, thetaInDegs, z);
-}
-
 bool Dobot::Initialize()
 {
+    cout << "[Dobot::Initialize]" << endl;
     //Command timeout
     SetCmdTimeout(3000);
     //clear old commands and set the queued command running
@@ -249,7 +229,7 @@ void Dobot::ConvertDobotPoseToRobotPose(const Pose &dobotPose)
     DobotPosition *pos = dynamic_cast<DobotPosition*>(mCurrentPosition);
     if (pos != nullptr)
     {
-        pos->SetPosition(dobotPose.x, dobotPose.y, dobotPose.r, dobotPose.z);
+        pos->SetPosition(dobotPose.x, dobotPose.y, dobotPose.z, dobotPose.r);
         double jointAngle[4];
         for (int index = 0; index < 4; index++)
             jointAngle[index] = dobotPose.jointAngle[index];

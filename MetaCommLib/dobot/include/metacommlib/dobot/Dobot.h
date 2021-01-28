@@ -16,15 +16,10 @@ public:
     Dobot();
     virtual ~Dobot();
 
-    bool GetCurrentPosition(double &x, double &y, double &thetaInDegs) override;
-    bool MovePosition(double x, double y, double thetaInDegs) override;
-    bool GetCurrentPosition(double &x, double &y, double &thetaInDegs, double &z);
+    bool GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs);
     bool GetCurrentJointAngle(double &j1, double &j2, double &j3, double &j4);
-    bool MovePosition(double x, double y, double thetaInDegs, double z);
-
-    string GetDobotSerialNumber() const;
-    string GetDobotName() const;
-    string GetDobotVersion() const;
+    bool MovePosition(double x, double y, double z, double thetaInDegs);
+    bool MovePosition(unique_ptr<IRobotPosition> position) override;
 
     void CmdJogStart(int index, bool isJoint);
     void CmdJogStop(bool isJoint);
@@ -40,10 +35,6 @@ protected:
 private:
     bool Initialize();
     void ConvertDobotPoseToRobotPose(const Pose &dobotPose);
-
-    string mDeviceSerialNumber;
-    string mDeviceName;
-    string mDeviceVersion;
     bool mIsSucking;
 
 protected:

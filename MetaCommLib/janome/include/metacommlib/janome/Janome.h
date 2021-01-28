@@ -4,11 +4,11 @@
 #include <metacommlib/MetaCommLib_global.h>
 #include <metacommlib/janome/JanomeDecodeMsg.h>
 #include <metacommlib/IRobot.h>
+#include <metacommlib/janome/JanomeSocket.h>
 #include <string>
 using namespace std;
 
 namespace mtcl {
-
 
 class METACOMMLIB_EXPORT Janome : public IRobot
 {
@@ -16,18 +16,20 @@ public:
     Janome();
     virtual ~Janome();
     void SetConnectionAddress(string ipAddress, int port);
-    virtual bool GetCurrentPosition(double &x, double &y, double &thetaInDegs) override;
-    virtual bool MovePosition(double x, double y, double thetaInDegs) override;
+    bool GetCurrentPosition(double &x, double &y, double &z);
+    bool MovePosition(double x, double y, double z);
+    bool MovePosition(unique_ptr<IRobotPosition> position) override;
 
     friend class JanomeDecodeMsg;
 protected:
+    //update position form decoder
     void SetPosition(double x, double y, double z);
-    void SetPosition(double x, double y, double z, double thetaIDegs);
-    virtual bool UpdateCurrentPosition() override;
     virtual void OnStart() override;
     virtual void OnStop() override;
     virtual void OnDoWork() override;
+    virtual bool UpdateCurrentPosition() override;
 private:
+    bool Initialize();
     string mIPAddress;
     int mPort;
     JanomeDecodeMsg mDecoder;

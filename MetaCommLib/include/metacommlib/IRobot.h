@@ -6,6 +6,8 @@
 #include <metacommlib/IRobotPosition.h>
 #include <QThread>
 #include <QMutex>
+#include <memory>
+using namespace std;
 
 namespace mtcl {
 
@@ -30,8 +32,12 @@ public:
     bool Start();
     bool Stop();
     void SetRefreshTimeInterval(double intervalInMilisecs);
-    virtual bool GetCurrentPosition(double &x, double &y, double &thetaInDegs) = 0;
-    virtual bool MovePosition(double x, double y, double thetaInDegs) = 0;
+    IRobotPosition *GetCurrentPosition();
+    virtual bool MovePosition(unique_ptr<IRobotPosition> position) = 0;
+
+    string GetRobotSerialNumber() const;
+    string GetRobotName() const;
+    string GetRobotVersion() const;
 signals:
     void OnConnectionStatusChanged(int status);
     void OnMovingStatusChanged(int status);
@@ -44,6 +50,9 @@ protected:
     void SetConnectionStatus(RobotConnectionStatus status);
     void SetMovingStatus(RobotMovingStatus status);
     IRobotPosition* mCurrentPosition;
+    string mDeviceSerialNumber;
+    string mDeviceName;
+    string mDeviceVersion;
 private:
     void InterruptBackgroundThread();
     void DoWork();
@@ -51,6 +60,8 @@ private:
     RobotMovingStatus mMovingStatus;
     QThread *mBackgroundThread;
     double mRefreshTimeIntervalInMilisecs;
+
+
 };
 
 }

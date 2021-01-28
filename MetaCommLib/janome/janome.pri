@@ -6,6 +6,8 @@ INCLUDEPATH += $$PWD/include/
 DEPENDPATH += $$PWD/include/
 
 SOURCES += $$PWD/src/Janome.cpp \
+            $$PWD/src/JanomeFactory.cpp \
+            $$PWD/src/JanomeControlForm.cpp \
             $$PWD/src/JanomePosition.cpp \
             $$PWD/src/JanomeDecodeMsg.cpp \
             $$PWD/src/JanomeSocket.cpp
@@ -13,11 +15,13 @@ SOURCES += $$PWD/src/Janome.cpp \
 headers = $$PWD/include/metacommlib/janome/Janome.h \
           $$PWD/include/metacommlib/janome/JanomeSocket.h \
           $$PWD/include/metacommlib/janome/JanomeDecodeMsg.h \
-          $$PWD/include/metacommlib/janome/JanomePosition.h
+          $$PWD/include/metacommlib/janome/JanomePosition.h \
+          $$PWD/include/metacommlib/janome/JanomeControlForm.h \
+          $$PWD/include/metacommlib/janome/JanomeFactory.h
 
 HEADERS += $$headers
 
-#FORMS += $$PWD/src/DobotControlForm.ui
+FORMS += $$PWD/src/JanomeControlForm.ui
 
 # Install
 janome.files = $$headers
@@ -31,4 +35,3 @@ linux:!android {
 }
 
 INSTALLS += janome
-

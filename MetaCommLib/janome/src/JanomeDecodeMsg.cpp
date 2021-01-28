@@ -82,6 +82,4 @@ long JanomeDecodeMsg::HexToDecimal(string num)
     return n;
 }
 
-
-
 }

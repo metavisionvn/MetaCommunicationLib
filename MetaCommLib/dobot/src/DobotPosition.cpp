@@ -59,8 +59,8 @@ void DobotPosition::GetPosition(double &x, double &y, double &z, double &thetaIn
 {
     x = GetPosX();
     y = GetPosY();
-    thetaInDegs = GetPosT();
     z = GetPosZ();
+    thetaInDegs = GetPosT();
 }
 
 void DobotPosition::GetJointAngle(double &j1, double &j2, double &j3, double &j4)

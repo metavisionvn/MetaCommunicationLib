@@ -62,7 +62,7 @@ void DobotControlForm::HandlePositionChanged()
     if (mptrDobot == nullptr)
         return;
     double posX = 0.0, posY = 0.0, posT = 0.0, posZ = 0.0;
-    mptrDobot->GetCurrentPosition(posX, posY, posT, posZ);
+    mptrDobot->GetCurrentPosition(posX, posY, posZ, posT);
     double j1 = 0.0, j2 = 0.0, j3 = 0.0, j4 = 0.0;
     mptrDobot->GetCurrentJointAngle(j1, j2, j3, j4);
     ui->joint1Label->setText(QString::number(j1));
@@ -115,9 +115,9 @@ void DobotControlForm::HandleConnectionStatusChanged(int status)
         refreshBtn();
         if (connectStatus)
         {
-            botSerialNumber = QString::fromStdString(bot->GetDobotSerialNumber());
-            botName = QString::fromStdString(bot->GetDobotName());
-            botVersion = QString::fromStdString(bot->GetDobotVersion());
+            botSerialNumber = QString::fromStdString(bot->GetRobotSerialNumber());
+            botName = QString::fromStdString(bot->GetRobotName());
+            botVersion = QString::fromStdString(bot->GetRobotVersion());
         }
         ui->deviceSNLabel->setText(botSerialNumber);
         ui->DeviceNameLabel->setText(botName);

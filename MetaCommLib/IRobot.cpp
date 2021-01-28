@@ -10,6 +10,9 @@ IRobot::IRobot()
     , mMovingStatus(RobotMoving_Done)
     , mBackgroundThread(nullptr)
     , mRefreshTimeIntervalInMilisecs(50.0)
+    , mDeviceSerialNumber("")
+    , mDeviceName("")
+    , mDeviceVersion("")
 {
 
 }
@@ -65,6 +68,27 @@ bool IRobot::Stop()
 void IRobot::SetRefreshTimeInterval(double intervalInMilisecs)
 {
     mRefreshTimeIntervalInMilisecs = intervalInMilisecs;
+}
+
+IRobotPosition *IRobot::GetCurrentPosition()
+{
+    return mCurrentPosition;
+}
+
+string IRobot::GetRobotSerialNumber() const
+{
+    cout << mDeviceSerialNumber << endl;
+    return mDeviceSerialNumber;
+}
+
+string IRobot::GetRobotName() const
+{
+    return mDeviceName;
+}
+
+string IRobot::GetRobotVersion() const
+{
+    return mDeviceVersion;
 }
 
 void IRobot::SetConnectionStatus(RobotConnectionStatus status)

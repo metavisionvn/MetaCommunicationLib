@@ -32,6 +32,9 @@ SOURCES += \
             IRobotFactory.cpp \
             IRobotPosition.cpp \
             IRobotUserControl.cpp \
+            TcpClient.cpp \
+            TcpServer.cpp \
+            TcpSocketBase.cpp \
             metacommlib.cpp
 
 headers = \
@@ -40,8 +43,11 @@ headers = \
         $$PWD/include/metacommlib/IRobotPosition.h \
         $$PWD/include/metacommlib/metacommlib.h \
         $$PWD/include/metacommlib/IRobotUserControl.h \
-        $$PWD/include/metacommlib/IRobotFactory.h
-        $$PWD/include/metacommlib/CommLibDefines.h
+        $$PWD/include/metacommlib/IRobotFactory.h \
+        $$PWD/include/metacommlib/CommLibDefines.h \
+        $$PWD/include/metacommlib/TcpClient.h \
+        $$PWD/include/metacommlib/TcpServer.h \
+        $$PWD/include/metacommlib/TcpSocketBase.h
 
 HEADERS += $$headers
 

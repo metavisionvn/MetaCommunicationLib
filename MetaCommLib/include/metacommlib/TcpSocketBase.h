@@ -1,27 +1,27 @@
-#ifndef JANOMESOCKET_H
-#define JANOMESOCKET_H
+#ifndef TCPSOCKETBASE_H
+#define TCPSOCKETBASE_H
 
-#include <QObject>
-#include <metacommlib/MetaCommLib_global.h>
-#include <QTcpSocket>
 #include <string>
+#include <iostream>
+#include <QObject>
+#include <QTcpSocket>
+#include <metacommlib/MetaCommLib_global.h>
 using namespace std;
 
 namespace mtcl {
 
-class METACOMMLIB_EXPORT JanomeSocket : public QObject
+class METACOMMLIB_EXPORT TcpSocketBase : public QObject
 {
     Q_OBJECT
 public:
-    explicit JanomeSocket(QObject *parent = nullptr);
-    virtual ~JanomeSocket();
-    void Disconnect();
-    bool ConnectTo(string ip, int port);
-    bool SendData(const QByteArray& data);
+    explicit TcpSocketBase(QObject *parent = nullptr);
+    virtual ~TcpSocketBase();
+    virtual void Disconnect();
+    virtual bool ConnectTo(string ip, int port) = 0;
 signals:
     void OnConnectionChanged(bool isConnected);
     void OnErrorChanged(const QString& errorMsg);
-    void OnReceivedMsgChanged(const QByteArray &data);
+    void OnReceivedMsgChanged(const QByteArray& message);
     void OnSendMessageChanged(const bool status);
 public slots:
     void HandleSendMessage(const QByteArray &message);
@@ -37,4 +37,6 @@ protected:
 };
 
 }
-#endif // JANOMESOCKET_H
+
+
+#endif // TCPSOCKETBASE_H

@@ -10,6 +10,7 @@
 JanomeControlForm::JanomeControlForm(QWidget *parent)
     : mtcl::IRobotUserControl(parent)
     , ui(new Ui::JanomeControlForm)
+    , mptrJanome(nullptr)
 {
     ui->setupUi(this);
 
@@ -45,7 +46,7 @@ void JanomeControlForm::HandleConnectJanome()
     {
         bool isOK = false;
         int port = ui->ctrlLineEditPort->text().toInt(&isOK);
-        if (isOK)
+        if (isOK && mptrJanome != nullptr)
         {
             isValidAddress = true;
             mptrJanome->SetConnectionAddress(ipAddress.toStdString(), port);

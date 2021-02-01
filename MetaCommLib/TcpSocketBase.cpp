@@ -41,12 +41,14 @@ void TcpSocketBase::HandleSendMessage(const QByteArray &message)
 
 void TcpSocketBase::HandleConnectedChanged()
 {
+    cout << "[TcpSocketBase::HandleConnectedChanged]" << endl;
     mIsConnected = true;
     emit OnConnectionChanged(true);
 }
 
 void TcpSocketBase::HandleDisconnectChanged()
 {
+    cout << "[TcpSocketBase::HandleDisconnectChanged]" << endl;
     mIsConnected = false;
     emit OnConnectionChanged(false);
 }

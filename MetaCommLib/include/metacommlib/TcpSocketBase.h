@@ -18,6 +18,7 @@ public:
     virtual ~TcpSocketBase();
     virtual void Disconnect();
     virtual bool ConnectTo(string ip, int port) = 0;
+    virtual bool SendData(const QByteArray& data) = 0;
 signals:
     void OnConnectionChanged(bool isConnected);
     void OnErrorChanged(const QString& errorMsg);

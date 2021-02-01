@@ -16,11 +16,11 @@ public:
     virtual ~IRobotPosition();
     virtual double GetPosX() = 0;
     virtual double GetPosY() = 0;
-    virtual double GetPosT() = 0;
+    virtual double GetPosThetaInDegs() = 0;
 
     virtual void SetPosX(double x) = 0;
     virtual void SetPosY(double y) = 0;
-    virtual void SetPosT(double thetaInDegs) = 0;
+    virtual void SetPosThetaInDegs(double thetaInDegs) = 0;
 
 protected:
     double *mptrPosition;

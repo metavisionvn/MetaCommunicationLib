@@ -10,13 +10,13 @@ Janome::Janome()
     , mIPAddress("")
     , mPort(0)
     , mDecoder(this)
+    , mEncoder()
     , mSocket(nullptr)
 {
     mCurrentPosition = new JanomePosition();
 
     mAutoReconnectTimer = new QTimer(this);
     connect(mAutoReconnectTimer, &QTimer::timeout, this, &Janome::HandleReconnectTimerChanged);
-    mAutoReconnectTimer->setSingleShot(true);
     mAutoReconnectTimer->setInterval(1000);
 }
 
@@ -42,18 +42,18 @@ void Janome::SetConnectionAddress(string ipAddress, int port)
     mPort = port;
 }
 
-bool Janome::GetCurrentPosition(double &x, double &y, double &z)
+bool Janome::GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs)
 {
     JanomePosition* position = dynamic_cast<JanomePosition*>(mCurrentPosition);
     if (position != nullptr)
     {
-        position->GetPosition(x, y, z);
+        position->GetPosition(x, y, z, thetaInDegs);
         return true;
     }
     return false;
 }
 
-bool Janome::MovePosition(double x, double y, double z)
+bool Janome::MovePosition(double x, double y, double z, double thetaInDegs)
 {
     return true;
 }
@@ -63,24 +63,35 @@ bool Janome::MovePosition(unique_ptr<IRobotPosition> position)
     JanomePosition* pos = dynamic_cast<JanomePosition*>(position.get());
     if (pos != nullptr)
     {
-        return MovePosition(pos->GetPosX(), pos->GetPosY(), pos->GetPosZ());
+        return MovePosition(pos->GetPosX(), pos->GetPosY(), pos->GetPosZ(), pos->GetPosThetaInDegs());
     }
     return false;
 }
 
-void Janome::SetPosition(double x, double y, double z)
+void Janome::SetPosition(double x, double y, double z, double thetaInDegs)
 {
     JanomePosition *pos = dynamic_cast<JanomePosition*>(mCurrentPosition);
     if (pos != nullptr)
     {
-        pos->SetPosition(x, y, z);
+        pos->SetPosition(x, y, z, thetaInDegs);
     }
     emit OnPositionChanged();
 }
 
+void Janome::SetRobotInformation(const JanomeRobotInformation &robotInformation)
+{
+    mRobotInformation = robotInformation;
+    mDeviceName = mRobotInformation.GetSeries();
+
+    emit OnRobotInformUpdated();
+}
+
 bool Janome::UpdateCurrentPosition()
 {
-    //Request to get current position
+    string acquireToolTipPosition = mEncoder.GetToolTipPositionMsg();
+    if (mSocket != nullptr){
+        bool isSuccess = mSocket->SendData(QByteArray(acquireToolTipPosition.c_str(), acquireToolTipPosition.length()));
+    }
     return true;
 }
 
@@ -90,12 +101,14 @@ void Janome::HandleOnSocketConnectionChanged(bool isConnected)
     {
         mAutoReconnectTimer->stop();
         SetConnectionStatus(RobotConnect_Connected);
+        Initialize();
     }
     else
     {
         mAutoReconnectTimer->start();
         SetConnectionStatus(RobotConnect_DisConnected);
     }
+    emit OnConnectionStatusChanged((int)GetConnectionStatus());
 }
 
 void Janome::HandleSocketErrorChanged(const QString& errorMsg)
@@ -105,9 +118,9 @@ void Janome::HandleSocketErrorChanged(const QString& errorMsg)
 
 void Janome::HandleReceivedMsgChanged(const QByteArray& message)
 {
-    OnReceivedMsg(message);
+    emit OnReceivedMsg(message);
     //Decode message here
-    mDecoder.Execute(message.data(), message.size());
+    mDecoder.Execute(message.constData(), message.length());
 }
 
 void Janome::HandleReconnectTimerChanged()
@@ -120,7 +133,12 @@ void Janome::HandleReconnectTimerChanged()
 
 bool Janome::Initialize()
 {
-    return false;
+    //Get Robot Information here
+    string acquireRobotInformMsg = mEncoder.GetRobotInformationMsg();
+    if (mSocket != nullptr){
+        bool isSuccess = mSocket->SendData(QByteArray(acquireRobotInformMsg.c_str(), acquireRobotInformMsg.length()));
+    }
+    return true;
 }
 
 void Janome::OnStart()

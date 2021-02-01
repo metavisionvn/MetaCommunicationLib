@@ -16,7 +16,7 @@ public:
     explicit TcpClient(QObject *parent = nullptr);
     virtual ~TcpClient();
     bool ConnectTo(string ipaddress, int port) override;
-    bool SendData(const QByteArray& data);
+    bool SendData(const QByteArray& data) override;
 private:
 };
 

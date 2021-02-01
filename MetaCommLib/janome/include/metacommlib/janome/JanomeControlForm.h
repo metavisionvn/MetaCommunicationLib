@@ -29,8 +29,12 @@ private slots:
     void HandleJOGCtrlBtnReleased();
     void HandlePositionChanged();
     void HandleConnectionStatusChanged(int connectionStatus);
+    void HandleReceivedMsg(const QByteArray& data);
+    void HandleRobotInformUpdated();
+protected:
+    virtual void InitControl() override;
+    virtual void RefreshBtn() override;
 private:
-    void InitControl();
     Ui::JanomeControlForm *ui;
     bool mConnectStatus;
     shared_ptr<mtcl::Janome> mptrJanome;

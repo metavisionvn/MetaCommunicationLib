@@ -12,12 +12,12 @@ public:
     virtual ~DobotPosition();
     virtual double GetPosX() override;
     virtual double GetPosY() override;
-    virtual double GetPosT() override;
+    virtual double GetPosThetaInDegs() override;
     virtual double GetPosZ();
 
     virtual void SetPosX(double x) override;
     virtual void SetPosY(double y) override;
-    virtual void SetPosT(double thetaInDegs) override;
+    virtual void SetPosThetaInDegs(double thetaInDegs) override;
     virtual void SetPosZ(double z);
 
     virtual void GetPosition(double &x, double &y, double &z, double &thetaInDegs);

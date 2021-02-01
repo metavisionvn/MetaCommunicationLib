@@ -15,6 +15,7 @@ public:
     virtual ~TcpServer();
     virtual void Disconnect() override;
     bool ConnectTo(string ipaddress, int port) override;
+    virtual bool SendData(const QByteArray &data) override;
 signals:
     void OnStatusChanged(const bool status);
 private slots:

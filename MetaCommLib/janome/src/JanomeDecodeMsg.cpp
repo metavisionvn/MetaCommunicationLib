@@ -1,5 +1,6 @@
 #include <metacommlib/janome/JanomeDecodeMsg.h>
 #include <metacommlib/janome/Janome.h>
+#include <metacommlib/janome/JanomeRobotInformation.h>
 
 namespace mtcl {
 
@@ -15,22 +16,43 @@ JanomeDecodeMsg::~JanomeDecodeMsg()
     mptrRobot = nullptr;
 }
 
-bool mtcl::JanomeDecodeMsg::Execute(const char *payload, const int size)
+bool JanomeDecodeMsg::Execute(const char *payload, const int size)
 {
     if (size == 0)
         return false;
-    int length = GetDataLength(payload);
-    if (length != size)
+    mBuffer.insert(mBuffer.end(), payload, payload + size);
+    if (mBuffer.size() < 4)
         return false;
-    return DecodeCmd(payload + 6);
+    char* msg = &mBuffer[0];
+    int length = GetDataLength(msg);
+    if (length <= size)
+    {
+        //Decode message, ignore lenght and fixed identifier
+
+        char commandCode = *(msg + 6);
+        char subCommandCode = *(msg + 7);
+        bool isSuccess = DecodeCmd(commandCode, subCommandCode, msg + 8);
+        mBuffer.erase(mBuffer.begin(), mBuffer.begin() + length);
+        return isSuccess;
+    }
+    return false;
 }
 
-bool JanomeDecodeMsg::DecodeCmd(const char *cmdMsg)
+bool JanomeDecodeMsg::DecodeCmd(char commandCode, char subCommandCode, const char *cmdMsg)
 {
     bool ret = false;
-    if (cmdMsg[0] == 'e')
+    if (commandCode == 'e')
     {
+        //Error
         ret = false;
+    }
+    else if (commandCode == 'b')
+    {
+        if (subCommandCode == '0')
+        {
+            //Acquire robot information
+            AcquireRobotInformation(cmdMsg);
+        }
     }
     else if (cmdMsg[0] == 'n')
     {
@@ -45,7 +67,7 @@ bool JanomeDecodeMsg::DecodeCmd(const char *cmdMsg)
             string yPosStr(cmdMsg + offset, 8);
             offset += 8;
             string zPosStr(cmdMsg + offset, 8);
-            double x = 0.0, y = 0.0, z = 0.0;
+            double x = 0.0, y = 0.0, z = 0.0, thetaInDegs = 0.0;
             try {
                 uint64_t xPos = HexToDecimal(xPosStr);
                 uint64_t yPos = HexToDecimal(yPosStr);
@@ -53,7 +75,8 @@ bool JanomeDecodeMsg::DecodeCmd(const char *cmdMsg)
                 x = xPos * UnitIncrements;
                 y = yPos * UnitIncrements;
                 z = zPos * UnitIncrements;
-                mptrRobot->SetPosition(x, y, z);
+
+                mptrRobot->SetPosition(x, y, z, thetaInDegs);
                 ret = true;
             } catch (exception) {
                 ret = false;
@@ -80,6 +103,131 @@ long JanomeDecodeMsg::HexToDecimal(string num)
     }
 
     return n;
+}
+
+void JanomeDecodeMsg::AcquireRobotInformation(const char *cmdMsg)
+{
+    //1. 4+5 mechanical type
+    int index = 0;
+    JanomeRobotInformation robotInformation;
+    if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '0')
+    {
+        robotInformation.SetMechanicalType(JMT_DesktopRobotJR3000Series);
+    }
+    else if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '2')
+    {
+        robotInformation.SetMechanicalType(JMT_CartersianRobotJC3Series);
+    }
+    index += 2;
+
+    //size classification
+    if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '2')
+    {
+        robotInformation.SetSeries("JR3200");
+    }
+    else if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '3')
+    {
+        robotInformation.SetSeries("JR3300");
+    }
+    else if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '4')
+    {
+        robotInformation.SetSeries("JR3400");
+    }
+    else if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '5')
+    {
+        robotInformation.SetSeries("JR3500");
+    }
+    else if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '6')
+    {
+        robotInformation.SetSeries("JR3600");
+    }
+    index += 2;
+
+    //Motor classification
+    index += 2;
+
+    //Axis support
+    int numberAxisMechanism = 0;
+    //X axis
+    if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '0')
+    {
+        numberAxisMechanism++;
+    }
+    index += 2;
+    //Y axis
+    if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '1')
+    {
+        numberAxisMechanism++;
+    }
+    index += 2;
+
+    //Z axis
+    if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '2')
+    {
+        numberAxisMechanism++;
+    }
+    index += 2;
+
+    //R axis
+    if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '3')
+    {
+        numberAxisMechanism++;
+    }
+    index += 2;
+    robotInformation.SetNumberAxisMechanism(numberAxisMechanism);
+
+    //axis function 5th
+    index += 2;
+    //axis function 6th
+    index += 2;
+    //not use
+    index += 4;
+
+    //specialized axis configuration. Single side or double side
+    index += 2;
+
+    //custom stroke flag
+    index += 2;
+
+    //X-Axis stroke
+    {
+        string stroke;
+        stroke += cmdMsg[index];
+        stroke += cmdMsg[index + 1];
+
+        double strokeValue = HexToDecimal(stroke) * 10.0;
+        robotInformation.SetXAxisStroke(strokeValue);
+        index += 2;
+    }
+
+    //Y-Axis stroke
+    {
+        string stroke;
+        stroke += cmdMsg[index];
+        stroke += cmdMsg[index + 1];
+        double strokeValue = HexToDecimal(stroke) * 10.0;
+        robotInformation.SetYAxisStroke(strokeValue);
+        index += 2;
+    }
+    //Z-Axis stroke
+    {
+        string stroke;
+        stroke += cmdMsg[index];
+        stroke += cmdMsg[index + 1];
+        double strokeValue = HexToDecimal(stroke) * 10.0;
+        robotInformation.SetZAxisStroke(strokeValue);
+        index += 2;
+    }
+
+    //R-Axis stroke
+    {
+        if (cmdMsg[index] == '0' && cmdMsg[index + 1] == '2')
+            robotInformation.SetRAxisStroke(360.0);
+        index += 2;
+    }
+
+    if (mptrRobot)
+        mptrRobot->SetRobotInformation(robotInformation);
 }
 
 }

@@ -34,13 +34,13 @@ private slots:
     void HandleSuckOff();
     void onHome();
     void HandleConnectionStatusChanged(int connectionStatus);
+protected:
+    void RefreshBtn() override;
+    void InitControl() override;
 private:
-    void refreshBtn();
-    void initControl();
     shared_ptr<mtcl::Dobot> mptrDobot;
 
     Ui::DobotController *ui;
-    bool connectStatus;
     bool mIsSucking;
 };
 

@@ -43,6 +43,7 @@ signals:
     void OnMovingStatusChanged(int status);
     void OnPositionChanged();
 protected:
+    virtual void StartBackgroundThread();
     virtual bool UpdateCurrentPosition() = 0;
     virtual void OnStart() = 0;
     virtual void OnStop() = 0;

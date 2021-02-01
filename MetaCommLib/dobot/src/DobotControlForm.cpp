@@ -27,7 +27,7 @@ DobotControlForm::DobotControlForm(QWidget *parent)
     connect(ui->sendBtn, SIGNAL(clicked(bool)), this, SLOT(HandlePTPsendBtnClicked()));
 
     //init JOG control
-    initControl();
+    InitControl();
 
     connect(ui->ctrlSuckOn, SIGNAL(released()), this, SLOT(HandleSuckOn()));
     connect(ui->ctrlSuckOff, SIGNAL(released()), this, SLOT(HandleSuckOff()));
@@ -112,7 +112,7 @@ void DobotControlForm::HandleConnectionStatusChanged(int status)
         QString botName("");
         QString botVersion("");
 
-        refreshBtn();
+        RefreshBtn();
         if (connectStatus)
         {
             botSerialNumber = QString::fromStdString(bot->GetRobotSerialNumber());
@@ -169,7 +169,7 @@ void DobotControlForm::HandleConnectDobot()
     }
 }
 
-void DobotControlForm::refreshBtn()
+void DobotControlForm::RefreshBtn()
 {
 
     if (connectStatus) {
@@ -197,7 +197,7 @@ void DobotControlForm::refreshBtn()
     ui->ctrlBtnHome->setEnabled(connectStatus);
 }
 
-void DobotControlForm::initControl()
+void DobotControlForm::InitControl()
 {
     QSignalMapper *signalMapper  = new QSignalMapper(this);
 

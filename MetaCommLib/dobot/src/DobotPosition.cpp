@@ -25,7 +25,7 @@ double DobotPosition::GetPosY()
     return mptrPosition[1];
 }
 
-double DobotPosition::GetPosT()
+double DobotPosition::GetPosThetaInDegs()
 {
     return mptrPosition[3];
 }
@@ -45,7 +45,7 @@ void DobotPosition::SetPosY(double y)
     mptrPosition[1] = y;
 }
 
-void DobotPosition::SetPosT(double thetaInDegs)
+void DobotPosition::SetPosThetaInDegs(double thetaInDegs)
 {
     mptrPosition[3] = thetaInDegs;
 }
@@ -60,7 +60,7 @@ void DobotPosition::GetPosition(double &x, double &y, double &z, double &thetaIn
     x = GetPosX();
     y = GetPosY();
     z = GetPosZ();
-    thetaInDegs = GetPosT();
+    thetaInDegs = GetPosThetaInDegs();
 }
 
 void DobotPosition::GetJointAngle(double &j1, double &j2, double &j3, double &j4)

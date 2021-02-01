@@ -6,6 +6,8 @@
 #include <QSignalMapper>
 #include <QTimer>
 #include <QHostAddress>
+#include <sstream>
+#include <iomanip>
 
 JanomeControlForm::JanomeControlForm(QWidget *parent)
     : mtcl::IRobotUserControl(parent)
@@ -16,6 +18,9 @@ JanomeControlForm::JanomeControlForm(QWidget *parent)
 
     connect(ui->connectBtn, SIGNAL(clicked(bool)), this, SLOT(HandleConnectJanome()));
     connect(ui->sendBtn, SIGNAL(clicked(bool)), this, SLOT(HandlePTPsendBtnClicked()));
+
+    ui->ctrlLineEditIPAddress->setPlaceholderText("192.168.200.180");
+    ui->ctrlLineEditPort->setPlaceholderText("10031");
 }
 
 JanomeControlForm::~JanomeControlForm()
@@ -32,6 +37,8 @@ bool JanomeControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
         mptrJanome = derived;
         connect(mptrJanome.get(), &mtcl::Janome::OnPositionChanged, this, &JanomeControlForm::HandlePositionChanged);
         connect(mptrJanome.get(), &mtcl::Janome::OnConnectionStatusChanged, this, &JanomeControlForm::HandleConnectionStatusChanged);
+        connect(mptrJanome.get(), &mtcl::Janome::OnReceivedMsg, this, &JanomeControlForm::HandleReceivedMsg);
+        connect(mptrJanome.get(), &mtcl::Janome::OnRobotInformUpdated, this, &JanomeControlForm::HandleRobotInformUpdated);
         ret = true;
     }
     return ret;
@@ -39,23 +46,36 @@ bool JanomeControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
 
 void JanomeControlForm::HandleConnectJanome()
 {
-    bool isValidAddress = false;
-    QString ipAddress = ui->ctrlLineEditIPAddress->text();
-    QHostAddress address(ipAddress);
-    if (QAbstractSocket::IPv4Protocol == address.protocol())
+    if (mptrJanome == nullptr)
     {
-        bool isOK = false;
-        int port = ui->ctrlLineEditPort->text().toInt(&isOK);
-        if (isOK && mptrJanome != nullptr)
+        QMessageBox::information(this, tr("error"), tr("No robot attached!!!"), QMessageBox::Ok);
+        return;
+    }
+
+    if (mptrJanome->GetConnectionStatus() != mtcl::RobotConnect_Connected)
+    {
+        bool isValidAddress = false;
+        QString ipAddress = ui->ctrlLineEditIPAddress->text();
+        QHostAddress address(ipAddress);
+        if (QAbstractSocket::IPv4Protocol == address.protocol())
         {
-            isValidAddress = true;
-            mptrJanome->SetConnectionAddress(ipAddress.toStdString(), port);
-            mptrJanome->Start();
+            bool isOK = false;
+            int port = ui->ctrlLineEditPort->text().toInt(&isOK);
+            if (isOK && mptrJanome != nullptr)
+            {
+                isValidAddress = true;
+                mptrJanome->SetConnectionAddress(ipAddress.toStdString(), port);
+                mptrJanome->Start();
+            }
+        }
+        if (!isValidAddress)
+        {
+            QMessageBox::warning(this, "Connection Error", "Invalid Host Address");
         }
     }
-    if (!isValidAddress)
+    else
     {
-        QMessageBox::warning(this, "Connection Error", "Invalid Host Address");
+        mptrJanome->Stop();
     }
 }
 
@@ -86,6 +106,38 @@ void JanomeControlForm::InitControl()
     connect(ui->ctrlBtnZSub, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
 }
 
+void JanomeControlForm::RefreshBtn()
+{
+    if (connectStatus) {
+        ui->connectBtn->setText(tr("Disconnect"));
+    } else {
+        ui->connectBtn->setText(tr("Connect"));
+        ui->deviceSNLabel->setText("");
+        ui->DeviceNameLabel->setText("");
+        ui->DeviceInfoLabel->setText("");
+    }
+
+    ui->sendBtn->setEnabled(connectStatus);
+    ui->ctrlDsbPtpX->setEnabled(connectStatus);
+    ui->ctrlDsbPtpY->setEnabled(connectStatus);
+    ui->ctrlDsbPtpZ->setEnabled(connectStatus);
+    ui->ctrlDsbPtpR->setEnabled(connectStatus);
+
+    ui->ctrlBtnHome->setEnabled(connectStatus);
+
+    ui->ctrlBtnXAdd->setEnabled(connectStatus);
+    ui->ctrlBtnXSub->setEnabled(connectStatus);
+
+    ui->ctrlBtnYAdd->setEnabled(connectStatus);
+    ui->ctrlBtnYSub->setEnabled(connectStatus);
+
+    ui->ctrlBtnZAdd->setEnabled(connectStatus);
+    ui->ctrlBtnZSub->setEnabled(connectStatus);
+
+    ui->ctrlBtnRAdd->setEnabled(connectStatus);
+    ui->ctrlBtnRSub->setEnabled(connectStatus);
+}
+
 void JanomeControlForm::HandleJOGCtrlBtnPressed(int index)
 {
 
@@ -100,15 +152,43 @@ void JanomeControlForm::HandlePositionChanged()
 {
     if (mptrJanome == nullptr)
         return;
-    double posX = 0.0, posY = 0.0, posZ = 0.0;
-    mptrJanome->GetCurrentPosition(posX, posY, posZ);
+    double posX = 0.0, posY = 0.0, posZ = 0.0, posThetaInDegs;
+    mptrJanome->GetCurrentPosition(posX, posY, posZ, posThetaInDegs);
     ui->xLabel->setText(QString::number(posX));
     ui->yLabel->setText(QString::number(posY));
     ui->zLabel->setText(QString::number(posZ));
+    ui->rLabel->setText(QString::number(posThetaInDegs));
 }
 
 void JanomeControlForm::HandleConnectionStatusChanged(int connectionStatus)
 {
+    mtcl::Janome* bot = dynamic_cast<mtcl::Janome*>(sender());
+    if (bot != nullptr)
+    {
+        connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
+        RefreshBtn();
+
+    }
+}
+
+void JanomeControlForm::HandleReceivedMsg(const QByteArray &data)
+{
+//    std::stringstream ss;
+//    ss << std::hex;
+//    for( int i(0) ; i < data.length(); ++i )
+//        ss << std::setw(2) << std::setfill('0') << (int)data[i];
+    //    ui->ctrlLabelMsg->setText(QString::fromStdString(ss.str()));
+}
+
+void JanomeControlForm::HandleRobotInformUpdated()
+{
+    mtcl::Janome* bot = dynamic_cast<mtcl::Janome*>(sender());
+    QString botSerialNumber = QString::fromStdString(bot->GetRobotSerialNumber());
+    QString botName = QString::fromStdString(bot->GetRobotName());
+    QString botVersion = QString::fromStdString(bot->GetRobotVersion());
+    ui->deviceSNLabel->setText(botSerialNumber);
+    ui->DeviceNameLabel->setText(botName);
+    ui->DeviceInfoLabel->setText(botVersion);
 
 }
 

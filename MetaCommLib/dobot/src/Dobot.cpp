@@ -88,7 +88,7 @@ bool Dobot::MovePosition(unique_ptr<IRobotPosition> position)
     DobotPosition* pos = dynamic_cast<DobotPosition*>(position.get());
     if (pos != nullptr)
     {
-        return MovePosition(pos->GetPosX(), pos->GetPosY(), pos->GetPosZ(), pos->GetPosT());
+        return MovePosition(pos->GetPosX(), pos->GetPosY(), pos->GetPosZ(), pos->GetPosThetaInDegs());
     }
     return false;
 }

@@ -43,6 +43,11 @@ bool TcpServer::ConnectTo(string ipaddress, int port)
     return ret;
 }
 
+bool TcpServer::SendData(const QByteArray &data)
+{
+    return false;
+}
+
 void TcpServer::HandleNewConnection()
 {
     QTcpSocket *socket = mServer->nextPendingConnection();

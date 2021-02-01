@@ -16,6 +16,10 @@ public:
     IRobotUserControl(QWidget* parent = nullptr);
     virtual ~IRobotUserControl();
     virtual bool SetRobot(shared_ptr<mtcl::IRobot> robot) = 0;
+protected:
+    virtual void InitControl() = 0;
+    virtual void RefreshBtn() = 0;
+    bool connectStatus;
 };
 
 }

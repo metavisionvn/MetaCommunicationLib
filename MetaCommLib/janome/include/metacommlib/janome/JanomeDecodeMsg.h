@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <QByteArray>
 using namespace std;
 
 namespace mtcl {
@@ -18,10 +19,12 @@ public:
     virtual ~JanomeDecodeMsg();
     bool Execute(const char *payload, const int size);
 private:
-    bool DecodeCmd(const char *cmdMsg);
+    bool DecodeCmd(char commandCode, char subCommandCode, const char *cmdMsg);
     int GetDataLength(const char *dataLengthStr);
     long HexToDecimal(string num);
-    vector<uint8_t> mBuffer;
+
+    void AcquireRobotInformation(const char *cmdMsg);
+    vector<char> mBuffer;
     const double UnitIncrements;
     Janome *mptrRobot;
 };

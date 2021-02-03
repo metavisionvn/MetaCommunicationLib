@@ -22,8 +22,10 @@ private:
     bool DecodeCmd(char commandCode, char subCommandCode, const char *cmdMsg);
     int GetDataLength(const char *dataLengthStr);
     long HexToDecimal(string num);
+    long HexToDecimal2sComplement(string num);
 
-    void AcquireRobotInformation(const char *cmdMsg);
+    bool AcquireRobotInformation(const char *cmdMsg);
+    bool AcquireRobotPosition(const char *cmdMsg);
     vector<char> mBuffer;
     const double UnitIncrements;
     Janome *mptrRobot;

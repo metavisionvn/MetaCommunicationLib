@@ -12,6 +12,9 @@ Janome::Janome()
     , mDecoder(this)
     , mEncoder()
     , mSocket(nullptr)
+    , mIsStopping(false)
+    , mSocketDescriptor(0)
+    , mSpeedLevel(0)
 {
     mCurrentPosition = new JanomePosition();
 
@@ -22,6 +25,7 @@ Janome::Janome()
 
 Janome::~Janome()
 {
+    Stop();
     if (mSocket != nullptr)
     {
         delete mSocket;
@@ -32,7 +36,6 @@ Janome::~Janome()
     {
         disconnect(mAutoReconnectTimer, &QTimer::timeout, this, &Janome::HandleReconnectTimerChanged);
         mAutoReconnectTimer->stop();
-        mAutoReconnectTimer->deleteLater();
     }
 }
 
@@ -55,6 +58,8 @@ bool Janome::GetCurrentPosition(double &x, double &y, double &z, double &thetaIn
 
 bool Janome::MovePosition(double x, double y, double z, double thetaInDegs)
 {
+    string msg = mEncoder.GetMoveCmdMsg(x, y, z, thetaInDegs);
+    emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
     return true;
 }
 
@@ -66,6 +71,56 @@ bool Janome::MovePosition(unique_ptr<IRobotPosition> position)
         return MovePosition(pos->GetPosX(), pos->GetPosY(), pos->GetPosZ(), pos->GetPosThetaInDegs());
     }
     return false;
+}
+
+bool Janome::CmdMecaInitialize()
+{
+    string msg = mEncoder.GetRunControlMechanicalInitMsg();
+    emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
+    return true;
+}
+
+bool Janome::CmdGoToHome()
+{
+    string msg = mEncoder.GetRunControlReturnWorkHomeMsg();
+    emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
+    return true;
+}
+
+void Janome::CmdJogStart(int index)
+{
+    int movingAxis = -1;
+    int movingDirection = -1;
+    switch (index) {
+    case 0: movingAxis = 0; movingDirection = 0; break;
+    case 1: movingAxis = 0; movingDirection = 1; break;
+    case 2: movingAxis = 1; movingDirection = 0; break;
+    case 3: movingAxis = 1; movingDirection = 1; break;
+    case 4: movingAxis = 2; movingDirection = 0; break;
+    case 5: movingAxis = 2; movingDirection = 1; break;
+    case 6: movingAxis = 3; movingDirection = 0; break;
+    case 7: movingAxis = 3; movingDirection = 1; break;
+    default: break;
+    }
+    if (movingAxis != -1 && movingDirection != -1)
+    {
+
+    }
+}
+
+void Janome::CmdJogStop()
+{
+
+}
+
+void Janome::CmdSetSpeedLevel(int speedLevel)
+{
+    mSpeedLevel = speedLevel;
+}
+
+int Janome::GetSpeedLevel() const
+{
+    return mSpeedLevel;
 }
 
 void Janome::SetPosition(double x, double y, double z, double thetaInDegs)
@@ -82,6 +137,7 @@ void Janome::SetRobotInformation(const JanomeRobotInformation &robotInformation)
 {
     mRobotInformation = robotInformation;
     mDeviceName = mRobotInformation.GetSeries();
+    mDeviceVersion = mRobotInformation.GetSoftwareVersion();
 
     emit OnRobotInformUpdated();
 }
@@ -89,9 +145,7 @@ void Janome::SetRobotInformation(const JanomeRobotInformation &robotInformation)
 bool Janome::UpdateCurrentPosition()
 {
     string acquireToolTipPosition = mEncoder.GetToolTipPositionMsg();
-    if (mSocket != nullptr){
-        bool isSuccess = mSocket->SendData(QByteArray(acquireToolTipPosition.c_str(), acquireToolTipPosition.length()));
-    }
+    emit OnSendMsgChanged(QByteArray(acquireToolTipPosition.c_str(), acquireToolTipPosition.length()));
     return true;
 }
 
@@ -99,13 +153,17 @@ void Janome::HandleOnSocketConnectionChanged(bool isConnected)
 {
     if (isConnected)
     {
-        mAutoReconnectTimer->stop();
+        if (mAutoReconnectTimer->isActive())
+            mAutoReconnectTimer->stop();
+        mSocketDescriptor = mSocket->SocketDescriptor();
         SetConnectionStatus(RobotConnect_Connected);
         Initialize();
+        StartBackgroundThread();
     }
     else
     {
-        mAutoReconnectTimer->start();
+        if (!mIsStopping)
+            mAutoReconnectTimer->start();
         SetConnectionStatus(RobotConnect_DisConnected);
     }
     emit OnConnectionStatusChanged((int)GetConnectionStatus());
@@ -135,13 +193,11 @@ bool Janome::Initialize()
 {
     //Get Robot Information here
     string acquireRobotInformMsg = mEncoder.GetRobotInformationMsg();
-    if (mSocket != nullptr){
-        bool isSuccess = mSocket->SendData(QByteArray(acquireRobotInformMsg.c_str(), acquireRobotInformMsg.length()));
-    }
+    emit OnSendMsgChanged(QByteArray(acquireRobotInformMsg.c_str(), acquireRobotInformMsg.length()));
     return true;
 }
 
-void Janome::OnStart()
+bool Janome::OnStart()
 {
     if (GetConnectionStatus() != RobotConnect_Connected)
     {
@@ -150,17 +206,22 @@ void Janome::OnStart()
             delete  mSocket;
             mSocket = nullptr;
         }
+        mIsStopping = false;
+        mSocketDescriptor = 0;
         mSocket = new TcpClient();
         connect(mSocket, &TcpSocketBase::OnConnectionChanged, this, &Janome::HandleOnSocketConnectionChanged);
         connect(mSocket, &TcpSocketBase::OnErrorChanged, this, &Janome::HandleSocketErrorChanged);
         connect(mSocket, &TcpSocketBase::OnReceivedMsgChanged, this, &Janome::HandleReceivedMsgChanged);
         connect(this, &Janome::OnSendMsgChanged, mSocket, &TcpSocketBase::HandleSendMessage);
         mSocket->ConnectTo(mIPAddress, mPort);
+        return true;
     }
+    return false;
 }
 
 void Janome::OnStop()
 {
+    mIsStopping = true;
     mAutoReconnectTimer->stop();
     mSocket->Disconnect();
 }

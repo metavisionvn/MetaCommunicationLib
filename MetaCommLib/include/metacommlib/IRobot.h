@@ -45,7 +45,7 @@ signals:
 protected:
     virtual void StartBackgroundThread();
     virtual bool UpdateCurrentPosition() = 0;
-    virtual void OnStart() = 0;
+    virtual bool OnStart() = 0;
     virtual void OnStop() = 0;
     virtual void OnDoWork() = 0;
     void SetConnectionStatus(RobotConnectionStatus status);

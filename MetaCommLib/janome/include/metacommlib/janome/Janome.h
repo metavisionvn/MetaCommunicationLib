@@ -24,6 +24,34 @@ public:
     bool MovePosition(double x, double y, double z, double thetaInDegs);
     bool MovePosition(unique_ptr<IRobotPosition> position) override;
 
+    /**
+     * @brief CmdMecaInitialize (Run Control)
+     * @details Initialize mechanical. Very first time when turn on the robot
+     *
+     */
+    bool CmdMecaInitialize();
+    /**
+     * @brief CmdGoToHome (Run Control)
+     */
+    bool CmdGoToHome();
+    /**
+     * @brief CmdJogStart
+     * @param
+     * index = 0: X positive;
+     * index = 1; X negative;
+     * index = 2: Y positive;
+     * index = 3: Y negative;
+     * index = 4: Z positive;
+     * index = 5: Z negative;
+     * index = 6: R positive;
+     * index = 7: R negative;
+     */
+    void CmdJogStart(int index);
+    void CmdJogStop();
+    void CmdSetSpeedLevel(int speedLevel);
+
+    int GetSpeedLevel() const;
+
     friend class JanomeDecodeMsg;
 signals:
     //Get response from dobot handler
@@ -33,7 +61,7 @@ signals:
     void OnRobotInformUpdated();
 protected:
 
-    virtual void OnStart() override;
+    virtual bool OnStart() override;
     virtual void OnStop() override;
     virtual void OnDoWork() override;
     virtual bool UpdateCurrentPosition() override;
@@ -47,14 +75,18 @@ private:
     //update position form decoder
     void SetPosition(double x, double y, double z, double thetaInDegs);
     void SetRobotInformation(const JanomeRobotInformation& robotInformation);
+    void SetRobotJogStarting(bool isStart);
     string mIPAddress;
     int mPort;
     JanomeDecodeMsg mDecoder;
     JanomeEncodedMsg mEncoder;
-
     TcpSocketBase *mSocket;
     QTimer* mAutoReconnectTimer;
     JanomeRobotInformation mRobotInformation;
+    bool mIsStopping;
+    qintptr mSocketDescriptor;
+    int mSpeedLevel;
+
 };
 
 }

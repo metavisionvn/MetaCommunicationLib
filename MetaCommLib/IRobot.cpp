@@ -6,13 +6,13 @@ namespace mtcl {
 
 IRobot::IRobot()
     : mCurrentPosition(nullptr)
-    , mConnectionStatus(RobotConnect_Undefined)
-    , mMovingStatus(RobotMoving_Done)
-    , mBackgroundThread(nullptr)
-    , mRefreshTimeIntervalInMilisecs(50.0)
     , mDeviceSerialNumber("")
     , mDeviceName("")
     , mDeviceVersion("")
+    , mConnectionStatus(RobotConnect_Undefined)
+    , mMovingStatus(RobotMoving_Done)
+    , mBackgroundThread(nullptr)
+    , mRefreshTimeIntervalInMilisecs(100.0)
 {
 
 }
@@ -39,16 +39,12 @@ RobotConnectionStatus IRobot::GetConnectionStatus()
 
 bool IRobot::Start()
 {
-    OnStart();
-    StartBackgroundThread();
-
-    return (mConnectionStatus == RobotConnect_Connected);
+    return OnStart();
 }
 
 bool IRobot::Stop()
 {
     OnStop();
-
     if (mConnectionStatus != RobotConnect_Connected)
     {
         InterruptBackgroundThread();

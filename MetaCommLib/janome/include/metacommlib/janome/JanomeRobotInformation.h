@@ -45,7 +45,8 @@ public:
     void SetRAxisStroke(double v);
     double GetRAxisStroke();
 
-    double GetMoveableRange(string axis);
+    void SetSoftwareVersion(string softwareVersion);
+    string GetSoftwareVersion();
 
     JanomeRobotInformation& operator= (const JanomeRobotInformation &robotInform);
     friend METACOMMLIB_EXPORT std::ostream &operator<<(std::ostream &os, const JanomeRobotInformation &robotInform);
@@ -57,6 +58,7 @@ private:
     double mYAxisStroke;
     double mZAxisStroke;
     double mRAxisStroke;
+    string mSoftwareVersion;
 };
 
 }

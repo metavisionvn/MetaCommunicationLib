@@ -28,7 +28,7 @@ public:
     void CmdSuckOff();
     void CmdMoveToHome();
 protected:
-    void OnStart() override;
+    bool OnStart() override;
     void OnStop() override;
     bool UpdateCurrentPosition() override;
 

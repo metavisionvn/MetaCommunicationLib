@@ -18,13 +18,16 @@ public:
     virtual ~JanomeEncodedMsg();
     string GetRobotInformationMsg();
     string GetRobotStatusMsg();
-    string GetMechanicalInitMsg();
+    string GetRunControlMechanicalInitMsg();
     string GetAxisPositionRequestMsg();
     string GetToolTipPositionMsg();
-    string GetMoveCmdMsg(double x, double y, double z);
+    string GetMoveCmdMsg(double x, double y, double z, double thetaInDegs);
+    string GetRunControlReturnWorkHomeMsg();
+    string GetRunControlStartMsg();
+    string GetJogStartMsg(int movingAxis, int movingDirection, int speedLevel);
 private:
     int GetCmdLength(const string& cmd);
-    string EncodedDataLength(int dataLength);
+    string EncodeDataWith2Byte(long value, int numBytes);
     string EncodedCmd(const string& cmd);
     string HexStringToString(const string inputString);
     string StringToHexString(string input);

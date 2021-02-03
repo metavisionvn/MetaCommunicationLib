@@ -84,6 +84,16 @@ double JanomeRobotInformation::GetRAxisStroke()
     return mRAxisStroke;
 }
 
+void JanomeRobotInformation::SetSoftwareVersion(string softwareVersion)
+{
+    mSoftwareVersion = softwareVersion;
+}
+
+string JanomeRobotInformation::GetSoftwareVersion()
+{
+    return mSoftwareVersion;
+}
+
 JanomeRobotInformation &JanomeRobotInformation::operator=(const JanomeRobotInformation &robotInform)
 {
     mMechanicalType = robotInform.mMechanicalType;
@@ -93,6 +103,7 @@ JanomeRobotInformation &JanomeRobotInformation::operator=(const JanomeRobotInfor
     mYAxisStroke = robotInform.mYAxisStroke;
     mZAxisStroke = robotInform.mZAxisStroke;
     mRAxisStroke = robotInform.mRAxisStroke;
+    mSoftwareVersion = robotInform.mSoftwareVersion;
     return (*this);
 }
 

@@ -27,6 +27,14 @@ void TcpSocketBase::Disconnect()
         mSocket->close();
 }
 
+qptrdiff TcpSocketBase::SocketDescriptor() const
+{
+    if (mSocket != nullptr)
+        return mSocket->socketDescriptor();
+    else
+        throw std::runtime_error("Socket is not valid");
+}
+
 void TcpSocketBase::HandleSendMessage(const QByteArray &message)
 {
     bool status = false;
@@ -41,14 +49,12 @@ void TcpSocketBase::HandleSendMessage(const QByteArray &message)
 
 void TcpSocketBase::HandleConnectedChanged()
 {
-    cout << "[TcpSocketBase::HandleConnectedChanged]" << endl;
     mIsConnected = true;
     emit OnConnectionChanged(true);
 }
 
 void TcpSocketBase::HandleDisconnectChanged()
 {
-    cout << "[TcpSocketBase::HandleDisconnectChanged]" << endl;
     mIsConnected = false;
     emit OnConnectionChanged(false);
 }

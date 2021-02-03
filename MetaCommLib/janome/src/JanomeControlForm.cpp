@@ -18,9 +18,13 @@ JanomeControlForm::JanomeControlForm(QWidget *parent)
 
     connect(ui->connectBtn, SIGNAL(clicked(bool)), this, SLOT(HandleConnectJanome()));
     connect(ui->sendBtn, SIGNAL(clicked(bool)), this, SLOT(HandlePTPsendBtnClicked()));
+    connect(ui->ctrlBtnMechanicalInitialize, SIGNAL(clicked(bool)), this, SLOT(HandleMechanicalInitializeClicked()));
+    connect(ui->ctrlBtnHome, SIGNAL(clicked(bool)), this, SLOT(HandleReturnHomeClicked()));
 
-    ui->ctrlLineEditIPAddress->setPlaceholderText("192.168.200.180");
-    ui->ctrlLineEditPort->setPlaceholderText("10031");
+    //ui->ctrlLineEditIPAddress->setPlaceholderText("192.168.200.180");
+    //ui->ctrlLineEditPort->setPlaceholderText("10031");
+    ui->ctrlLineEditIPAddress->setText("192.168.200.180");
+    ui->ctrlLineEditPort->setText("10031");
 }
 
 JanomeControlForm::~JanomeControlForm()
@@ -89,6 +93,8 @@ void JanomeControlForm::InitControl()
     connect(ui->ctrlBtnYSub, SIGNAL(pressed()), signalMapper, SLOT(map()));
     connect(ui->ctrlBtnZAdd, SIGNAL(pressed()), signalMapper, SLOT(map()));
     connect(ui->ctrlBtnZSub, SIGNAL(pressed()), signalMapper, SLOT(map()));
+    connect(ui->ctrlBtnRAdd, SIGNAL(pressed()), signalMapper, SLOT(map()));
+    connect(ui->ctrlBtnRSub, SIGNAL(pressed()), signalMapper, SLOT(map()));
 
     signalMapper->setMapping(ui->ctrlBtnXAdd, 0);
     signalMapper->setMapping(ui->ctrlBtnXSub, 1);
@@ -96,14 +102,19 @@ void JanomeControlForm::InitControl()
     signalMapper->setMapping(ui->ctrlBtnYSub, 3);
     signalMapper->setMapping(ui->ctrlBtnZAdd, 4);
     signalMapper->setMapping(ui->ctrlBtnZSub, 5);
+    signalMapper->setMapping(ui->ctrlBtnRAdd, 6);
+    signalMapper->setMapping(ui->ctrlBtnRSub, 7);
 
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(HandleJOGCtrlBtnPressed(int)));
+
     connect(ui->ctrlBtnXAdd, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
     connect(ui->ctrlBtnXSub, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
     connect(ui->ctrlBtnYAdd, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
     connect(ui->ctrlBtnYSub, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
     connect(ui->ctrlBtnZAdd, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
     connect(ui->ctrlBtnZSub, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
+    connect(ui->ctrlBtnRAdd, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
+    connect(ui->ctrlBtnRSub, SIGNAL(released()), this, SLOT(HandleJOGCtrlBtnReleased()));
 }
 
 void JanomeControlForm::RefreshBtn()
@@ -136,16 +147,27 @@ void JanomeControlForm::RefreshBtn()
 
     ui->ctrlBtnRAdd->setEnabled(connectStatus);
     ui->ctrlBtnRSub->setEnabled(connectStatus);
+
+    ui->ctrlBtnMechanicalInitialize->setEnabled(connectStatus);
+    ui->ctrlBtnSpeedLow->setEnabled(connectStatus);
+    ui->ctrlBtnSpeedHigh->setEnabled(connectStatus);
+    ui->ctrlBtnSpeedMedium->setEnabled(connectStatus);
 }
 
 void JanomeControlForm::HandleJOGCtrlBtnPressed(int index)
 {
-
+    if (mptrJanome != nullptr)
+    {
+        mptrJanome->CmdJogStart(index);
+    }
 }
 
 void JanomeControlForm::HandleJOGCtrlBtnReleased()
 {
-
+    if (mptrJanome != nullptr)
+    {
+        mptrJanome->CmdJogStop();
+    }
 }
 
 void JanomeControlForm::HandlePositionChanged()
@@ -192,16 +214,33 @@ void JanomeControlForm::HandleRobotInformUpdated()
 
 }
 
+void JanomeControlForm::HandleMechanicalInitializeClicked()
+{
+    if (mptrJanome)
+    {
+        mptrJanome->CmdMecaInitialize();
+    }
+}
+
+void JanomeControlForm::HandleReturnHomeClicked()
+{
+    if (mptrJanome)
+    {
+        mptrJanome->CmdGoToHome();
+    }
+}
+
 void JanomeControlForm::HandlePTPsendBtnClicked()
 {
     float x = ui->ctrlDsbPtpX->value();
     float y = ui->ctrlDsbPtpY->value();
     float z = ui->ctrlDsbPtpZ->value();
+    float thetaInDegs = ui->ctrlDsbPtpR->value();
 
-//    if (mptrDobot != nullptr)
-//    {
-//        ui->sendBtn->setEnabled(false);
-//        mptrDobot->CmdPTP(x, y, z, r);
-//        ui->sendBtn->setEnabled(true);
-//    }
+    if (mptrJanome != nullptr)
+    {
+        ui->sendBtn->setEnabled(false);
+        mptrJanome->MovePosition(x, y, z, thetaInDegs);
+        ui->sendBtn->setEnabled(true);
+    }
 }

@@ -19,26 +19,25 @@ Dobot::Dobot()
 
 Dobot::~Dobot()
 {
-    if (GetConnectionStatus() == RobotConnect_Connected)
-    {
-        Stop();
-    }
+    Stop();
 }
 
-void Dobot::OnStart()
+bool Dobot::OnStart()
 {
+    RobotConnectionStatus status = RobotConnect_Undefined;
     if (GetConnectionStatus() != RobotConnect_Connected)
     {
-        RobotConnectionStatus status = RobotConnect_Undefined;
         if (ConnectDobot(0, 115200, 0, 0) != DobotConnect_NoError) {
             status = RobotConnect_DisConnected;
         }
         else{
             status = RobotConnect_Connected;
             Initialize();
+            StartBackgroundThread();
         }
         SetConnectionStatus(status);
     }
+    return (status == RobotConnect_Connected);
 }
 
 void Dobot::OnStop()

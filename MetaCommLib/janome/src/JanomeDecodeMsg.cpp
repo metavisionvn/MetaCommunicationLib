@@ -24,11 +24,10 @@ bool JanomeDecodeMsg::Execute(const char *payload, const int size)
     if (mBuffer.size() < 4)
         return false;
     char* msg = &mBuffer[0];
-    int length = GetDataLength(msg);
-    if (length <= size)
+    size_t length = GetDataLength(msg);
+    if (length <= mBuffer.size())
     {
         //Decode message, ignore lenght and fixed identifier
-
         char commandCode = *(msg + 6);
         char subCommandCode = *(msg + 7);
         bool isSuccess = DecodeCmd(commandCode, subCommandCode, msg + 8);
@@ -50,46 +49,35 @@ bool JanomeDecodeMsg::DecodeCmd(char commandCode, char subCommandCode, const cha
     {
         if (subCommandCode == '0')
         {
-            //Acquire robot information
-            AcquireRobotInformation(cmdMsg);
+            ret = AcquireRobotInformation(cmdMsg);
         }
     }
-    else if (cmdMsg[0] == 'n')
+    else if (commandCode == 'n')
     {
-        if (cmdMsg[1] == '1')
+        if (subCommandCode == '1')
         {
-            //Get Position
-            int offset = 2;
-            string coordinateSystemStr(cmdMsg + offset, 8);
-            offset += 8;
-            string xPosStr(cmdMsg + offset, 8);
-            offset += 8;
-            string yPosStr(cmdMsg + offset, 8);
-            offset += 8;
-            string zPosStr(cmdMsg + offset, 8);
-            double x = 0.0, y = 0.0, z = 0.0, thetaInDegs = 0.0;
-            try {
-                uint64_t xPos = HexToDecimal(xPosStr);
-                uint64_t yPos = HexToDecimal(yPosStr);
-                uint64_t zPos = HexToDecimal(zPosStr);
-                x = xPos * UnitIncrements;
-                y = yPos * UnitIncrements;
-                z = zPos * UnitIncrements;
-
-                mptrRobot->SetPosition(x, y, z, thetaInDegs);
-                ret = true;
-            } catch (exception) {
-                ret = false;
-            }
+            ret = AcquireRobotPosition(cmdMsg);
         }
     }
+    else if (commandCode == 'r')
+    {
+        if (subCommandCode == '0')
+        {
+            string valueStr(cmdMsg, 4);
+            for (int index = 0; index < valueStr.size(); index++)
+                printf("%02X", valueStr[index]);
+            cout << __FUNCTION__ << " " << "RO" << endl;
+        }
+    }
+
+
     return ret;
 }
 
 int JanomeDecodeMsg::GetDataLength(const char *dataLengthStr)
 {
-    int ret = (int(dataLengthStr[0]))*pow(16, 3) + (int(dataLengthStr[1]))*pow(16, 2) +
-            (int(dataLengthStr[2]))*pow(16, 1) + (int(dataLengthStr[3]))*pow(16, 0);
+    int ret = (int(dataLengthStr[0]))*pow(16, 6) + (int(dataLengthStr[1]))*pow(16, 4) +
+            (int(dataLengthStr[2]))*pow(16, 2) + (int(dataLengthStr[3]))*pow(16, 0);
     return ret;
 }
 
@@ -105,7 +93,18 @@ long JanomeDecodeMsg::HexToDecimal(string num)
     return n;
 }
 
-void JanomeDecodeMsg::AcquireRobotInformation(const char *cmdMsg)
+long JanomeDecodeMsg::HexToDecimal2sComplement(string num)
+{
+    char* p;
+    uint64_t n = strtoul(num.c_str(), &p, 16);
+    if (*p != 0)
+    {
+        throw std::runtime_error("Not a number");
+    }
+    return n;
+}
+
+bool JanomeDecodeMsg::AcquireRobotInformation(const char *cmdMsg)
 {
     //1. 4+5 mechanical type
     int index = 0;
@@ -226,8 +225,54 @@ void JanomeDecodeMsg::AcquireRobotInformation(const char *cmdMsg)
         index += 2;
     }
 
+    {
+        //get software version
+        string majorNumberStr(cmdMsg + 60, 2);
+        string minorNumberStr(cmdMsg + 62, 2);
+        string subMinorNumberStr(cmdMsg + 64, 2);
+        int majorNumber = HexToDecimal(majorNumberStr);
+        int minorNumber = HexToDecimal(minorNumberStr);
+        int subMinorNumber = HexToDecimal(subMinorNumberStr);
+        char buffer[100];
+        snprintf(buffer, 100, "%d.%d.%d", majorNumber, minorNumber, subMinorNumber);
+        robotInformation.SetSoftwareVersion(buffer);
+    }
+
     if (mptrRobot)
         mptrRobot->SetRobotInformation(robotInformation);
+    return true;
+}
+
+bool JanomeDecodeMsg::AcquireRobotPosition(const char *cmdMsg)
+{
+    bool ret = false;
+    //Get Position
+    int offset = 0;
+    string coordinateSystemStr(cmdMsg + offset, 8);
+    offset += 8;
+    string xPosStr(cmdMsg + offset, 8);
+    offset += 8;
+    string yPosStr(cmdMsg + offset, 8);
+    offset += 8;
+    string zPosStr(cmdMsg + offset, 8);
+    offset += 8;
+    string thetaPosStr(cmdMsg + offset, 8);
+    double x = 0.0, y = 0.0, z = 0.0, thetaInDegs = 0.0;
+    try {
+        long xPos = HexToDecimal(xPosStr);
+        long yPos = HexToDecimal(yPosStr);
+        long zPos = HexToDecimal(zPosStr);
+        long thetaPos = HexToDecimal2sComplement(thetaPosStr);
+        x = xPos * UnitIncrements;
+        y = yPos * UnitIncrements;
+        z = zPos * UnitIncrements;
+        thetaInDegs = thetaPos * UnitIncrements;
+        mptrRobot->SetPosition(x, y, z, thetaInDegs);
+        ret = true;
+    } catch (exception) {
+
+    }
+    return ret;
 }
 
 }

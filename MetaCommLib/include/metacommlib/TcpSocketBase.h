@@ -19,6 +19,12 @@ public:
     virtual void Disconnect();
     virtual bool ConnectTo(string ip, int port) = 0;
     virtual bool SendData(const QByteArray& data) = 0;
+    /**
+     * @brief SocketDescriptor
+     * @return
+     * @exception socket invalid
+     */
+    virtual qptrdiff SocketDescriptor() const;
 signals:
     void OnConnectionChanged(bool isConnected);
     void OnErrorChanged(const QString& errorMsg);

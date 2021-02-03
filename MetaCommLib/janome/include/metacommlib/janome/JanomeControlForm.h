@@ -31,6 +31,8 @@ private slots:
     void HandleConnectionStatusChanged(int connectionStatus);
     void HandleReceivedMsg(const QByteArray& data);
     void HandleRobotInformUpdated();
+    void HandleMechanicalInitializeClicked();
+    void HandleReturnHomeClicked();
 protected:
     virtual void InitControl() override;
     virtual void RefreshBtn() override;

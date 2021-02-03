@@ -277,8 +277,10 @@ bool Janome::OnStart()
 void Janome::OnStop()
 {
     mIsStopping = true;
-    mAutoReconnectTimer->stop();
-    mSocket->Disconnect();
+    if (mAutoReconnectTimer != nullptr)
+        mAutoReconnectTimer->stop();
+    if (mSocket != nullptr)
+        mSocket->Disconnect();
 }
 
 void Janome::OnDoWork()

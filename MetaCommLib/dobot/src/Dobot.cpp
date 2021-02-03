@@ -43,8 +43,11 @@ bool Dobot::OnStart()
 
 void Dobot::OnStop()
 {
-    DisconnectDobot();
-    SetConnectionStatus(RobotConnect_DisConnected);
+    if (GetConnectionStatus() == RobotConnect_Connected)
+    {
+        DisconnectDobot();
+        SetConnectionStatus(RobotConnect_DisConnected);
+    }
 }
 
 bool Dobot::GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs)
@@ -156,7 +159,6 @@ bool Dobot::UpdateCurrentPosition()
 
 bool Dobot::Initialize()
 {
-    cout << "[Dobot::Initialize]" << endl;
     //Command timeout
     SetCmdTimeout(3000);
     //clear old commands and set the queued command running

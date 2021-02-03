@@ -380,22 +380,6 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="ctrlBtnYAdd">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Y+</string>
-          </property>
-         </widget>
-        </item>
         <item row="5" column="2">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
@@ -422,22 +406,6 @@
           </property>
           <property name="text">
            <string>Z-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="ctrlBtnXSub">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>X-</string>
           </property>
          </widget>
         </item>
@@ -520,22 +488,6 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="ctrlBtnXAdd">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>X+</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="1">
          <widget class="QLabel" name="label_18">
           <property name="font">
@@ -587,22 +539,6 @@
           </property>
           <property name="text">
            <string>GO</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="ctrlBtnYSub">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Y-</string>
           </property>
          </widget>
         </item>
@@ -673,6 +609,70 @@
           </property>
           <property name="value">
            <double>0.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="ctrlBtnXAdd">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>X+</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="ctrlBtnXSub">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>X-</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="ctrlBtnYAdd">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Y+</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="ctrlBtnYSub">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Y-</string>
           </property>
          </widget>
         </item>
@@ -905,11 +905,7 @@
   <tabstop>ctrlLineEditPort</tabstop>
   <tabstop>connectBtn</tabstop>
   <tabstop>ctrlBtnHome</tabstop>
-  <tabstop>ctrlBtnXAdd</tabstop>
-  <tabstop>ctrlBtnYAdd</tabstop>
   <tabstop>ctrlBtnZAdd</tabstop>
-  <tabstop>ctrlBtnXSub</tabstop>
-  <tabstop>ctrlBtnYSub</tabstop>
   <tabstop>ctrlBtnZSub</tabstop>
  </tabstops>
  <resources/>

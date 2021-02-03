@@ -76,6 +76,8 @@ private:
     void SetPosition(double x, double y, double z, double thetaInDegs);
     void SetRobotInformation(const JanomeRobotInformation& robotInformation);
     void SetRobotJogStarting(bool isStart);
+    void SetRobotJogMoving(bool isMoving);
+    void JogMovingFnc();
     string mIPAddress;
     int mPort;
     JanomeDecodeMsg mDecoder;
@@ -86,6 +88,7 @@ private:
     bool mIsStopping;
     qintptr mSocketDescriptor;
     int mSpeedLevel;
+    QThread* mJoggingThread;
 
 };
 

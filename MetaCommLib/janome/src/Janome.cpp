@@ -15,6 +15,7 @@ Janome::Janome()
     , mIsStopping(false)
     , mSocketDescriptor(0)
     , mSpeedLevel(0)
+    , mJoggingThread(nullptr)
 {
     mCurrentPosition = new JanomePosition();
 
@@ -104,13 +105,21 @@ void Janome::CmdJogStart(int index)
     }
     if (movingAxis != -1 && movingDirection != -1)
     {
-
+        string msg = mEncoder.GetJogStartMsg(movingAxis, movingDirection, mSpeedLevel);
+        emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
     }
 }
 
 void Janome::CmdJogStop()
 {
-
+    if (mJoggingThread != nullptr && mJoggingThread->isRunning())
+    {
+        mJoggingThread->requestInterruption();
+        mJoggingThread->quit();
+        mJoggingThread->wait();
+    }
+    string msg = mEncoder.GetJogStopMsg();
+    emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
 }
 
 void Janome::CmdSetSpeedLevel(int speedLevel)
@@ -140,6 +149,52 @@ void Janome::SetRobotInformation(const JanomeRobotInformation &robotInformation)
     mDeviceVersion = mRobotInformation.GetSoftwareVersion();
 
     emit OnRobotInformUpdated();
+}
+
+void Janome::SetRobotJogStarting(bool isStarted)
+{
+    if (isStarted)
+    {
+        //send command every 100ms
+        mJoggingThread = QThread::create(std::bind(&Janome::JogMovingFnc, this));
+        connect(mJoggingThread, &QThread::finished, this, [ = ]() {
+            delete mJoggingThread;
+            mJoggingThread = nullptr;
+        });
+        mJoggingThread->start();
+    }
+    else
+    {
+        //Jog Failed
+    }
+}
+
+void Janome::SetRobotJogMoving(bool isMoving)
+{
+    cout << __FUNCTION__ << " " << isMoving << endl;
+    if (!isMoving)
+    {
+        //Error
+        if (mJoggingThread != nullptr && mJoggingThread->isRunning())
+        {
+            mJoggingThread->requestInterruption();
+            mJoggingThread->quit();
+            mJoggingThread->wait();
+        }
+    }
+}
+
+void Janome::JogMovingFnc()
+{
+    if (mJoggingThread != nullptr)
+    {
+        while (!mJoggingThread->isInterruptionRequested())
+        {
+            string msg = mEncoder.GetJogMovingMsg(mSpeedLevel);
+            emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
+            QThread::msleep(100);
+        }
+    }
 }
 
 bool Janome::UpdateCurrentPosition()

@@ -25,8 +25,11 @@ public:
     string GetRunControlReturnWorkHomeMsg();
     string GetRunControlStartMsg();
     string GetJogStartMsg(int movingAxis, int movingDirection, int speedLevel);
+    string GetJogMovingMsg(int speedLevel);
+    string GetJogStopMsg();
 private:
     int GetCmdLength(const string& cmd);
+    string EncodeDataLength(int value);
     string EncodeDataWith2Byte(long value, int numBytes);
     string EncodedCmd(const string& cmd);
     string HexStringToString(const string inputString);

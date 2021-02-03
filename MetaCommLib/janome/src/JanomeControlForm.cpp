@@ -21,6 +21,8 @@ JanomeControlForm::JanomeControlForm(QWidget *parent)
     connect(ui->ctrlBtnMechanicalInitialize, SIGNAL(clicked(bool)), this, SLOT(HandleMechanicalInitializeClicked()));
     connect(ui->ctrlBtnHome, SIGNAL(clicked(bool)), this, SLOT(HandleReturnHomeClicked()));
 
+    InitControl();
+
     //ui->ctrlLineEditIPAddress->setPlaceholderText("192.168.200.180");
     //ui->ctrlLineEditPort->setPlaceholderText("10031");
     ui->ctrlLineEditIPAddress->setText("192.168.200.180");
@@ -152,6 +154,17 @@ void JanomeControlForm::RefreshBtn()
     ui->ctrlBtnSpeedLow->setEnabled(connectStatus);
     ui->ctrlBtnSpeedHigh->setEnabled(connectStatus);
     ui->ctrlBtnSpeedMedium->setEnabled(connectStatus);
+
+    if (!connectStatus)
+    {
+        ui->ctrlLineEditIPAddress->setEnabled(true);
+        ui->ctrlLineEditPort->setEnabled(true);
+    }
+    else
+    {
+        ui->ctrlLineEditIPAddress->setDisabled(true);
+        ui->ctrlLineEditPort->setDisabled(true);
+    }
 }
 
 void JanomeControlForm::HandleJOGCtrlBtnPressed(int index)
@@ -189,7 +202,6 @@ void JanomeControlForm::HandleConnectionStatusChanged(int connectionStatus)
     {
         connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
         RefreshBtn();
-
     }
 }
 

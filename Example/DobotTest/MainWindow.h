@@ -14,6 +14,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void AttachDobotWidget(QWidget* userControl);
+    void AttachJanomeWidget(QWidget* userControl);
 protected:
     void closeEvent(QCloseEvent *event);
 private:

@@ -64,12 +64,29 @@ bool JanomeDecodeMsg::DecodeCmd(char commandCode, char subCommandCode, const cha
         if (subCommandCode == '0')
         {
             string valueStr(cmdMsg, 4);
-            for (int index = 0; index < valueStr.size(); index++)
-                printf("%02X", valueStr[index]);
-            cout << __FUNCTION__ << " " << "RO" << endl;
         }
     }
-
+    else if (commandCode == 'm')
+    {
+        if (subCommandCode == '4')
+        {
+            string valueStr(cmdMsg, 4);
+            long value = HexToDecimal2sComplement(valueStr);
+            if (value == 0)
+                mptrRobot->SetRobotJogStarting(true);
+            else
+                mptrRobot->SetRobotJogStarting(false);
+        }
+        else if (subCommandCode == '5')
+        {
+            string valueStr(cmdMsg, 4);
+            long value = HexToDecimal2sComplement(valueStr);
+            if (value == 0)
+                mptrRobot->SetRobotJogMoving(true);
+            else
+                mptrRobot->SetRobotJogMoving(false);
+        }
+    }
 
     return ret;
 }

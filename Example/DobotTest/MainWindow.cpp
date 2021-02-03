@@ -20,6 +20,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::AttachDobotWidget(QWidget *userControl)
 {
-    ui->mainLayout->addWidget(userControl);
+    ui->dobotLayout->addWidget(userControl);
+}
+
+void MainWindow::AttachJanomeWidget(QWidget *userControl)
+{
+    ui->janomeLayout->addWidget(userControl);
 }
 

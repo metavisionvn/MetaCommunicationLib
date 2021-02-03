@@ -52,13 +52,12 @@ string JanomeEncodedMsg::GetMoveCmdMsg(double x, double y, double z, double thet
     long mt1 = 0;
     long mt2 = 0;
 
-    string posXStr = EncodeDataWith2Byte(posX, 4);
-    string posYStr = EncodeDataWith2Byte(posY, 4);
-    string posZStr = EncodeDataWith2Byte(posZ, 4);
-    string posRStr = EncodeDataWith2Byte(posR, 4);
-    string mt1Str = EncodeDataWith2Byte(mt1, 4);
-    string mt2Str = EncodeDataWith2Byte(mt2, 4);
-
+    string posXStr = EncodeDataWith2Byte(posX, 8);
+    string posYStr = EncodeDataWith2Byte(posY, 8);
+    string posZStr = EncodeDataWith2Byte(posZ, 8);
+    string posRStr = EncodeDataWith2Byte(posR, 8);
+    string mt1Str = EncodeDataWith2Byte(mt1, 8);
+    string mt2Str = EncodeDataWith2Byte(mt2, 8);
     string posXHexStr = StringToHexString(posXStr);
     string posYHexStr = StringToHexString(posYStr);
     string posZHexStr = StringToHexString(posZStr);
@@ -68,15 +67,13 @@ string JanomeEncodedMsg::GetMoveCmdMsg(double x, double y, double z, double thet
 
     //data length is fixed;
     int dataLength = 56 + 4 + 2 + 2;
-    string dataLengthStr = EncodeDataWith2Byte(dataLength, 4);
+    string dataLengthStr = EncodeDataLength(dataLength);
     //Encode coordinate system
-    string coordinateSystemStr = EncodeDataWith2Byte(1, 4);
+    string coordinateSystemStr = EncodeDataWith2Byte(1, 8);
     string coordinateSystemHexStr = StringToHexString(coordinateSystemStr);
 
-    string msg = EncodeDataWith2Byte(dataLength, 4) + mFixedID  + StringToHexString("M1") + coordinateSystemHexStr + posXHexStr + posYHexStr + posZHexStr + posRHexStr + mt1HexStr + mt2HexStr;
-    string ret = HexStringToString(msg);
-
-    return ret;
+    string msg = dataLengthStr + mFixedID  + StringToHexString("M1") + coordinateSystemHexStr + posXHexStr + posYHexStr + posZHexStr + posRHexStr + mt1HexStr + mt2HexStr;
+    return  HexStringToString(msg);
 }
 
 string JanomeEncodedMsg::GetRunControlReturnWorkHomeMsg()
@@ -93,7 +90,46 @@ string JanomeEncodedMsg::GetRunControlStartMsg()
 
 string JanomeEncodedMsg::GetJogStartMsg(int movingAxis, int movingDirection, int speedLevel)
 {
-    return "";
+    //1. command name
+    long reversed = 0;
+    string reversedStr = EncodeDataWith2Byte(reversed, 2);
+    string movingAxisStr = EncodeDataWith2Byte(movingAxis, 2);
+    string movingDirectionStr = EncodeDataWith2Byte(movingDirection, 2);
+    string speedLevelStr = EncodeDataWith2Byte(speedLevel, 2);
+    string toolDataStr = EncodeDataWith2Byte(0, 56);
+
+    string reversedHexStr = StringToHexString(reversedStr);
+    string movingAxisHexStr = StringToHexString(movingAxisStr);
+    string movingDirectionHexStr = StringToHexString(movingDirectionStr);
+    string speedLevelHexStr = StringToHexString(speedLevelStr);
+    string toolDataHexStr = StringToHexString(toolDataStr);
+
+
+    //data length is fixed: data length (4); fixed (2); command (2); reversed (2); moving axis(2); moving direction(2); speed (2); tool data(56)
+    int dataLength = 4 + 2 + 2 + 2 + 2 + 2 + 2 + 56;
+    string dataLengthStr = EncodeDataLength(dataLength);
+
+    string msg = dataLengthStr + mFixedID  + StringToHexString("M4") + reversedHexStr + movingAxisHexStr + movingDirectionHexStr + speedLevelHexStr + toolDataHexStr;
+    return  HexStringToString(msg);
+}
+
+string JanomeEncodedMsg::GetJogMovingMsg(int speedLevel)
+{
+    string speedLevelStr = EncodeDataWith2Byte(speedLevel, 2);
+    string speedLevelHexStr = StringToHexString(speedLevelStr);
+
+    //data length is fixed: data length (4); fixed (2); command (2); speed (2);
+    int dataLength = 4 + 2 + 2 + 2;
+    string dataLengthStr = EncodeDataLength(dataLength);
+
+    string msg = dataLengthStr + mFixedID  + StringToHexString("M5") + speedLevelHexStr;
+    return  HexStringToString(msg);
+}
+
+string JanomeEncodedMsg::GetJogStopMsg()
+{
+    string ret = EncodedCmd("M6");
+    return HexStringToString(ret);
 }
 
 int JanomeEncodedMsg::GetCmdLength(const string &cmd)
@@ -101,12 +137,22 @@ int JanomeEncodedMsg::GetCmdLength(const string &cmd)
     return (4 + 2 + cmd.size());
 }
 
+string JanomeEncodedMsg::EncodeDataLength(int value)
+{
+    int len = 8 + 1;
+    char* str = new char[len];
+    snprintf(str, len, "%08X", value);
+    string output(str);
+    delete [] str;
+    return output;
+}
+
 string JanomeEncodedMsg::EncodeDataWith2Byte(long value, int numBytes)
 {
     //Using 2 character to encode. Add one place for null '\0'
-    int len = 2*numBytes + 1;
+    int len = numBytes + 1;
     char* str = new char[len];
-    string formattedStr = "%0" + std::to_string(2*numBytes) + "X";
+    string formattedStr = "%0" + std::to_string(numBytes) + "X";
     snprintf(str, len, formattedStr.c_str(), value);
     string output(str);
     delete [] str;
@@ -117,8 +163,8 @@ string JanomeEncodedMsg::EncodedCmd(const string &cmd)
 {
     string hexCmd = StringToHexString(cmd);
     int length = GetCmdLength(cmd);
-    //Encode
-    string msg = EncodeDataWith2Byte(length, 4) + mFixedID + hexCmd;
+    string dataLengthStr = EncodeDataLength(length);
+    string msg = dataLengthStr + mFixedID + hexCmd;
     return msg;
 }
 

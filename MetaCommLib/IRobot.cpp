@@ -12,7 +12,7 @@ IRobot::IRobot()
     , mConnectionStatus(RobotConnect_Undefined)
     , mMovingStatus(RobotMoving_Done)
     , mBackgroundThread(nullptr)
-    , mRefreshTimeIntervalInMilisecs(100.0)
+    , mRefreshTimeIntervalInMilisecs(200.0)
 {
 
 }
@@ -64,7 +64,6 @@ IRobotPosition *IRobot::GetCurrentPosition()
 
 string IRobot::GetRobotSerialNumber() const
 {
-    cout << mDeviceSerialNumber << endl;
     return mDeviceSerialNumber;
 }
 

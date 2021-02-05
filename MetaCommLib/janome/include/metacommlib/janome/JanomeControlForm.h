@@ -21,7 +21,8 @@ public:
     ~JanomeControlForm();
     virtual bool SetRobot(shared_ptr<mtcl::IRobot> robot) override;
 protected:
-
+    virtual void InitControl() override;
+    virtual void RefreshBtn() override;
 private slots:
     void HandleConnectJanome();
     void HandlePTPsendBtnClicked();
@@ -35,10 +36,11 @@ private slots:
     void HandleReturnHomeClicked();
     void HandleRobotReturnToHomeStatusChanged(int v);
     void HandleRobotMecaInitStatusChanged(int v);
-protected:
-    virtual void InitControl() override;
-    virtual void RefreshBtn() override;
+    void HandleBtnSpeedLowClicked();
+    void HandleBtnSpeedMeidumClicked();
+    void HandleBtnSpeedHighClicked();
 private:
+    void SetExpectedSpeed(int speedLevel);
     Ui::JanomeControlForm *ui;
     bool mConnectStatus;
     shared_ptr<mtcl::Janome> mptrJanome;

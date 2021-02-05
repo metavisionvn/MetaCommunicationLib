@@ -241,6 +241,7 @@ void Janome::SetRobotMecaInitializingStatus(JanomeMecaInitializeStatus status)
 
 bool Janome::IsBusy()
 {
+    return false;
     if (mReturnHomeStatus == JRHS_Moving)
         return true;
     if (mMecaInitStatus == JMIS_Initializing)
@@ -277,8 +278,8 @@ void Janome::HandleOnSocketConnectionChanged(bool isConnected)
 
 void Janome::HandleSocketErrorChanged(const QString& errorMsg)
 {
-    if (mAutoReconnectTimer != nullptr)
-        mAutoReconnectTimer->start();
+//    if (mAutoReconnectTimer != nullptr)
+//        mAutoReconnectTimer->start();
 }
 
 void Janome::HandleReceivedMsgChanged(const QByteArray& message)

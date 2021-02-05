@@ -21,6 +21,9 @@ JanomeControlForm::JanomeControlForm(QWidget *parent)
     connect(ui->sendBtn, SIGNAL(clicked(bool)), this, SLOT(HandlePTPsendBtnClicked()));
     connect(ui->ctrlBtnMechanicalInitialize, SIGNAL(clicked(bool)), this, SLOT(HandleMechanicalInitializeClicked()));
     connect(ui->ctrlBtnHome, SIGNAL(clicked(bool)), this, SLOT(HandleReturnHomeClicked()));
+    connect(ui->ctrlRadioSpeedSlow, SIGNAL(clicked(bool)), this, SLOT(HandleBtnSpeedLowClicked()));
+    connect(ui->ctrlRadioSpeedMedium, SIGNAL(clicked(bool)), this, SLOT(HandleBtnSpeedMeidumClicked()));
+    connect(ui->ctrlRadioSpeedHigh, SIGNAL(clicked(bool)), this, SLOT(HandleBtnSpeedHighClicked()));
 
     InitControl();
     ui->ctrlLabelStatus->setText("...");
@@ -49,6 +52,7 @@ bool JanomeControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
         connect(mptrJanome.get(), &mtcl::Janome::OnRobotInformUpdated, this, &JanomeControlForm::HandleRobotInformUpdated);
         connect(mptrJanome.get(), &mtcl::Janome::OnRobotReturnToHomeStatus, this, &JanomeControlForm::HandleRobotReturnToHomeStatusChanged);
         connect(mptrJanome.get(), &mtcl::Janome::OnRobotMecaInitStatus, this, &JanomeControlForm::HandleRobotMecaInitStatusChanged);
+
         ret = true;
     }
     return ret;
@@ -162,9 +166,9 @@ void JanomeControlForm::RefreshBtn()
     ui->ctrlBtnRSub->setEnabled(connectStatus && isRAxisValid);
 
     ui->ctrlBtnMechanicalInitialize->setEnabled(connectStatus);
-    ui->ctrlBtnSpeedLow->setEnabled(connectStatus);
-    ui->ctrlBtnSpeedHigh->setEnabled(connectStatus);
-    ui->ctrlBtnSpeedMedium->setEnabled(connectStatus);
+    ui->ctrlRadioSpeedSlow->setEnabled(connectStatus);
+    ui->ctrlRadioSpeedMedium->setEnabled(connectStatus);
+    ui->ctrlRadioSpeedHigh->setEnabled(connectStatus);
 
     if (!connectStatus)
     {
@@ -206,15 +210,19 @@ void JanomeControlForm::HandlePositionChanged()
     ui->rLabel->setText(QString::number(posThetaInDegs));
 }
 
-void JanomeControlForm::HandleConnectionStatusChanged(int connectionStatus)
+void JanomeControlForm::HandleConnectionStatusChanged(int v)
 {
-    (void)connectionStatus;
+    (void)v;
     mtcl::Janome* bot = dynamic_cast<mtcl::Janome*>(sender());
     if (bot != nullptr)
     {
         connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
+        if (!connectStatus)
+        {
+            QMessageBox::warning(nullptr, "Connection Error", "Connection To Robot Failed");
+        }
 
-        ui->ctrlLabelStatus->setText(connectionStatus ? "Connected to Robot" : "Disconnected to Robot");
+        ui->ctrlLabelStatus->setText(connectStatus ? "Connected to Robot" : "Disconnected to Robot");
         string ipAddress("");
         int port = 0;
         bot->GetConnectionAddress(ipAddress, port);
@@ -305,6 +313,29 @@ void JanomeControlForm::HandleRobotMecaInitStatusChanged(int v)
     case mtcl::JMIS_Finished:
         ui->ctrlLabelStatus->setText("Initialized Mechanical Success");
         break;
+    }
+}
+
+void JanomeControlForm::HandleBtnSpeedLowClicked()
+{
+    SetExpectedSpeed(0);
+}
+
+void JanomeControlForm::HandleBtnSpeedMeidumClicked()
+{
+    SetExpectedSpeed(1);
+}
+
+void JanomeControlForm::HandleBtnSpeedHighClicked()
+{
+    SetExpectedSpeed(2);
+}
+
+void JanomeControlForm::SetExpectedSpeed(int speedLevel)
+{
+    if (mptrJanome != nullptr)
+    {
+        mptrJanome->CmdSetSpeedLevel(speedLevel);
     }
 }
 

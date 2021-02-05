@@ -28,7 +28,7 @@ void MainWindow::AttachJanomeWidget(QWidget *userControl)
     ui->janomeLayout->addWidget(userControl);
 }
 
-void MainWindow::AttachJanome2Widget(QWidget *userControl)
+void MainWindow::AttachTechmanWidget(QWidget *userControl)
 {
     ui->janomeLayout2->addWidget(userControl);
 }

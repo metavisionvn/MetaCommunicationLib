@@ -20,6 +20,9 @@ public:
     void SetPosY(double y);
     void SetPosThetaInDegs(double thetaInDegs);
     void SetPosZ(double z);
+
+    void SetPosition(double x, double y, double z, double thetaInDegs);
+    virtual void GetPosition(double &x, double &y, double &z, double &thetaInDegs);
 };
 
 }

@@ -24,6 +24,7 @@ INCLUDEPATH += $$PWD/include
 # include subfolders
 include(dobot/dobot.pri)
 include(janome/janome.pri)
+include(techman/techman.pri)
 # end
 DestinationDir = $$PWD/../build
 

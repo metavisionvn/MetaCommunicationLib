@@ -12,10 +12,13 @@ Janome::Janome()
     , mDecoder(this)
     , mEncoder()
     , mSocket(nullptr)
+    , mRobotInformation()
     , mIsStopping(false)
     , mSocketDescriptor(0)
     , mSpeedLevel(0)
     , mJoggingThread(nullptr)
+    , mReturnHomeStatus(JRHS_None)
+    , mMecaInitStatus(JMIS_None)
 {
     mCurrentPosition = new JanomePosition();
 
@@ -46,6 +49,12 @@ void Janome::SetConnectionAddress(string ipAddress, int port)
     mPort = port;
 }
 
+void Janome::GetConnectionAddress(string &ipAddress, int &port)
+{
+    ipAddress = mIPAddress;
+    port = mPort;
+}
+
 bool Janome::GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs)
 {
     JanomePosition* position = dynamic_cast<JanomePosition*>(mCurrentPosition);
@@ -59,6 +68,8 @@ bool Janome::GetCurrentPosition(double &x, double &y, double &z, double &thetaIn
 
 bool Janome::MovePosition(double x, double y, double z, double thetaInDegs)
 {
+    if (IsBusy())
+        return false;
     string msg = mEncoder.GetMoveCmdMsg(x, y, z, thetaInDegs);
     emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
     return true;
@@ -76,20 +87,28 @@ bool Janome::MovePosition(unique_ptr<IRobotPosition> position)
 
 bool Janome::CmdMecaInitialize()
 {
+    if (IsBusy())
+        return false;
+    mMecaInitStatus = JMIS_None;
     string msg = mEncoder.GetRunControlMechanicalInitMsg();
     emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
     return true;
 }
 
-bool Janome::CmdGoToHome()
+bool Janome::CmdReturnToHome()
 {
+    if (IsBusy())
+        return false;
+    mReturnHomeStatus = JRHS_None;
     string msg = mEncoder.GetRunControlReturnWorkHomeMsg();
     emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
     return true;
 }
 
-void Janome::CmdJogStart(int index)
+bool Janome::CmdJogStart(int index)
 {
+    if (IsBusy())
+        return false;
     int movingAxis = -1;
     int movingDirection = -1;
     switch (index) {
@@ -107,7 +126,9 @@ void Janome::CmdJogStart(int index)
     {
         string msg = mEncoder.GetJogStartMsg(movingAxis, movingDirection, mSpeedLevel);
         emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
+        return true;
     }
+    return false;
 }
 
 void Janome::CmdJogStop()
@@ -122,14 +143,24 @@ void Janome::CmdJogStop()
     emit OnSendMsgChanged(QByteArray(msg.c_str(), msg.length()));
 }
 
-void Janome::CmdSetSpeedLevel(int speedLevel)
+bool Janome::CmdSetSpeedLevel(int speedLevel)
 {
-    mSpeedLevel = speedLevel;
+    if (speedLevel >= 0 && mSpeedLevel <= 2)
+    {
+        mSpeedLevel = speedLevel;
+        return true;
+    }
+    return false;
 }
 
 int Janome::GetSpeedLevel() const
 {
     return mSpeedLevel;
+}
+
+int Janome::GetNumberAxes()
+{
+    return mRobotInformation.GetNumberAxisMechanism();
 }
 
 void Janome::SetPosition(double x, double y, double z, double thetaInDegs)
@@ -171,7 +202,6 @@ void Janome::SetRobotJogStarting(bool isStarted)
 
 void Janome::SetRobotJogMoving(bool isMoving)
 {
-    cout << __FUNCTION__ << " " << isMoving << endl;
     if (!isMoving)
     {
         //Error
@@ -197,6 +227,27 @@ void Janome::JogMovingFnc()
     }
 }
 
+void Janome::SetRobotReturnHomeStatus(JanomeReturnHomeStatus status)
+{
+    mReturnHomeStatus = status;
+    emit OnRobotReturnToHomeStatus(int(mReturnHomeStatus));
+}
+
+void Janome::SetRobotMecaInitializingStatus(JanomeMecaInitializeStatus status)
+{
+    mMecaInitStatus = status;
+    emit OnRobotMecaInitStatus(int(mMecaInitStatus));
+}
+
+bool Janome::IsBusy()
+{
+    if (mReturnHomeStatus == JRHS_Moving)
+        return true;
+    if (mMecaInitStatus == JMIS_Initializing)
+        return true;
+    return false;
+}
+
 bool Janome::UpdateCurrentPosition()
 {
     string acquireToolTipPosition = mEncoder.GetToolTipPositionMsg();
@@ -217,7 +268,7 @@ void Janome::HandleOnSocketConnectionChanged(bool isConnected)
     }
     else
     {
-        if (!mIsStopping)
+        if (!mIsStopping && mAutoReconnectTimer != nullptr)
             mAutoReconnectTimer->start();
         SetConnectionStatus(RobotConnect_DisConnected);
     }
@@ -226,7 +277,8 @@ void Janome::HandleOnSocketConnectionChanged(bool isConnected)
 
 void Janome::HandleSocketErrorChanged(const QString& errorMsg)
 {
-    mAutoReconnectTimer->start();
+    if (mAutoReconnectTimer != nullptr)
+        mAutoReconnectTimer->start();
 }
 
 void Janome::HandleReceivedMsgChanged(const QByteArray& message)
@@ -238,7 +290,8 @@ void Janome::HandleReceivedMsgChanged(const QByteArray& message)
 
 void Janome::HandleReconnectTimerChanged()
 {
-    mAutoReconnectTimer->stop();
+    if (mAutoReconnectTimer != nullptr)
+        mAutoReconnectTimer->stop();
     TcpClient* client = dynamic_cast<TcpClient*>(mSocket);
     if (client)
         client->ConnectTo(mIPAddress, mPort);

@@ -20,10 +20,10 @@ public:
     Janome();
     virtual ~Janome();
     void SetConnectionAddress(string ipAddress, int port);
+    void GetConnectionAddress(string& ipAddress, int& port);
     bool GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs);
     bool MovePosition(double x, double y, double z, double thetaInDegs);
     bool MovePosition(unique_ptr<IRobotPosition> position) override;
-
     /**
      * @brief CmdMecaInitialize (Run Control)
      * @details Initialize mechanical. Very first time when turn on the robot
@@ -33,7 +33,7 @@ public:
     /**
      * @brief CmdGoToHome (Run Control)
      */
-    bool CmdGoToHome();
+    bool CmdReturnToHome();
     /**
      * @brief CmdJogStart
      * @param
@@ -46,11 +46,19 @@ public:
      * index = 6: R positive;
      * index = 7: R negative;
      */
-    void CmdJogStart(int index);
+    bool CmdJogStart(int index);
     void CmdJogStop();
-    void CmdSetSpeedLevel(int speedLevel);
-
+    bool CmdSetSpeedLevel(int speedLevel);
+    /**
+     * @brief GetSpeedLevel
+     * @return speed level. 0(Slow) 1(Medium) 2(High)
+     */
     int GetSpeedLevel() const;
+    /**
+     * @brief GetNumberAxes
+     * @return 2(XY) 3(XYZ) 4(XYZR)
+     */
+    int GetNumberAxes();
 
     friend class JanomeDecodeMsg;
 signals:
@@ -59,6 +67,8 @@ signals:
     //Internal Used. Send message to dobot handler (cross-thread with socket)
     void OnSendMsgChanged(const QByteArray& msg);
     void OnRobotInformUpdated();
+    void OnRobotReturnToHomeStatus(int v);
+    void OnRobotMecaInitStatus(int v);
 protected:
 
     virtual bool OnStart() override;
@@ -78,18 +88,35 @@ private:
     void SetRobotJogStarting(bool isStart);
     void SetRobotJogMoving(bool isMoving);
     void JogMovingFnc();
+    void SetRobotReturnHomeStatus(JanomeReturnHomeStatus status);
+    void SetRobotMecaInitializingStatus(JanomeMecaInitializeStatus status);
+    bool IsBusy();
     string mIPAddress;
     int mPort;
     JanomeDecodeMsg mDecoder;
     JanomeEncodedMsg mEncoder;
     TcpSocketBase *mSocket;
+
+
+
+
+
+
+
+
+
+
+
+
+
     QTimer* mAutoReconnectTimer;
     JanomeRobotInformation mRobotInformation;
     bool mIsStopping;
     qintptr mSocketDescriptor;
     int mSpeedLevel;
     QThread* mJoggingThread;
-
+    JanomeReturnHomeStatus mReturnHomeStatus;
+    JanomeMecaInitializeStatus mMecaInitStatus;
 };
 
 }

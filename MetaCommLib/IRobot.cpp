@@ -79,16 +79,14 @@ string IRobot::GetRobotVersion() const
 
 void IRobot::StartBackgroundThread()
 {
-    if (mConnectionStatus == RobotConnect_Connected)
-    {
-        InterruptBackgroundThread();
-        mBackgroundThread = QThread::create(std::bind(&IRobot::DoWork, this));
-        connect(mBackgroundThread, &QThread::finished, this, [ = ]() {
-            delete mBackgroundThread;
-            mBackgroundThread = nullptr;
-        });
-        mBackgroundThread->start();
-    }
+    InterruptBackgroundThread();
+    mBackgroundThread = QThread::create(std::bind(&IRobot::DoWork, this));
+    connect(mBackgroundThread, &QThread::finished, this, [ = ]() {
+        delete mBackgroundThread;
+        mBackgroundThread = nullptr;
+    });
+    mBackgroundThread->start();
+
 }
 
 void IRobot::SetConnectionStatus(RobotConnectionStatus status)

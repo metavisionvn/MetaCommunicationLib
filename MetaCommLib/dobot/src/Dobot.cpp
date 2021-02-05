@@ -29,14 +29,13 @@ bool Dobot::OnStart()
     {
         if (ConnectDobot(0, 115200, 0, 0) != DobotConnect_NoError) {
             status = RobotConnect_DisConnected;
-            SetConnectionStatus(status);
         }
         else{
             status = RobotConnect_Connected;
-            SetConnectionStatus(status);
             Initialize();
             StartBackgroundThread();
         }
+        SetConnectionStatus(status);
     }
     return (status == RobotConnect_Connected);
 }

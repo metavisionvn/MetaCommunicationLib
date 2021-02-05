@@ -61,9 +61,29 @@ bool JanomeDecodeMsg::DecodeCmd(char commandCode, char subCommandCode, const cha
     }
     else if (commandCode == 'r')
     {
+        string valueStr(cmdMsg, 4);
+        long v = HexToDecimal(valueStr);
         if (subCommandCode == '0')
         {
-            string valueStr(cmdMsg, 4);
+            mptrRobot->SetRobotMecaInitializingStatus(v == 0 ? JMIS_Finished : JMIS_Failed);
+        }
+        else if (subCommandCode == '2')
+        {
+            mptrRobot->SetRobotReturnHomeStatus(v == 0 ? JRHS_Finished : JRHS_Failed);
+        }
+    }
+    else if (commandCode == 'R')
+    {
+        //Temporary response
+        if (subCommandCode == '0')
+        {
+            //Start to init robot
+            mptrRobot->SetRobotMecaInitializingStatus(JMIS_Initializing);
+        }
+        else if (subCommandCode == '2')
+        {
+            //start to returning home
+            mptrRobot->SetRobotReturnHomeStatus(JRHS_Moving);
         }
     }
     else if (commandCode == 'm')

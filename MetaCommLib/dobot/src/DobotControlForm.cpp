@@ -104,6 +104,7 @@ void DobotControlForm::onHome()
 
 void DobotControlForm::HandleConnectionStatusChanged(int status)
 {
+    (void)status;
     mtcl::Dobot* bot = dynamic_cast<mtcl::Dobot*>(sender());
     if (bot != nullptr)
     {

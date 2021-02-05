@@ -33,6 +33,8 @@ private slots:
     void HandleRobotInformUpdated();
     void HandleMechanicalInitializeClicked();
     void HandleReturnHomeClicked();
+    void HandleRobotReturnToHomeStatusChanged(int v);
+    void HandleRobotMecaInitStatusChanged(int v);
 protected:
     virtual void InitControl() override;
     virtual void RefreshBtn() override;
@@ -40,6 +42,7 @@ private:
     Ui::JanomeControlForm *ui;
     bool mConnectStatus;
     shared_ptr<mtcl::Janome> mptrJanome;
+    int mNumberAxes;
 };
 
 #endif // JANOMECONTROLFORM_H

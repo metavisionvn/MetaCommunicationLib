@@ -13,6 +13,21 @@ typedef enum e_JanomeMechanicalType{
     JMT_CartersianRobotJC3Series
 }JanomeMechanicalType;
 
+typedef enum e_JanomeReturnHomeStatus{
+    JRHS_None,
+    JRHS_Failed,
+    JRHS_Moving,
+    JRHS_Finished
+}JanomeReturnHomeStatus;
+
+typedef enum e_JanomeMecaInitializeStatus
+{
+    JMIS_None,
+    JMIS_Failed,
+    JMIS_Initializing,
+    JMIS_Finished
+}JanomeMecaInitializeStatus;
+
 class METACOMMLIB_EXPORT JanomeRobotInformation
 {
 public:

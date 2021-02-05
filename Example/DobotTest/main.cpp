@@ -20,8 +20,13 @@ int main(int argc, char *argv[])
     shared_ptr<mtcl::IRobotUserControl> userControl2 = robotFactory2->CreateRobotUserControl(&w);
     userControl2->SetRobot(robot2);
 
+    shared_ptr<mtcl::IRobot> robot3 = robotFactory2->CreateRobot();
+    shared_ptr<mtcl::IRobotUserControl> userControl3 = robotFactory2->CreateRobotUserControl(&w);
+    userControl3->SetRobot(robot3);
+
     w.AttachDobotWidget(userControl.get());
     w.AttachJanomeWidget(userControl2.get());
+    w.AttachJanome2Widget(userControl3.get());
 
     w.show();
     return a.exec();

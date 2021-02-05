@@ -6,7 +6,7 @@
 
 namespace mtcl {
 
-class JanomePosition : public IRobotPosition
+class METACOMMLIB_EXPORT JanomePosition : public IRobotPosition
 {
 public:
     JanomePosition();

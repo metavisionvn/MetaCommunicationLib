@@ -13,6 +13,7 @@ JanomeControlForm::JanomeControlForm(QWidget *parent)
     : mtcl::IRobotUserControl(parent)
     , ui(new Ui::JanomeControlForm)
     , mptrJanome(nullptr)
+    , mNumberAxes(2)
 {
     ui->setupUi(this);
 
@@ -22,6 +23,7 @@ JanomeControlForm::JanomeControlForm(QWidget *parent)
     connect(ui->ctrlBtnHome, SIGNAL(clicked(bool)), this, SLOT(HandleReturnHomeClicked()));
 
     InitControl();
+    ui->ctrlLabelStatus->setText("...");
 
     //ui->ctrlLineEditIPAddress->setPlaceholderText("192.168.200.180");
     //ui->ctrlLineEditPort->setPlaceholderText("10031");
@@ -45,6 +47,8 @@ bool JanomeControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
         connect(mptrJanome.get(), &mtcl::Janome::OnConnectionStatusChanged, this, &JanomeControlForm::HandleConnectionStatusChanged);
         connect(mptrJanome.get(), &mtcl::Janome::OnReceivedMsg, this, &JanomeControlForm::HandleReceivedMsg);
         connect(mptrJanome.get(), &mtcl::Janome::OnRobotInformUpdated, this, &JanomeControlForm::HandleRobotInformUpdated);
+        connect(mptrJanome.get(), &mtcl::Janome::OnRobotReturnToHomeStatus, this, &JanomeControlForm::HandleRobotReturnToHomeStatusChanged);
+        connect(mptrJanome.get(), &mtcl::Janome::OnRobotMecaInitStatus, this, &JanomeControlForm::HandleRobotMecaInitStatusChanged);
         ret = true;
     }
     return ret;
@@ -130,11 +134,18 @@ void JanomeControlForm::RefreshBtn()
         ui->DeviceInfoLabel->setText("");
     }
 
+    bool isZAxisValid = false, isRAxisValid = false;
+    switch (mNumberAxes) {
+    case 2: isZAxisValid = isRAxisValid = false; break;
+    case 3: isZAxisValid = true; isRAxisValid = false; break;
+    case 4: isZAxisValid = isRAxisValid = true; break;
+    }
+
     ui->sendBtn->setEnabled(connectStatus);
     ui->ctrlDsbPtpX->setEnabled(connectStatus);
     ui->ctrlDsbPtpY->setEnabled(connectStatus);
-    ui->ctrlDsbPtpZ->setEnabled(connectStatus);
-    ui->ctrlDsbPtpR->setEnabled(connectStatus);
+    ui->ctrlDsbPtpZ->setEnabled(connectStatus && isZAxisValid);
+    ui->ctrlDsbPtpR->setEnabled(connectStatus && isRAxisValid);
 
     ui->ctrlBtnHome->setEnabled(connectStatus);
 
@@ -144,11 +155,11 @@ void JanomeControlForm::RefreshBtn()
     ui->ctrlBtnYAdd->setEnabled(connectStatus);
     ui->ctrlBtnYSub->setEnabled(connectStatus);
 
-    ui->ctrlBtnZAdd->setEnabled(connectStatus);
-    ui->ctrlBtnZSub->setEnabled(connectStatus);
+    ui->ctrlBtnZAdd->setEnabled(connectStatus && isZAxisValid);
+    ui->ctrlBtnZSub->setEnabled(connectStatus && isZAxisValid);
 
-    ui->ctrlBtnRAdd->setEnabled(connectStatus);
-    ui->ctrlBtnRSub->setEnabled(connectStatus);
+    ui->ctrlBtnRAdd->setEnabled(connectStatus && isRAxisValid);
+    ui->ctrlBtnRSub->setEnabled(connectStatus && isRAxisValid);
 
     ui->ctrlBtnMechanicalInitialize->setEnabled(connectStatus);
     ui->ctrlBtnSpeedLow->setEnabled(connectStatus);
@@ -197,33 +208,50 @@ void JanomeControlForm::HandlePositionChanged()
 
 void JanomeControlForm::HandleConnectionStatusChanged(int connectionStatus)
 {
+    (void)connectionStatus;
     mtcl::Janome* bot = dynamic_cast<mtcl::Janome*>(sender());
     if (bot != nullptr)
     {
         connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
+
+        ui->ctrlLabelStatus->setText(connectionStatus ? "Connected to Robot" : "Disconnected to Robot");
+        string ipAddress("");
+        int port = 0;
+        bot->GetConnectionAddress(ipAddress, port);
+        //Update value of ipaddress and port of connection;
+        ui->ctrlLineEditIPAddress->setText(QString::fromStdString(ipAddress));
+        ui->ctrlLineEditPort->setText(QString::number(port));
         RefreshBtn();
     }
 }
 
 void JanomeControlForm::HandleReceivedMsg(const QByteArray &data)
 {
-//    std::stringstream ss;
-//    ss << std::hex;
-//    for( int i(0) ; i < data.length(); ++i )
-//        ss << std::setw(2) << std::setfill('0') << (int)data[i];
-    //    ui->ctrlLabelMsg->setText(QString::fromStdString(ss.str()));
+    (void)data;
 }
 
 void JanomeControlForm::HandleRobotInformUpdated()
 {
     mtcl::Janome* bot = dynamic_cast<mtcl::Janome*>(sender());
-    QString botSerialNumber = QString::fromStdString(bot->GetRobotSerialNumber());
-    QString botName = QString::fromStdString(bot->GetRobotName());
-    QString botVersion = QString::fromStdString(bot->GetRobotVersion());
-    ui->deviceSNLabel->setText(botSerialNumber);
-    ui->DeviceNameLabel->setText(botName);
-    ui->DeviceInfoLabel->setText(botVersion);
+    if (bot != nullptr)
+    {
+        QString botSerialNumber = QString::fromStdString(bot->GetRobotSerialNumber());
+        QString botName = QString::fromStdString(bot->GetRobotName());
+        QString botVersion = QString::fromStdString(bot->GetRobotVersion());
+        ui->deviceSNLabel->setText(botSerialNumber.size() == 0 ? "No Information" : botSerialNumber);
+        ui->DeviceNameLabel->setText(botName.size() == 0 ? "No Information" : botName);
+        ui->DeviceInfoLabel->setText(botVersion.size() == 0? "No Information" : botVersion);
 
+        mNumberAxes = bot->GetNumberAxes();
+        QString axesSupport("");
+        switch (mNumberAxes) {
+        case 2: axesSupport = "XY"; break;
+        case 3: axesSupport = "XYZ"; break;
+        case 4: axesSupport = "XYZR"; break;
+        }
+        ui->AxisInfoLabel->setText(axesSupport);
+        RefreshBtn();
+    }
 }
 
 void JanomeControlForm::HandleMechanicalInitializeClicked()
@@ -238,7 +266,45 @@ void JanomeControlForm::HandleReturnHomeClicked()
 {
     if (mptrJanome)
     {
-        mptrJanome->CmdGoToHome();
+        mptrJanome->CmdReturnToHome();
+    }
+}
+
+void JanomeControlForm::HandleRobotReturnToHomeStatusChanged(int v)
+{
+    this->setEnabled(true);
+    switch (v) {
+    case mtcl::JRHS_None:
+        break;
+    case mtcl::JRHS_Failed:
+        ui->ctrlLabelStatus->setText("Return Home Failed");
+        break;
+    case mtcl::JRHS_Moving:
+        ui->ctrlLabelStatus->setText("Returning to Home");
+        this->setDisabled(true);
+        break;
+    case mtcl::JRHS_Finished:
+        ui->ctrlLabelStatus->setText("Return Home Success");
+        break;
+    }
+}
+
+void JanomeControlForm::HandleRobotMecaInitStatusChanged(int v)
+{
+    this->setEnabled(true);
+    switch (v) {
+    case mtcl::JMIS_None:
+        break;
+    case mtcl::JMIS_Failed:
+        ui->ctrlLabelStatus->setText("Initialize Mechanical Failed");
+        break;
+    case mtcl::JMIS_Initializing:
+        ui->ctrlLabelStatus->setText("Initializing Mechanical");
+        this->setDisabled(true);
+        break;
+    case mtcl::JMIS_Finished:
+        ui->ctrlLabelStatus->setText("Initialized Mechanical Success");
+        break;
     }
 }
 

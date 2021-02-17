@@ -32,7 +32,7 @@ public:
     bool Start();
     bool Stop();
     void SetRefreshTimeInterval(double intervalInMilisecs);
-    IRobotPosition *GetCurrentPosition();
+    IRobotPosition* GetCurrentPosition();
     virtual bool MovePosition(unique_ptr<IRobotPosition> position) = 0;
 
     string GetRobotSerialNumber() const;
@@ -61,8 +61,6 @@ private:
     RobotMovingStatus mMovingStatus;
     QThread *mBackgroundThread;
     double mRefreshTimeIntervalInMilisecs;
-
-
 };
 
 }

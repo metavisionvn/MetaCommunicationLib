@@ -26,6 +26,9 @@
       <string>Robot</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
+      <property name="topMargin">
+       <number>20</number>
+      </property>
       <item row="1" column="0">
        <widget class="QRadioButton" name="ctrlRadioBtnTeachingMode">
         <property name="font">
@@ -274,6 +277,9 @@
         <string>Axis Operation</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_4">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
         <item row="0" column="4">
          <widget class="QPushButton" name="ctrlBtnZAdd">
           <property name="enabled">
@@ -590,24 +596,14 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QGroupBox" name="groupBox_5">
        <property name="title">
         <string>Speed</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
         <item row="3" column="0">
          <spacer name="verticalSpacer">
           <property name="orientation">
@@ -671,6 +667,9 @@
       <string>Device Information</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="topMargin">
+       <number>20</number>
+      </property>
       <item row="0" column="2">
        <widget class="QLabel" name="label_3">
         <property name="font">
@@ -826,6 +825,9 @@
         <string>Connection</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
         <item row="0" column="1">
          <widget class="QLineEdit" name="ctrlLineEditIPAddress"/>
         </item>

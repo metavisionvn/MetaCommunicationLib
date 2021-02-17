@@ -41,6 +41,9 @@
         <string>Connection</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
         <item row="1" column="1">
          <widget class="QComboBox" name="comboBox">
           <property name="font">
@@ -136,6 +139,9 @@
       <string>Suction</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
+      <property name="topMargin">
+       <number>20</number>
+      </property>
       <item row="0" column="0">
        <widget class="QPushButton" name="ctrlSuckOn">
         <property name="enabled">
@@ -196,6 +202,9 @@
       <string>Device Information</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="topMargin">
+       <number>20</number>
+      </property>
       <item row="0" column="1">
        <widget class="QLabel" name="deviceSNLabel">
         <property name="minimumSize">
@@ -317,6 +326,9 @@
       <string>POSE</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
+      <property name="topMargin">
+       <number>20</number>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="font">
@@ -596,6 +608,9 @@
         <string>JOG</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
         <item row="0" column="0">
          <widget class="QPushButton" name="baseAngleAddBtn">
           <property name="enabled">
@@ -762,6 +777,9 @@
         <string>PTP</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_6">
+        <property name="topMargin">
+         <number>20</number>
+        </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_17">
           <property name="font">

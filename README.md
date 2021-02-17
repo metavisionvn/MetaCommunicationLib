@@ -6,8 +6,8 @@ Based on
 - Eigen 3.3.7
 
 ## Support Robot
-- [Dobot!](https://www.dobot.cc/)
-- [Janome!](https://www.janomeie.com/)
+- [Dobot](https://www.dobot.cc/)
+- [Janome](https://www.janomeie.com/)
 
 ## Build on Raspberry
 - QMAKE_CXXFLAGS_RELEASE += -mfpu=neon
@@ -46,4 +46,8 @@ w.AttachTechmanWidget(userControl3.get());
 
 w.show();
 ```
-
+# GUI
+## Dobot
+![dobot](./documents/images/usercontrol_dobot.png)
+## Janome
+![janome](./documents/images/usercontrol_janome.png)

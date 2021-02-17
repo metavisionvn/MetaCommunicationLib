@@ -15,14 +15,14 @@ Based on
 
 # How to instantiate Robot and User Control
 ## Include headers
-'''
+```
 #include <metacommlib/IRobotFactory.h>
 #include <metacommlib/dobot/DobotFactory.h>
 #include <metacommlib/janome/JanomeFactory.h>
 #include <metacommlib/techman/TechmanFactory.h>
-'''
+```
 ## Create instantiate 
-'''
+```
 MainWindow w;
 
 shared_ptr<mtcl::IRobotFactory> robotFactory = shared_ptr<mtcl::IRobotFactory>(new mtcl::DobotFactory());
@@ -45,5 +45,5 @@ w.AttachJanomeWidget(userControl2.get());
 w.AttachTechmanWidget(userControl3.get());
 
 w.show();
-'''
+```
 

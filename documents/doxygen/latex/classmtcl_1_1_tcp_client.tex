@@ -1,0 +1,100 @@
+\hypertarget{classmtcl_1_1_tcp_client}{}\doxysection{mtcl\+::Tcp\+Client Class Reference}
+\label{classmtcl_1_1_tcp_client}\index{mtcl::TcpClient@{mtcl::TcpClient}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_tcp_client}{Tcp\+Client}} class. Establish connection to target by using T\+C\+P/\+IP. ~\newline
+Working in Client mode.  
+
+
+
+
+{\ttfamily \#include $<$Tcp\+Client.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::Tcp\+Client\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classmtcl_1_1_tcp_client__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::Tcp\+Client\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classmtcl_1_1_tcp_client__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_client_ad78e5eee85e55413ee82a6153a0261d6}\label{classmtcl_1_1_tcp_client_ad78e5eee85e55413ee82a6153a0261d6}} 
+{\bfseries Tcp\+Client} (Q\+Object $\ast$parent=nullptr)
+\item 
+bool \mbox{\hyperlink{classmtcl_1_1_tcp_client_aea39410f07a7f6341ce44c44830fa4bf}{Connect\+To}} (string ipaddress, int port) override
+\begin{DoxyCompactList}\small\item\em Connect\+To. Connect to target with IP Address and Port. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_tcp_client_a828f021162db0ddee17c58d9d4b598d1}{Send\+Data}} (const Q\+Byte\+Array \&data) override
+\begin{DoxyCompactList}\small\item\em Send\+Data. Send Data to connected target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_tcp_client}{Tcp\+Client}} class. Establish connection to target by using T\+C\+P/\+IP. ~\newline
+Working in Client mode. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_client_aea39410f07a7f6341ce44c44830fa4bf}\label{classmtcl_1_1_tcp_client_aea39410f07a7f6341ce44c44830fa4bf}} 
+\index{mtcl::TcpClient@{mtcl::TcpClient}!ConnectTo@{ConnectTo}}
+\index{ConnectTo@{ConnectTo}!mtcl::TcpClient@{mtcl::TcpClient}}
+\doxysubsubsection{\texorpdfstring{ConnectTo()}{ConnectTo()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Tcp\+Client\+::\+Connect\+To (\begin{DoxyParamCaption}\item[{string}]{ipaddress,  }\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Connect\+To. Connect to target with IP Address and Port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ipaddress} & \\
+\hline
+{\em port} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_aa0ddfe09bd5780109a1476c4cadb175c}{mtcl\+::\+Tcp\+Socket\+Base}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_tcp_client_a828f021162db0ddee17c58d9d4b598d1}\label{classmtcl_1_1_tcp_client_a828f021162db0ddee17c58d9d4b598d1}} 
+\index{mtcl::TcpClient@{mtcl::TcpClient}!SendData@{SendData}}
+\index{SendData@{SendData}!mtcl::TcpClient@{mtcl::TcpClient}}
+\doxysubsubsection{\texorpdfstring{SendData()}{SendData()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Tcp\+Client\+::\+Send\+Data (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Send\+Data. Send Data to connected target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if socket is open otherwise false. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a9172a6565020915f46974f6a0637f7ab}{mtcl\+::\+Tcp\+Socket\+Base}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/include/metacommlib/Tcp\+Client.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/Tcp\+Client.\+cpp\end{DoxyCompactItemize}

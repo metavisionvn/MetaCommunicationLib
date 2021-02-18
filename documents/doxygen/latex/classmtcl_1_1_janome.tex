@@ -1,0 +1,341 @@
+\hypertarget{classmtcl_1_1_janome}{}\doxysection{mtcl\+::Janome Class Reference}
+\label{classmtcl_1_1_janome}\index{mtcl::Janome@{mtcl::Janome}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_janome}{Janome}} class. Concrete robot of \mbox{\hyperlink{classmtcl_1_1_janome}{Janome}}.  
+
+
+
+
+{\ttfamily \#include $<$Janome.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::Janome\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=155pt]{classmtcl_1_1_janome__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::Janome\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classmtcl_1_1_janome__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_abf6334967dd0e502bf57e758d1681809}\label{classmtcl_1_1_janome_abf6334967dd0e502bf57e758d1681809}} 
+void {\bfseries On\+Received\+Msg} (const Q\+Byte\+Array \&message)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_a58ba199b85b50cb4bba02013cbb7d42d}\label{classmtcl_1_1_janome_a58ba199b85b50cb4bba02013cbb7d42d}} 
+void {\bfseries On\+Send\+Msg\+Changed} (const Q\+Byte\+Array \&msg)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_a9ea36d15d10291c135aaf4ac3048aa62}\label{classmtcl_1_1_janome_a9ea36d15d10291c135aaf4ac3048aa62}} 
+void {\bfseries On\+Robot\+Inform\+Updated} ()
+\item 
+void \mbox{\hyperlink{classmtcl_1_1_janome_a2aa73615f8ed35228180add048ff2553}{On\+Robot\+Return\+To\+Home\+Status}} (int v)
+\begin{DoxyCompactList}\small\item\em On\+Robot\+Return\+To\+Home\+Status. Status of robot on moving home position. Command takes time to complete. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_janome_abd13015fed818ad32134b092ad817da5}{On\+Robot\+Meca\+Init\+Status}} (int v)
+\begin{DoxyCompactList}\small\item\em On\+Robot\+Meca\+Init\+Status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmtcl_1_1_janome_a83fb488d1cedf4860b24da60c58fe4cf}{Set\+Connection\+Address}} (string ip\+Address, int port)
+\begin{DoxyCompactList}\small\item\em Set\+Connection\+Address. Address of connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_janome_ac426680bc2d56c18e3ff836a7f7db5a5}{Get\+Connection\+Address}} (string \&ip\+Address, int \&port)
+\begin{DoxyCompactList}\small\item\em Get\+Connection\+Address. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_a27797616fb3ea48f7e38a900d7ba0f7c}{Get\+Current\+Position}} (double \&x, double \&y, double \&z, double \&theta\+In\+Degs)
+\begin{DoxyCompactList}\small\item\em Get\+Current\+Position. With non-\/support axis, value set to zero. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_a99b648593b6f4b2be004007e3492213c}{Move\+Position}} (double x, double y, double z, double theta\+In\+Degs)
+\begin{DoxyCompactList}\small\item\em Move\+Position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_a89454ec60888e10d881c26f9be782b6e}{Move\+Position}} (unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$ position) override
+\begin{DoxyCompactList}\small\item\em Move\+Position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_ab90fafc3997cb2d84b9ec5a6619588f4}{Cmd\+Meca\+Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Cmd\+Meca\+Initialize (Run Control) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_aba3f269fe1ef00acad740f00a56fba85}\label{classmtcl_1_1_janome_aba3f269fe1ef00acad740f00a56fba85}} 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_aba3f269fe1ef00acad740f00a56fba85}{Cmd\+Return\+To\+Home}} ()
+\begin{DoxyCompactList}\small\item\em Cmd\+Go\+To\+Home (Run Control) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_a102c70f6f136f95ed473acf6807b6ca8}{Cmd\+Jog\+Start}} (int index)
+\begin{DoxyCompactList}\small\item\em Cmd\+Jog\+Start. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_a4fd49cbabd068d7464bf48c56723464e}\label{classmtcl_1_1_janome_a4fd49cbabd068d7464bf48c56723464e}} 
+void \mbox{\hyperlink{classmtcl_1_1_janome_a4fd49cbabd068d7464bf48c56723464e}{Cmd\+Jog\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em Cmd\+Jog\+Stop. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_janome_a0b200680276574b097d9ad8ab21a91a9}{Cmd\+Set\+Speed\+Level}} (int speed\+Level)
+\begin{DoxyCompactList}\small\item\em Cmd\+Set\+Speed\+Level. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classmtcl_1_1_janome_affd690ef500c8646560884a2e9557690}{Get\+Speed\+Level}} () const
+\begin{DoxyCompactList}\small\item\em Get\+Speed\+Level. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classmtcl_1_1_janome_aada2d98999d054918913141d79157b36}{Get\+Number\+Axes}} ()
+\begin{DoxyCompactList}\small\item\em Get\+Number\+Axes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_ae8babb98d0c2e00bac61b5ffe97d6137}\label{classmtcl_1_1_janome_ae8babb98d0c2e00bac61b5ffe97d6137}} 
+virtual bool {\bfseries On\+Start} () override
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_a17151e0320584ad7cf8237fcfa4a439d}\label{classmtcl_1_1_janome_a17151e0320584ad7cf8237fcfa4a439d}} 
+virtual void {\bfseries On\+Stop} () override
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_aaa5c318ed916119cdf9050279c7f1767}\label{classmtcl_1_1_janome_aaa5c318ed916119cdf9050279c7f1767}} 
+virtual void {\bfseries On\+Do\+Work} () override
+\item 
+virtual bool \mbox{\hyperlink{classmtcl_1_1_janome_a3768bc47772335be10154950828a0af6}{Update\+Current\+Position}} () override
+\begin{DoxyCompactList}\small\item\em Update\+Current\+Position. For Internal use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_janome_a3af8bb1abd8165501bc108121997755f}\label{classmtcl_1_1_janome_a3af8bb1abd8165501bc108121997755f}} 
+class {\bfseries Janome\+Decode\+Msg}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_janome}{Janome}} class. Concrete robot of \mbox{\hyperlink{classmtcl_1_1_janome}{Janome}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a102c70f6f136f95ed473acf6807b6ca8}\label{classmtcl_1_1_janome_a102c70f6f136f95ed473acf6807b6ca8}} 
+\index{mtcl::Janome@{mtcl::Janome}!CmdJogStart@{CmdJogStart}}
+\index{CmdJogStart@{CmdJogStart}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{CmdJogStart()}{CmdJogStart()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Cmd\+Jog\+Start (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Cmd\+Jog\+Start. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & = 0\+: X positive; index = 1; X negative; index = 2\+: Y positive; index = 3\+: Y negative; index = 4\+: Z positive; index = 5\+: Z negative; index = 6\+: R positive; index = 7\+: R negative; \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_janome_ab90fafc3997cb2d84b9ec5a6619588f4}\label{classmtcl_1_1_janome_ab90fafc3997cb2d84b9ec5a6619588f4}} 
+\index{mtcl::Janome@{mtcl::Janome}!CmdMecaInitialize@{CmdMecaInitialize}}
+\index{CmdMecaInitialize@{CmdMecaInitialize}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{CmdMecaInitialize()}{CmdMecaInitialize()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Cmd\+Meca\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Cmd\+Meca\+Initialize (Run Control) 
+
+Initialize mechanical. Very first time when turn on the robot \mbox{\Hypertarget{classmtcl_1_1_janome_a0b200680276574b097d9ad8ab21a91a9}\label{classmtcl_1_1_janome_a0b200680276574b097d9ad8ab21a91a9}} 
+\index{mtcl::Janome@{mtcl::Janome}!CmdSetSpeedLevel@{CmdSetSpeedLevel}}
+\index{CmdSetSpeedLevel@{CmdSetSpeedLevel}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{CmdSetSpeedLevel()}{CmdSetSpeedLevel()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Cmd\+Set\+Speed\+Level (\begin{DoxyParamCaption}\item[{int}]{speed\+Level }\end{DoxyParamCaption})}
+
+
+
+Cmd\+Set\+Speed\+Level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed\+Level} & 0-\/low 1-\/medium 2-\/high \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_janome_ac426680bc2d56c18e3ff836a7f7db5a5}\label{classmtcl_1_1_janome_ac426680bc2d56c18e3ff836a7f7db5a5}} 
+\index{mtcl::Janome@{mtcl::Janome}!GetConnectionAddress@{GetConnectionAddress}}
+\index{GetConnectionAddress@{GetConnectionAddress}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{GetConnectionAddress()}{GetConnectionAddress()}}
+{\footnotesize\ttfamily void mtcl\+::\+Janome\+::\+Get\+Connection\+Address (\begin{DoxyParamCaption}\item[{string \&}]{ip\+Address,  }\item[{int \&}]{port }\end{DoxyParamCaption})}
+
+
+
+Get\+Connection\+Address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip\+Address} & \\
+\hline
+{\em port} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a27797616fb3ea48f7e38a900d7ba0f7c}\label{classmtcl_1_1_janome_a27797616fb3ea48f7e38a900d7ba0f7c}} 
+\index{mtcl::Janome@{mtcl::Janome}!GetCurrentPosition@{GetCurrentPosition}}
+\index{GetCurrentPosition@{GetCurrentPosition}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{GetCurrentPosition()}{GetCurrentPosition()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Get\+Current\+Position (\begin{DoxyParamCaption}\item[{double \&}]{x,  }\item[{double \&}]{y,  }\item[{double \&}]{z,  }\item[{double \&}]{theta\+In\+Degs }\end{DoxyParamCaption})}
+
+
+
+Get\+Current\+Position. With non-\/support axis, value set to zero. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+{\em z} & \\
+\hline
+{\em theta\+In\+Degs} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_janome_aada2d98999d054918913141d79157b36}\label{classmtcl_1_1_janome_aada2d98999d054918913141d79157b36}} 
+\index{mtcl::Janome@{mtcl::Janome}!GetNumberAxes@{GetNumberAxes}}
+\index{GetNumberAxes@{GetNumberAxes}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{GetNumberAxes()}{GetNumberAxes()}}
+{\footnotesize\ttfamily int mtcl\+::\+Janome\+::\+Get\+Number\+Axes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get\+Number\+Axes. 
+
+\begin{DoxyReturn}{Returns}
+2(XY) 3(X\+YZ) 4(X\+Y\+ZR) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_janome_affd690ef500c8646560884a2e9557690}\label{classmtcl_1_1_janome_affd690ef500c8646560884a2e9557690}} 
+\index{mtcl::Janome@{mtcl::Janome}!GetSpeedLevel@{GetSpeedLevel}}
+\index{GetSpeedLevel@{GetSpeedLevel}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{GetSpeedLevel()}{GetSpeedLevel()}}
+{\footnotesize\ttfamily int mtcl\+::\+Janome\+::\+Get\+Speed\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get\+Speed\+Level. 
+
+\begin{DoxyReturn}{Returns}
+speed level. 0(Slow) 1(Medium) 2(High) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a99b648593b6f4b2be004007e3492213c}\label{classmtcl_1_1_janome_a99b648593b6f4b2be004007e3492213c}} 
+\index{mtcl::Janome@{mtcl::Janome}!MovePosition@{MovePosition}}
+\index{MovePosition@{MovePosition}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{MovePosition()}{MovePosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Move\+Position (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{z,  }\item[{double}]{theta\+In\+Degs }\end{DoxyParamCaption})}
+
+
+
+Move\+Position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+{\em z} & \\
+\hline
+{\em theta\+In\+Degs} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmtcl_1_1_janome_a99b648593b6f4b2be004007e3492213c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a89454ec60888e10d881c26f9be782b6e}\label{classmtcl_1_1_janome_a89454ec60888e10d881c26f9be782b6e}} 
+\index{mtcl::Janome@{mtcl::Janome}!MovePosition@{MovePosition}}
+\index{MovePosition@{MovePosition}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{MovePosition()}{MovePosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Move\+Position (\begin{DoxyParamCaption}\item[{unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Move\+Position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_a6e578e0bc6ae4b9e79d564655a0f0775}{mtcl\+::\+I\+Robot}}.
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmtcl_1_1_janome_a89454ec60888e10d881c26f9be782b6e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmtcl_1_1_janome_abd13015fed818ad32134b092ad817da5}\label{classmtcl_1_1_janome_abd13015fed818ad32134b092ad817da5}} 
+\index{mtcl::Janome@{mtcl::Janome}!OnRobotMecaInitStatus@{OnRobotMecaInitStatus}}
+\index{OnRobotMecaInitStatus@{OnRobotMecaInitStatus}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{OnRobotMecaInitStatus}{OnRobotMecaInitStatus}}
+{\footnotesize\ttfamily void mtcl\+::\+Janome\+::\+On\+Robot\+Meca\+Init\+Status (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Robot\+Meca\+Init\+Status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & 0-\/none 1-\/failed 2-\/initializing 3-\/finished \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a2aa73615f8ed35228180add048ff2553}\label{classmtcl_1_1_janome_a2aa73615f8ed35228180add048ff2553}} 
+\index{mtcl::Janome@{mtcl::Janome}!OnRobotReturnToHomeStatus@{OnRobotReturnToHomeStatus}}
+\index{OnRobotReturnToHomeStatus@{OnRobotReturnToHomeStatus}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{OnRobotReturnToHomeStatus}{OnRobotReturnToHomeStatus}}
+{\footnotesize\ttfamily void mtcl\+::\+Janome\+::\+On\+Robot\+Return\+To\+Home\+Status (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Robot\+Return\+To\+Home\+Status. Status of robot on moving home position. Command takes time to complete. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & 0-\/undefined 1-\/failed 2-\/moving 3-\/finished \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a83fb488d1cedf4860b24da60c58fe4cf}\label{classmtcl_1_1_janome_a83fb488d1cedf4860b24da60c58fe4cf}} 
+\index{mtcl::Janome@{mtcl::Janome}!SetConnectionAddress@{SetConnectionAddress}}
+\index{SetConnectionAddress@{SetConnectionAddress}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{SetConnectionAddress()}{SetConnectionAddress()}}
+{\footnotesize\ttfamily void mtcl\+::\+Janome\+::\+Set\+Connection\+Address (\begin{DoxyParamCaption}\item[{string}]{ip\+Address,  }\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+
+Set\+Connection\+Address. Address of connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip\+Address} & \\
+\hline
+{\em port} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_janome_a3768bc47772335be10154950828a0af6}\label{classmtcl_1_1_janome_a3768bc47772335be10154950828a0af6}} 
+\index{mtcl::Janome@{mtcl::Janome}!UpdateCurrentPosition@{UpdateCurrentPosition}}
+\index{UpdateCurrentPosition@{UpdateCurrentPosition}!mtcl::Janome@{mtcl::Janome}}
+\doxysubsubsection{\texorpdfstring{UpdateCurrentPosition()}{UpdateCurrentPosition()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Janome\+::\+Update\+Current\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Update\+Current\+Position. For Internal use. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_a290504b4bd2679642946ffc0f04e1d00}{mtcl\+::\+I\+Robot}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/janome/include/metacommlib/janome/Janome.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/janome/src/Janome.\+cpp\end{DoxyCompactItemize}

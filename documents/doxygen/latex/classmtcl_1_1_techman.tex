@@ -1,0 +1,121 @@
+\hypertarget{classmtcl_1_1_techman}{}\doxysection{mtcl\+::Techman Class Reference}
+\label{classmtcl_1_1_techman}\index{mtcl::Techman@{mtcl::Techman}}
+
+
+Inheritance diagram for mtcl\+::Techman\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=161pt]{classmtcl_1_1_techman__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::Techman\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classmtcl_1_1_techman__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a1646c0ded9d5a2a0e3073d7e16cd96b9}\label{classmtcl_1_1_techman_a1646c0ded9d5a2a0e3073d7e16cd96b9}} 
+void {\bfseries On\+Received\+Msg} (const Q\+Byte\+Array \&message)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a605a908d8701d4bdbca48c9ba27fad3f}\label{classmtcl_1_1_techman_a605a908d8701d4bdbca48c9ba27fad3f}} 
+void {\bfseries On\+Send\+Msg\+Changed} (const Q\+Byte\+Array \&message)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_ac96a268c4f5d3b8075817c429d8004e6}\label{classmtcl_1_1_techman_ac96a268c4f5d3b8075817c429d8004e6}} 
+void {\bfseries On\+Robot\+Inform\+Updated} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a294d004ea3748d13480744a294abdfec}\label{classmtcl_1_1_techman_a294d004ea3748d13480744a294abdfec}} 
+void {\bfseries Set\+Connection\+Address} (string ip\+Address, int port)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_acfffc531c6985a15e6a675d84fb5352f}\label{classmtcl_1_1_techman_acfffc531c6985a15e6a675d84fb5352f}} 
+void {\bfseries Get\+Connection\+Address} (string \&ip\+Address, int \&port)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a845490e2c037e9c903fedd27719c1ea2}\label{classmtcl_1_1_techman_a845490e2c037e9c903fedd27719c1ea2}} 
+bool {\bfseries Get\+Current\+Position} (double \&x, double \&y, double \&z, double \&theta\+In\+Degs)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a202d0d25eacc8a0b7f715a88afdd3f23}\label{classmtcl_1_1_techman_a202d0d25eacc8a0b7f715a88afdd3f23}} 
+bool {\bfseries Move\+Position} (double x, double y, double z, double theta\+In\+Degs)
+\item 
+bool \mbox{\hyperlink{classmtcl_1_1_techman_addbe346a4ca1d2895770fa0191edc783}{Move\+Position}} (unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$ position) override
+\begin{DoxyCompactList}\small\item\em Move\+Position. Move robot to the pre-\/set position. When robot reaches to that position, one signal is emitted. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a60eaf60735d1173a393e01f306166e5d}\label{classmtcl_1_1_techman_a60eaf60735d1173a393e01f306166e5d}} 
+bool {\bfseries Cmd\+Return\+To\+Home} ()
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a1d923889f75f57be3b4714fb8b585205}\label{classmtcl_1_1_techman_a1d923889f75f57be3b4714fb8b585205}} 
+bool {\bfseries Cmd\+Jog\+Start} (int index)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_ace7ed793524fb37a6a2876d127c08c39}\label{classmtcl_1_1_techman_ace7ed793524fb37a6a2876d127c08c39}} 
+bool {\bfseries Cmd\+Jog\+Stop} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classmtcl_1_1_techman_aad647950ce66f212ce912cbfe595d954}{Update\+Current\+Position}} () override
+\begin{DoxyCompactList}\small\item\em Update\+Current\+Position. For Internal use. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_aa8d92ac9109b49ed15fd895dc2e101c8}\label{classmtcl_1_1_techman_aa8d92ac9109b49ed15fd895dc2e101c8}} 
+bool {\bfseries On\+Start} () override
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a443bd74c32b8044e9b8902bfa38b4f63}\label{classmtcl_1_1_techman_a443bd74c32b8044e9b8902bfa38b4f63}} 
+void {\bfseries On\+Stop} () override
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_techman_a39d902da2521771902a87e7d3acd31de}\label{classmtcl_1_1_techman_a39d902da2521771902a87e7d3acd31de}} 
+void {\bfseries On\+Do\+Work} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_techman_addbe346a4ca1d2895770fa0191edc783}\label{classmtcl_1_1_techman_addbe346a4ca1d2895770fa0191edc783}} 
+\index{mtcl::Techman@{mtcl::Techman}!MovePosition@{MovePosition}}
+\index{MovePosition@{MovePosition}!mtcl::Techman@{mtcl::Techman}}
+\doxysubsubsection{\texorpdfstring{MovePosition()}{MovePosition()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Techman\+::\+Move\+Position (\begin{DoxyParamCaption}\item[{unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Move\+Position. Move robot to the pre-\/set position. When robot reaches to that position, one signal is emitted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_a6e578e0bc6ae4b9e79d564655a0f0775}{mtcl\+::\+I\+Robot}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_techman_aad647950ce66f212ce912cbfe595d954}\label{classmtcl_1_1_techman_aad647950ce66f212ce912cbfe595d954}} 
+\index{mtcl::Techman@{mtcl::Techman}!UpdateCurrentPosition@{UpdateCurrentPosition}}
+\index{UpdateCurrentPosition@{UpdateCurrentPosition}!mtcl::Techman@{mtcl::Techman}}
+\doxysubsubsection{\texorpdfstring{UpdateCurrentPosition()}{UpdateCurrentPosition()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Techman\+::\+Update\+Current\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Update\+Current\+Position. For Internal use. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_a290504b4bd2679642946ffc0f04e1d00}{mtcl\+::\+I\+Robot}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/techman/include/metacommlib/techman/Techman.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/techman/src/Techman.\+cpp\end{DoxyCompactItemize}

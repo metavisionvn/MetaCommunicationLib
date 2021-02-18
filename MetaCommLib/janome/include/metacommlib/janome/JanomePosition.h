@@ -6,6 +6,9 @@
 
 namespace mtcl {
 
+/**
+ * @brief The JanomePosition class. Position of Janome robot
+ */
 class METACOMMLIB_EXPORT JanomePosition : public IRobotPosition
 {
 public:
@@ -24,8 +27,6 @@ public:
 
     virtual void SetPosition(double x, double y, double z, double thetaInDegs);
     virtual void GetPosition(double &x, double &y, double &z, double &thetaInDegs);
-
-
 };
 
 }

@@ -129,7 +129,7 @@ void JanomeControlForm::InitControl()
 
 void JanomeControlForm::RefreshBtn()
 {
-    if (connectStatus) {
+    if (mConnectStatus) {
         ui->connectBtn->setText(tr("Disconnect"));
     } else {
         ui->connectBtn->setText(tr("Connect"));
@@ -145,32 +145,32 @@ void JanomeControlForm::RefreshBtn()
     case 4: isZAxisValid = isRAxisValid = true; break;
     }
 
-    ui->sendBtn->setEnabled(connectStatus);
-    ui->ctrlDsbPtpX->setEnabled(connectStatus);
-    ui->ctrlDsbPtpY->setEnabled(connectStatus);
-    ui->ctrlDsbPtpZ->setEnabled(connectStatus && isZAxisValid);
-    ui->ctrlDsbPtpR->setEnabled(connectStatus && isRAxisValid);
+    ui->sendBtn->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpX->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpY->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpZ->setEnabled(mConnectStatus && isZAxisValid);
+    ui->ctrlDsbPtpR->setEnabled(mConnectStatus && isRAxisValid);
 
-    ui->ctrlBtnHome->setEnabled(connectStatus);
+    ui->ctrlBtnHome->setEnabled(mConnectStatus);
 
-    ui->ctrlBtnXAdd->setEnabled(connectStatus);
-    ui->ctrlBtnXSub->setEnabled(connectStatus);
+    ui->ctrlBtnXAdd->setEnabled(mConnectStatus);
+    ui->ctrlBtnXSub->setEnabled(mConnectStatus);
 
-    ui->ctrlBtnYAdd->setEnabled(connectStatus);
-    ui->ctrlBtnYSub->setEnabled(connectStatus);
+    ui->ctrlBtnYAdd->setEnabled(mConnectStatus);
+    ui->ctrlBtnYSub->setEnabled(mConnectStatus);
 
-    ui->ctrlBtnZAdd->setEnabled(connectStatus && isZAxisValid);
-    ui->ctrlBtnZSub->setEnabled(connectStatus && isZAxisValid);
+    ui->ctrlBtnZAdd->setEnabled(mConnectStatus && isZAxisValid);
+    ui->ctrlBtnZSub->setEnabled(mConnectStatus && isZAxisValid);
 
-    ui->ctrlBtnRAdd->setEnabled(connectStatus && isRAxisValid);
-    ui->ctrlBtnRSub->setEnabled(connectStatus && isRAxisValid);
+    ui->ctrlBtnRAdd->setEnabled(mConnectStatus && isRAxisValid);
+    ui->ctrlBtnRSub->setEnabled(mConnectStatus && isRAxisValid);
 
-    ui->ctrlBtnMechanicalInitialize->setEnabled(connectStatus);
-    ui->ctrlRadioSpeedSlow->setEnabled(connectStatus);
-    ui->ctrlRadioSpeedMedium->setEnabled(connectStatus);
-    ui->ctrlRadioSpeedHigh->setEnabled(connectStatus);
+    ui->ctrlBtnMechanicalInitialize->setEnabled(mConnectStatus);
+    ui->ctrlRadioSpeedSlow->setEnabled(mConnectStatus);
+    ui->ctrlRadioSpeedMedium->setEnabled(mConnectStatus);
+    ui->ctrlRadioSpeedHigh->setEnabled(mConnectStatus);
 
-    if (!connectStatus)
+    if (!mConnectStatus)
     {
         ui->ctrlLineEditIPAddress->setEnabled(true);
         ui->ctrlLineEditPort->setEnabled(true);
@@ -216,13 +216,13 @@ void JanomeControlForm::HandleConnectionStatusChanged(int v)
     mtcl::Janome* bot = dynamic_cast<mtcl::Janome*>(sender());
     if (bot != nullptr)
     {
-        connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
-        if (!connectStatus)
+        mConnectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
+        if (!mConnectStatus)
         {
             QMessageBox::warning(nullptr, "Connection Error", "Connection To Robot Failed");
         }
 
-        ui->ctrlLabelStatus->setText(connectStatus ? "Connected to Robot" : "Disconnected to Robot");
+        ui->ctrlLabelStatus->setText(mConnectStatus ? "Connected to Robot" : "Disconnected to Robot");
         string ipAddress("");
         int port = 0;
         bot->GetConnectionAddress(ipAddress, port);

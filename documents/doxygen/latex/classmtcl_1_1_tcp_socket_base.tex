@@ -1,0 +1,262 @@
+\hypertarget{classmtcl_1_1_tcp_socket_base}{}\doxysection{mtcl\+::Tcp\+Socket\+Base Class Reference}
+\label{classmtcl_1_1_tcp_socket_base}\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base}{Tcp\+Socket\+Base}} class. Abstract class for T\+C\+P/\+IP connection.  
+
+
+
+
+{\ttfamily \#include $<$Tcp\+Socket\+Base.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::Tcp\+Socket\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classmtcl_1_1_tcp_socket_base__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::Tcp\+Socket\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classmtcl_1_1_tcp_socket_base__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_aaf4dd8891afb3f825c1a7d3585fa8f1d}{Handle\+Send\+Message}} (const Q\+Byte\+Array \&message)
+\begin{DoxyCompactList}\small\item\em Handle\+Send\+Message. Using slot to send message to target. To handle cross-\/thread issue. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a59f61f41efbf82ff5aefae399488d692}\label{classmtcl_1_1_tcp_socket_base_a59f61f41efbf82ff5aefae399488d692}} 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a59f61f41efbf82ff5aefae399488d692}{Handle\+Connected\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em Handle\+Connected\+Changed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a9cd740788590529a1303dbbb51922446}\label{classmtcl_1_1_tcp_socket_base_a9cd740788590529a1303dbbb51922446}} 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a9cd740788590529a1303dbbb51922446}{Handle\+Disconnect\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em Handle\+Disconnect\+Changed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_acc22a4c01abac2c21b6a73e63333c297}\label{classmtcl_1_1_tcp_socket_base_acc22a4c01abac2c21b6a73e63333c297}} 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_acc22a4c01abac2c21b6a73e63333c297}{Handle\+Error\+Changed}} (Q\+Abstract\+Socket\+::\+Socket\+Error)
+\begin{DoxyCompactList}\small\item\em Handle\+Error\+Changed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a0f1b18cebee78bd7fa63d4c432383dac}\label{classmtcl_1_1_tcp_socket_base_a0f1b18cebee78bd7fa63d4c432383dac}} 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a0f1b18cebee78bd7fa63d4c432383dac}{Handle\+Data\+Received\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em Handle\+Data\+Received\+Changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a48158e98ff7cd5d5b10957d2e612e019}{On\+Connection\+Changed}} (bool is\+Connected)
+\begin{DoxyCompactList}\small\item\em On\+Connection\+Changed. Inform on Connection status. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a75c8d41b34b24a14ddf999c4250767e8}{On\+Error\+Changed}} (const Q\+String \&error\+Msg)
+\begin{DoxyCompactList}\small\item\em On\+Error\+Changed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_aed5f3fac3f0af604a52dd1966a7ed5b3}{On\+Received\+Msg\+Changed}} (const Q\+Byte\+Array \&message)
+\begin{DoxyCompactList}\small\item\em On\+Received\+Msg\+Changed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a50412a7a41ea75fb1d076b6ef97a42d3}{On\+Send\+Message\+Changed}} (const bool status)
+\begin{DoxyCompactList}\small\item\em On\+Send\+Message\+Changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a9a56d45ee97439c1e7a7934e1b10ecb4}\label{classmtcl_1_1_tcp_socket_base_a9a56d45ee97439c1e7a7934e1b10ecb4}} 
+{\bfseries Tcp\+Socket\+Base} (Q\+Object $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a922c8749d0e5cc207f0523ba8944c76c}\label{classmtcl_1_1_tcp_socket_base_a922c8749d0e5cc207f0523ba8944c76c}} 
+virtual void \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a922c8749d0e5cc207f0523ba8944c76c}{Disconnect}} ()
+\begin{DoxyCompactList}\small\item\em Disconnect. Close connection. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_aa0ddfe09bd5780109a1476c4cadb175c}{Connect\+To}} (string ip, int port)=0
+\begin{DoxyCompactList}\small\item\em Connect\+To. Open connection and connect to target. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a9172a6565020915f46974f6a0637f7ab}{Send\+Data}} (const Q\+Byte\+Array \&data)=0
+\begin{DoxyCompactList}\small\item\em Send\+Data. Send data to target. \end{DoxyCompactList}\item 
+virtual qptrdiff \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base_a2faa3f94544b9671754cce2e15f15dfe}{Socket\+Descriptor}} () const
+\begin{DoxyCompactList}\small\item\em Socket\+Descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_afe81b7e0c434cb655b9016ddc12d6598}\label{classmtcl_1_1_tcp_socket_base_afe81b7e0c434cb655b9016ddc12d6598}} 
+Q\+Tcp\+Socket $\ast$ {\bfseries m\+Socket}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_aebdbe195b12c2f80711763f5ab9d5579}\label{classmtcl_1_1_tcp_socket_base_aebdbe195b12c2f80711763f5ab9d5579}} 
+bool {\bfseries m\+Is\+Connected}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_tcp_socket_base}{Tcp\+Socket\+Base}} class. Abstract class for T\+C\+P/\+IP connection. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_aa0ddfe09bd5780109a1476c4cadb175c}\label{classmtcl_1_1_tcp_socket_base_aa0ddfe09bd5780109a1476c4cadb175c}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!ConnectTo@{ConnectTo}}
+\index{ConnectTo@{ConnectTo}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{ConnectTo()}{ConnectTo()}}
+{\footnotesize\ttfamily virtual bool mtcl\+::\+Tcp\+Socket\+Base\+::\+Connect\+To (\begin{DoxyParamCaption}\item[{string}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Connect\+To. Open connection and connect to target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & \\
+\hline
+{\em port} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if connection is failed otherwise true. ~\newline
+If connection takes time to establish, one temporary result returned. ~\newline
+Later, one signal is emitted on Connection\+Changed. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classmtcl_1_1_tcp_server_a77f62cafad65e43b7075982461e1f6dc}{mtcl\+::\+Tcp\+Server}}, and \mbox{\hyperlink{classmtcl_1_1_tcp_client_aea39410f07a7f6341ce44c44830fa4bf}{mtcl\+::\+Tcp\+Client}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_aaf4dd8891afb3f825c1a7d3585fa8f1d}\label{classmtcl_1_1_tcp_socket_base_aaf4dd8891afb3f825c1a7d3585fa8f1d}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!HandleSendMessage@{HandleSendMessage}}
+\index{HandleSendMessage@{HandleSendMessage}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{HandleSendMessage}{HandleSendMessage}}
+{\footnotesize\ttfamily void mtcl\+::\+Tcp\+Socket\+Base\+::\+Handle\+Send\+Message (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Handle\+Send\+Message. Using slot to send message to target. To handle cross-\/thread issue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a48158e98ff7cd5d5b10957d2e612e019}\label{classmtcl_1_1_tcp_socket_base_a48158e98ff7cd5d5b10957d2e612e019}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!OnConnectionChanged@{OnConnectionChanged}}
+\index{OnConnectionChanged@{OnConnectionChanged}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{OnConnectionChanged}{OnConnectionChanged}}
+{\footnotesize\ttfamily void mtcl\+::\+Tcp\+Socket\+Base\+::\+On\+Connection\+Changed (\begin{DoxyParamCaption}\item[{bool}]{is\+Connected }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Connection\+Changed. Inform on Connection status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Connected} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmtcl_1_1_tcp_socket_base_a48158e98ff7cd5d5b10957d2e612e019_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a75c8d41b34b24a14ddf999c4250767e8}\label{classmtcl_1_1_tcp_socket_base_a75c8d41b34b24a14ddf999c4250767e8}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!OnErrorChanged@{OnErrorChanged}}
+\index{OnErrorChanged@{OnErrorChanged}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{OnErrorChanged}{OnErrorChanged}}
+{\footnotesize\ttfamily void mtcl\+::\+Tcp\+Socket\+Base\+::\+On\+Error\+Changed (\begin{DoxyParamCaption}\item[{const Q\+String \&}]{error\+Msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Error\+Changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error\+Msg} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{classmtcl_1_1_tcp_socket_base_a75c8d41b34b24a14ddf999c4250767e8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_aed5f3fac3f0af604a52dd1966a7ed5b3}\label{classmtcl_1_1_tcp_socket_base_aed5f3fac3f0af604a52dd1966a7ed5b3}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!OnReceivedMsgChanged@{OnReceivedMsgChanged}}
+\index{OnReceivedMsgChanged@{OnReceivedMsgChanged}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{OnReceivedMsgChanged}{OnReceivedMsgChanged}}
+{\footnotesize\ttfamily void mtcl\+::\+Tcp\+Socket\+Base\+::\+On\+Received\+Msg\+Changed (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Received\+Msg\+Changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmtcl_1_1_tcp_socket_base_aed5f3fac3f0af604a52dd1966a7ed5b3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a50412a7a41ea75fb1d076b6ef97a42d3}\label{classmtcl_1_1_tcp_socket_base_a50412a7a41ea75fb1d076b6ef97a42d3}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!OnSendMessageChanged@{OnSendMessageChanged}}
+\index{OnSendMessageChanged@{OnSendMessageChanged}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{OnSendMessageChanged}{OnSendMessageChanged}}
+{\footnotesize\ttfamily void mtcl\+::\+Tcp\+Socket\+Base\+::\+On\+Send\+Message\+Changed (\begin{DoxyParamCaption}\item[{const bool}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Send\+Message\+Changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmtcl_1_1_tcp_socket_base_a50412a7a41ea75fb1d076b6ef97a42d3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a9172a6565020915f46974f6a0637f7ab}\label{classmtcl_1_1_tcp_socket_base_a9172a6565020915f46974f6a0637f7ab}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!SendData@{SendData}}
+\index{SendData@{SendData}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{SendData()}{SendData()}}
+{\footnotesize\ttfamily virtual bool mtcl\+::\+Tcp\+Socket\+Base\+::\+Send\+Data (\begin{DoxyParamCaption}\item[{const Q\+Byte\+Array \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Send\+Data. Send data to target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classmtcl_1_1_tcp_server_a29310c563be9183a0ca40807dcb805c6}{mtcl\+::\+Tcp\+Server}}, and \mbox{\hyperlink{classmtcl_1_1_tcp_client_a828f021162db0ddee17c58d9d4b598d1}{mtcl\+::\+Tcp\+Client}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_tcp_socket_base_a2faa3f94544b9671754cce2e15f15dfe}\label{classmtcl_1_1_tcp_socket_base_a2faa3f94544b9671754cce2e15f15dfe}} 
+\index{mtcl::TcpSocketBase@{mtcl::TcpSocketBase}!SocketDescriptor@{SocketDescriptor}}
+\index{SocketDescriptor@{SocketDescriptor}!mtcl::TcpSocketBase@{mtcl::TcpSocketBase}}
+\doxysubsubsection{\texorpdfstring{SocketDescriptor()}{SocketDescriptor()}}
+{\footnotesize\ttfamily qptrdiff mtcl\+::\+Tcp\+Socket\+Base\+::\+Socket\+Descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Socket\+Descriptor. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em socket} & invalid \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/include/metacommlib/Tcp\+Socket\+Base.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/Tcp\+Socket\+Base.\+cpp\end{DoxyCompactItemize}

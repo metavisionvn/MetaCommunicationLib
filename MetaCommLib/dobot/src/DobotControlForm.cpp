@@ -16,7 +16,7 @@ DobotControlForm::DobotControlForm(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connectStatus = false;
+    mConnectStatus = false;
     //endtype change
     connect(ui->teachMode, SIGNAL(currentIndexChanged(int)), this, SLOT(HandleChangedMode()));
 
@@ -108,13 +108,13 @@ void DobotControlForm::HandleConnectionStatusChanged(int status)
     mtcl::Dobot* bot = dynamic_cast<mtcl::Dobot*>(sender());
     if (bot != nullptr)
     {
-        connectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
+        mConnectStatus = (bot->GetConnectionStatus() == mtcl::RobotConnect_Connected) ? true : false;
         QString botSerialNumber("");
         QString botName("");
         QString botVersion("");
 
         RefreshBtn();
-        if (connectStatus)
+        if (mConnectStatus)
         {
             botSerialNumber = QString::fromStdString(bot->GetRobotSerialNumber());
             botName = QString::fromStdString(bot->GetRobotName());
@@ -173,29 +173,29 @@ void DobotControlForm::HandleConnectDobot()
 void DobotControlForm::RefreshBtn()
 {
 
-    if (connectStatus) {
+    if (mConnectStatus) {
         ui->connectBtn->setText(tr("Disconnect"));
     } else {
         ui->connectBtn->setText(tr("Connect"));
     }
 
-    ui->teachMode->setEnabled(connectStatus);
-    ui->baseAngleAddBtn->setEnabled(connectStatus);
-    ui->baseAngleSubBtn->setEnabled(connectStatus);
-    ui->longArmAddBtn->setEnabled(connectStatus);
-    ui->longArmSubBtn->setEnabled(connectStatus);
-    ui->shortArmAddBtn->setEnabled(connectStatus);
-    ui->shortArmSubBtn->setEnabled(connectStatus);
-    ui->rHeadAddBtn->setEnabled(connectStatus);
-    ui->rHeadSubBtn->setEnabled(connectStatus);
-    ui->sendBtn->setEnabled(connectStatus);
-    ui->ctrlDsbPtpX->setEnabled(connectStatus);
-    ui->ctrlDsbPtpY->setEnabled(connectStatus);
-    ui->ctrlDsbPtpZ->setEnabled(connectStatus);
-    ui->ctrlDsbPtpR->setEnabled(connectStatus);
-    ui->ctrlSuckOn->setEnabled(connectStatus);
-    ui->ctrlSuckOff->setEnabled(connectStatus);
-    ui->ctrlBtnHome->setEnabled(connectStatus);
+    ui->teachMode->setEnabled(mConnectStatus);
+    ui->baseAngleAddBtn->setEnabled(mConnectStatus);
+    ui->baseAngleSubBtn->setEnabled(mConnectStatus);
+    ui->longArmAddBtn->setEnabled(mConnectStatus);
+    ui->longArmSubBtn->setEnabled(mConnectStatus);
+    ui->shortArmAddBtn->setEnabled(mConnectStatus);
+    ui->shortArmSubBtn->setEnabled(mConnectStatus);
+    ui->rHeadAddBtn->setEnabled(mConnectStatus);
+    ui->rHeadSubBtn->setEnabled(mConnectStatus);
+    ui->sendBtn->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpX->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpY->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpZ->setEnabled(mConnectStatus);
+    ui->ctrlDsbPtpR->setEnabled(mConnectStatus);
+    ui->ctrlSuckOn->setEnabled(mConnectStatus);
+    ui->ctrlSuckOff->setEnabled(mConnectStatus);
+    ui->ctrlBtnHome->setEnabled(mConnectStatus);
 }
 
 void DobotControlForm::InitControl()

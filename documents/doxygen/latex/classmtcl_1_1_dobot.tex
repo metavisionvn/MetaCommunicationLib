@@ -1,0 +1,246 @@
+\hypertarget{classmtcl_1_1_dobot}{}\doxysection{mtcl\+::Dobot Class Reference}
+\label{classmtcl_1_1_dobot}\index{mtcl::Dobot@{mtcl::Dobot}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_dobot}{Dobot}} class. Concrete \mbox{\hyperlink{classmtcl_1_1_dobot}{Dobot}}.  
+
+
+
+
+{\ttfamily \#include $<$Dobot.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::Dobot\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=149pt]{classmtcl_1_1_dobot__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::Dobot\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classmtcl_1_1_dobot__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classmtcl_1_1_dobot_a74019917030f17961d68f716044a7b37}{Get\+Current\+Position}} (double \&x, double \&y, double \&z, double \&theta\+In\+Degs)
+\begin{DoxyCompactList}\small\item\em Get\+Current\+Position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_dobot_a39f884030310407fa2d1bc1e5862ff40}{Get\+Current\+Joint\+Angle}} (double \&j1, double \&j2, double \&j3, double \&j4)
+\begin{DoxyCompactList}\small\item\em Get\+Current\+Joint\+Angle. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_dobot_a4eb2c07d9ea785cee944a60b0e4f51c6}{Move\+Position}} (double x, double y, double z, double theta\+In\+Degs)
+\begin{DoxyCompactList}\small\item\em Move\+Position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_dobot_a3bae7969b07e932337d3e07e710389c5}{Move\+Position}} (unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$ position) override
+\begin{DoxyCompactList}\small\item\em Move\+Position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_dobot_a296f9b5bef7bb456bc576a3a4d3aa881}{Cmd\+Jog\+Start}} (int index, bool is\+Joint)
+\begin{DoxyCompactList}\small\item\em Cmd\+Jog\+Start. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_dobot_a060f9a3327d9e944c81a5650bbc914b8}{Cmd\+Jog\+Stop}} (bool is\+Joint)
+\begin{DoxyCompactList}\small\item\em Cmd\+Jog\+Stop. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_dobot_ad0bf0486400e46109760d0d3be5a248b}{Cmd\+P\+TP}} (float x, float y, float z, float r)
+\begin{DoxyCompactList}\small\item\em Cmd\+P\+TP. Move to position using P\+TP. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_dobot_ab9eb740f5b273753c73cc822a778da8a}\label{classmtcl_1_1_dobot_ab9eb740f5b273753c73cc822a778da8a}} 
+void \mbox{\hyperlink{classmtcl_1_1_dobot_ab9eb740f5b273753c73cc822a778da8a}{Cmd\+Suck\+On}} ()
+\begin{DoxyCompactList}\small\item\em Cmd\+Suck\+On. Turn on sucker. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a994ff75f3b2082be4e25df28bff70c1c}\label{classmtcl_1_1_dobot_a994ff75f3b2082be4e25df28bff70c1c}} 
+void \mbox{\hyperlink{classmtcl_1_1_dobot_a994ff75f3b2082be4e25df28bff70c1c}{Cmd\+Suck\+Off}} ()
+\begin{DoxyCompactList}\small\item\em Cmd\+Suck\+Off. Turn off sucker. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a362c8aab2eaa141c177c8539e3515160}\label{classmtcl_1_1_dobot_a362c8aab2eaa141c177c8539e3515160}} 
+void \mbox{\hyperlink{classmtcl_1_1_dobot_a362c8aab2eaa141c177c8539e3515160}{Cmd\+Move\+To\+Home}} ()
+\begin{DoxyCompactList}\small\item\em Cmd\+Move\+To\+Home. Move to Home position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a12a2a0bec6e964c681891dde050493e7}\label{classmtcl_1_1_dobot_a12a2a0bec6e964c681891dde050493e7}} 
+bool {\bfseries On\+Start} () override
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a0316a21322be29b100c3df2229e779ce}\label{classmtcl_1_1_dobot_a0316a21322be29b100c3df2229e779ce}} 
+void {\bfseries On\+Stop} () override
+\item 
+bool \mbox{\hyperlink{classmtcl_1_1_dobot_a16eb0176ca06f369b1311ff24d39dac9}{Update\+Current\+Position}} () override
+\begin{DoxyCompactList}\small\item\em Update\+Current\+Position. For Internal use. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_dobot_aedc1e8b6a10c3ca07b20a8a1f811b930}\label{classmtcl_1_1_dobot_aedc1e8b6a10c3ca07b20a8a1f811b930}} 
+void {\bfseries On\+Do\+Work} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_dobot}{Dobot}} class. Concrete \mbox{\hyperlink{classmtcl_1_1_dobot}{Dobot}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a296f9b5bef7bb456bc576a3a4d3aa881}\label{classmtcl_1_1_dobot_a296f9b5bef7bb456bc576a3a4d3aa881}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!CmdJogStart@{CmdJogStart}}
+\index{CmdJogStart@{CmdJogStart}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{CmdJogStart()}{CmdJogStart()}}
+{\footnotesize\ttfamily void mtcl\+::\+Dobot\+::\+Cmd\+Jog\+Start (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{bool}]{is\+Joint }\end{DoxyParamCaption})}
+
+
+
+Cmd\+Jog\+Start. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & \\
+\hline
+{\em is\+Joint} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a060f9a3327d9e944c81a5650bbc914b8}\label{classmtcl_1_1_dobot_a060f9a3327d9e944c81a5650bbc914b8}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!CmdJogStop@{CmdJogStop}}
+\index{CmdJogStop@{CmdJogStop}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{CmdJogStop()}{CmdJogStop()}}
+{\footnotesize\ttfamily void mtcl\+::\+Dobot\+::\+Cmd\+Jog\+Stop (\begin{DoxyParamCaption}\item[{bool}]{is\+Joint }\end{DoxyParamCaption})}
+
+
+
+Cmd\+Jog\+Stop. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Joint} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_ad0bf0486400e46109760d0d3be5a248b}\label{classmtcl_1_1_dobot_ad0bf0486400e46109760d0d3be5a248b}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!CmdPTP@{CmdPTP}}
+\index{CmdPTP@{CmdPTP}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{CmdPTP()}{CmdPTP()}}
+{\footnotesize\ttfamily void mtcl\+::\+Dobot\+::\+Cmd\+P\+TP (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{float}]{r }\end{DoxyParamCaption})}
+
+
+
+Cmd\+P\+TP. Move to position using P\+TP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+{\em z} & \\
+\hline
+{\em r} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a39f884030310407fa2d1bc1e5862ff40}\label{classmtcl_1_1_dobot_a39f884030310407fa2d1bc1e5862ff40}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!GetCurrentJointAngle@{GetCurrentJointAngle}}
+\index{GetCurrentJointAngle@{GetCurrentJointAngle}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{GetCurrentJointAngle()}{GetCurrentJointAngle()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Dobot\+::\+Get\+Current\+Joint\+Angle (\begin{DoxyParamCaption}\item[{double \&}]{j1,  }\item[{double \&}]{j2,  }\item[{double \&}]{j3,  }\item[{double \&}]{j4 }\end{DoxyParamCaption})}
+
+
+
+Get\+Current\+Joint\+Angle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j1} & \\
+\hline
+{\em j2} & \\
+\hline
+{\em j3} & \\
+\hline
+{\em j4} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a74019917030f17961d68f716044a7b37}\label{classmtcl_1_1_dobot_a74019917030f17961d68f716044a7b37}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!GetCurrentPosition@{GetCurrentPosition}}
+\index{GetCurrentPosition@{GetCurrentPosition}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{GetCurrentPosition()}{GetCurrentPosition()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Dobot\+::\+Get\+Current\+Position (\begin{DoxyParamCaption}\item[{double \&}]{x,  }\item[{double \&}]{y,  }\item[{double \&}]{z,  }\item[{double \&}]{theta\+In\+Degs }\end{DoxyParamCaption})}
+
+
+
+Get\+Current\+Position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+{\em z} & \\
+\hline
+{\em theta\+In\+Degs} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a4eb2c07d9ea785cee944a60b0e4f51c6}\label{classmtcl_1_1_dobot_a4eb2c07d9ea785cee944a60b0e4f51c6}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!MovePosition@{MovePosition}}
+\index{MovePosition@{MovePosition}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{MovePosition()}{MovePosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool mtcl\+::\+Dobot\+::\+Move\+Position (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{z,  }\item[{double}]{theta\+In\+Degs }\end{DoxyParamCaption})}
+
+
+
+Move\+Position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+{\em z} & \\
+\hline
+{\em theta\+In\+Degs} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a3bae7969b07e932337d3e07e710389c5}\label{classmtcl_1_1_dobot_a3bae7969b07e932337d3e07e710389c5}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!MovePosition@{MovePosition}}
+\index{MovePosition@{MovePosition}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{MovePosition()}{MovePosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool mtcl\+::\+Dobot\+::\+Move\+Position (\begin{DoxyParamCaption}\item[{unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Move\+Position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_a6e578e0bc6ae4b9e79d564655a0f0775}{mtcl\+::\+I\+Robot}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_dobot_a16eb0176ca06f369b1311ff24d39dac9}\label{classmtcl_1_1_dobot_a16eb0176ca06f369b1311ff24d39dac9}} 
+\index{mtcl::Dobot@{mtcl::Dobot}!UpdateCurrentPosition@{UpdateCurrentPosition}}
+\index{UpdateCurrentPosition@{UpdateCurrentPosition}!mtcl::Dobot@{mtcl::Dobot}}
+\doxysubsubsection{\texorpdfstring{UpdateCurrentPosition()}{UpdateCurrentPosition()}}
+{\footnotesize\ttfamily bool mtcl\+::\+Dobot\+::\+Update\+Current\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Update\+Current\+Position. For Internal use. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_a290504b4bd2679642946ffc0f04e1d00}{mtcl\+::\+I\+Robot}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/dobot/include/metacommlib/dobot/Dobot.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/dobot/src/Dobot.\+cpp\end{DoxyCompactItemize}

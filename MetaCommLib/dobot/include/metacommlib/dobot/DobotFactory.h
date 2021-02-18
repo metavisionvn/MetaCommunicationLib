@@ -5,6 +5,9 @@
 
 namespace mtcl {
 
+/**
+ * @brief The DobotFactory class. Concrete factory of Dobot
+ */
 class METACOMMLIB_EXPORT DobotFactory : public IRobotFactory
 {
 public:

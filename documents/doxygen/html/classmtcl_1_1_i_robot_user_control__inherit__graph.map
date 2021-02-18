@@ -1,0 +1,7 @@
+<map id="mtcl::IRobotUserControl" name="mtcl::IRobotUserControl">
+<area shape="rect" id="node1" title="The IRobotUserControl class. Abstract class of robot user control." alt="" coords="146,80,306,107"/>
+<area shape="rect" id="node3" href="$class_dobot_control_form.html" title=" " alt="" coords="5,155,132,181"/>
+<area shape="rect" id="node4" href="$class_janome_control_form.html" title=" " alt="" coords="157,155,295,181"/>
+<area shape="rect" id="node5" href="$class_techman_control_form.html" title=" " alt="" coords="319,155,466,181"/>
+<area shape="rect" id="node2" title=" " alt="" coords="189,5,263,32"/>
+</map>

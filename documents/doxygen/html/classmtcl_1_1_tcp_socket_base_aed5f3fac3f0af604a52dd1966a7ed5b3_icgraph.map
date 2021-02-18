@@ -1,0 +1,4 @@
+<map id="mtcl::TcpSocketBase::OnReceivedMsgChanged" name="mtcl::TcpSocketBase::OnReceivedMsgChanged">
+<area shape="rect" id="node1" title="OnReceivedMsgChanged." alt="" coords="253,5,428,47"/>
+<area shape="rect" id="node2" href="$classmtcl_1_1_tcp_socket_base.html#a0f1b18cebee78bd7fa63d4c432383dac" title="HandleDataReceivedChanged." alt="" coords="5,5,205,47"/>
+</map>

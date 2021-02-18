@@ -28,6 +28,9 @@ typedef enum e_JanomeMecaInitializeStatus
     JMIS_Finished
 }JanomeMecaInitializeStatus;
 
+/**
+ * @brief The JanomeRobotInformation class
+ */
 class METACOMMLIB_EXPORT JanomeRobotInformation
 {
 public:

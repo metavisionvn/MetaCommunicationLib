@@ -214,6 +214,11 @@ void Janome::SetRobotJogMoving(bool isMoving)
     }
 }
 
+/**
+ * @brief Janome::JogMovingFnc
+ * @details Every 100ms one message is sent to robot to keep jogging. Robot will check every 150ms.
+ * If no message is sent, robot will stop.
+ */
 void Janome::JogMovingFnc()
 {
     if (mJoggingThread != nullptr)

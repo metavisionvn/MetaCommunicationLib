@@ -6,8 +6,9 @@
 namespace mtcl
 {
 /**
- * @brief The RobotPosition class.
- * Position of robot include x, y, r (theta)
+ * @brief The RobotPosition abstract class.
+ * Position of robot include x, y, z, r (theta)
+ * If one axis not supported, one exception thrown.
  */
 class METACOMMLIB_EXPORT IRobotPosition
 {

@@ -1,0 +1,4 @@
+<map id="mtcl::DobotFactory" name="mtcl::DobotFactory">
+<area shape="rect" id="node1" title="The DobotFactory class. Concrete factory of Dobot." alt="" coords="7,80,140,107"/>
+<area shape="rect" id="node2" href="$classmtcl_1_1_i_robot_factory.html" title="The IRobotFactory class." alt="" coords="5,5,141,32"/>
+</map>

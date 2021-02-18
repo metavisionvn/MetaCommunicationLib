@@ -1,0 +1,5 @@
+<map id="mtcl::TcpServer" name="mtcl::TcpServer">
+<area shape="rect" id="node1" title="The TcpServer class. Establish connection to target by using TCP/IP. &#160;Working in Server mode." alt="" coords="23,155,135,181"/>
+<area shape="rect" id="node2" href="$classmtcl_1_1_tcp_socket_base.html" title="The TcpSocketBase class. Abstract class for TCP/IP connection." alt="" coords="5,80,152,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="43,5,114,32"/>
+</map>

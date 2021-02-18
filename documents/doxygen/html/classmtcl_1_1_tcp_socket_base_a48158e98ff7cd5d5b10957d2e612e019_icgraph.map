@@ -1,0 +1,5 @@
+<map id="mtcl::TcpSocketBase::OnConnectionChanged" name="mtcl::TcpSocketBase::OnConnectionChanged">
+<area shape="rect" id="node1" title="OnConnectionChanged. Inform on Connection status." alt="" coords="240,39,403,80"/>
+<area shape="rect" id="node2" href="$classmtcl_1_1_tcp_socket_base.html#a59f61f41efbf82ff5aefae399488d692" title="HandleConnectedChanged." alt="" coords="7,5,190,47"/>
+<area shape="rect" id="node3" href="$classmtcl_1_1_tcp_socket_base.html#a9cd740788590529a1303dbbb51922446" title="HandleDisconnectChanged." alt="" coords="5,71,192,112"/>
+</map>

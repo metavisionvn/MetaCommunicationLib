@@ -1,0 +1,71 @@
+\hypertarget{class_udp_port}{}\doxysection{Udp\+Port Class Reference}
+\label{class_udp_port}\index{UdpPort@{UdpPort}}
+
+
+Inheritance diagram for Udp\+Port\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=142pt]{class_udp_port__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Udp\+Port\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=142pt]{class_udp_port__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_udp_port_a3a8715f2d6fa818c53f4ba86bd09cb0b}\label{class_udp_port_a3a8715f2d6fa818c53f4ba86bd09cb0b}} 
+void {\bfseries Set\+Heart\+Beart\+Emit} (bool)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_udp_port_aa191adc5085896707b6055c7f4ff4ff0}\label{class_udp_port_aa191adc5085896707b6055c7f4ff4ff0}} 
+{\bfseries Udp\+Port} (Q\+Object $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_udp_port_a704f1fc0968e5281e40b8cdc011344bd}\label{class_udp_port_a704f1fc0968e5281e40b8cdc011344bd}} 
+bool {\bfseries open} (Open\+Mode mode) Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a593a378c4dacf063c1b2aa2ddae71967}\label{class_udp_port_a593a378c4dacf063c1b2aa2ddae71967}} 
+void {\bfseries close} () Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a949aa705fd9765dac1fd06dcc2e8b0e7}\label{class_udp_port_a949aa705fd9765dac1fd06dcc2e8b0e7}} 
+void {\bfseries set\+Addr} (const Q\+String \&name)
+\item 
+\mbox{\Hypertarget{class_udp_port_ab1dac3d3d4c31dce7655b6b82e1b2715}\label{class_udp_port_ab1dac3d3d4c31dce7655b6b82e1b2715}} 
+bool {\bfseries can\+Read\+Line} () const Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a7fbd41b9411a26963ed4f99aa16210e7}\label{class_udp_port_a7fbd41b9411a26963ed4f99aa16210e7}} 
+qint64 {\bfseries bytes\+Available} () const Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a8816ec91861a1da1c33a5a95a052c28d}\label{class_udp_port_a8816ec91861a1da1c33a5a95a052c28d}} 
+qint64 {\bfseries bytes\+To\+Write} () const Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a44435894bd9ebb4eacd6694922038fe7}\label{class_udp_port_a44435894bd9ebb4eacd6694922038fe7}} 
+bool {\bfseries wait\+For\+Ready\+Read} (int msecs) Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a31b21f5258f7e00dd9a5b3188ba3f069}\label{class_udp_port_a31b21f5258f7e00dd9a5b3188ba3f069}} 
+bool {\bfseries wait\+For\+Bytes\+Written} (int msecs) Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_aa3b482c009eea084e801ebf22959af75}\label{class_udp_port_aa3b482c009eea084e801ebf22959af75}} 
+qint64 {\bfseries read\+Data} (char $\ast$data, qint64 maxlen) Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_a4ecd5141a895930f1c5a167dbf0da4ee}\label{class_udp_port_a4ecd5141a895930f1c5a167dbf0da4ee}} 
+qint64 {\bfseries read\+Line\+Data} (char $\ast$data, qint64 maxlen) Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\item 
+\mbox{\Hypertarget{class_udp_port_ac866daded6c9983e0515d8fd3758c497}\label{class_udp_port_ac866daded6c9983e0515d8fd3758c497}} 
+qint64 {\bfseries write\+Data} (const char $\ast$data, qint64 len) Q\+\_\+\+D\+E\+C\+L\+\_\+\+O\+V\+E\+R\+R\+I\+DE
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/dobot/include/metacommlib/dobot/\+Dobot\+Device/Udp\+Port.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/dobot/src/\+Dobot\+Device/Udp\+Port.\+cpp\end{DoxyCompactItemize}

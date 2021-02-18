@@ -1,0 +1,7 @@
+<map id="tagProtocolHandler" name="tagProtocolHandler">
+<area shape="rect" id="node1" title=" " alt="" coords="135,228,267,255"/>
+<area shape="rect" id="node2" href="$structtag_packet.html" title=" " alt="" coords="103,95,185,121"/>
+<area shape="rect" id="node3" href="$structtag_packet_payload.html" title=" " alt="" coords="5,5,133,32"/>
+<area shape="rect" id="node4" href="$structtag_packet_header.html" title=" " alt="" coords="157,5,280,32"/>
+<area shape="rect" id="node5" href="$structtag_ring_buffer.html" title=" " alt="" coords="209,95,308,121"/>
+</map>

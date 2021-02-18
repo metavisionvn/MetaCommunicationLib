@@ -1,0 +1,87 @@
+\hypertarget{classmtcl_1_1_dobot_factory}{}\doxysection{mtcl\+::Dobot\+Factory Class Reference}
+\label{classmtcl_1_1_dobot_factory}\index{mtcl::DobotFactory@{mtcl::DobotFactory}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_dobot_factory}{Dobot\+Factory}} class. Concrete factory of \mbox{\hyperlink{classmtcl_1_1_dobot}{Dobot}}.  
+
+
+
+
+{\ttfamily \#include $<$Dobot\+Factory.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::Dobot\+Factory\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classmtcl_1_1_dobot_factory__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::Dobot\+Factory\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{classmtcl_1_1_dobot_factory__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+shared\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot}{I\+Robot}} $>$ \mbox{\hyperlink{classmtcl_1_1_dobot_factory_a213b0250429398d7f494e1204aab6252}{Create\+Robot}} () override
+\begin{DoxyCompactList}\small\item\em Create\+Robot. Create concrete robot. \end{DoxyCompactList}\item 
+shared\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control}{I\+Robot\+User\+Control}} $>$ \mbox{\hyperlink{classmtcl_1_1_dobot_factory_ad399ed88dfbd661c7b2c97419a764915}{Create\+Robot\+User\+Control}} (Q\+Widget $\ast$parent=nullptr) override
+\begin{DoxyCompactList}\small\item\em Create\+Robot\+User\+Control. Create concrete robot user control (UI) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_dobot_factory}{Dobot\+Factory}} class. Concrete factory of \mbox{\hyperlink{classmtcl_1_1_dobot}{Dobot}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_dobot_factory_a213b0250429398d7f494e1204aab6252}\label{classmtcl_1_1_dobot_factory_a213b0250429398d7f494e1204aab6252}} 
+\index{mtcl::DobotFactory@{mtcl::DobotFactory}!CreateRobot@{CreateRobot}}
+\index{CreateRobot@{CreateRobot}!mtcl::DobotFactory@{mtcl::DobotFactory}}
+\doxysubsubsection{\texorpdfstring{CreateRobot()}{CreateRobot()}}
+{\footnotesize\ttfamily shared\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot}{I\+Robot}} $>$ mtcl\+::\+Dobot\+Factory\+::\+Create\+Robot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Create\+Robot. Create concrete robot. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_factory_a7cffdbda2d90076103c8524424ac4d3f}{mtcl\+::\+I\+Robot\+Factory}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_dobot_factory_ad399ed88dfbd661c7b2c97419a764915}\label{classmtcl_1_1_dobot_factory_ad399ed88dfbd661c7b2c97419a764915}} 
+\index{mtcl::DobotFactory@{mtcl::DobotFactory}!CreateRobotUserControl@{CreateRobotUserControl}}
+\index{CreateRobotUserControl@{CreateRobotUserControl}!mtcl::DobotFactory@{mtcl::DobotFactory}}
+\doxysubsubsection{\texorpdfstring{CreateRobotUserControl()}{CreateRobotUserControl()}}
+{\footnotesize\ttfamily shared\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control}{I\+Robot\+User\+Control}} $>$ mtcl\+::\+Dobot\+Factory\+::\+Create\+Robot\+User\+Control (\begin{DoxyParamCaption}\item[{Q\+Widget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Create\+Robot\+User\+Control. Create concrete robot user control (UI) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classmtcl_1_1_i_robot_factory_a784e8efe37b7b638a43b09216c457b0c}{mtcl\+::\+I\+Robot\+Factory}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/dobot/include/metacommlib/dobot/Dobot\+Factory.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/dobot/src/Dobot\+Factory.\+cpp\end{DoxyCompactItemize}

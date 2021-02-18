@@ -5,6 +5,9 @@
 
 namespace mtcl {
 
+/**
+ * @brief The JanomeFactory class. Concrete factory of Janome robot
+ */
 class METACOMMLIB_EXPORT JanomeFactory : public IRobotFactory
 {
 public:

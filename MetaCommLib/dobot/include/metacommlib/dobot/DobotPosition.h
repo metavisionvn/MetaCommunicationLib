@@ -5,6 +5,9 @@
 
 namespace mtcl {
 
+/**
+ * @brief The DobotPosition class. Concrete position of Dobot
+ */
 class METACOMMLIB_EXPORT DobotPosition : public IRobotPosition
 {
 public:

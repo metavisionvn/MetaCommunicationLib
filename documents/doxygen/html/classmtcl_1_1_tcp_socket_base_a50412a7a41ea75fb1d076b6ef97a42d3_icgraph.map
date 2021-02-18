@@ -1,0 +1,4 @@
+<map id="mtcl::TcpSocketBase::OnSendMessageChanged" name="mtcl::TcpSocketBase::OnSendMessageChanged">
+<area shape="rect" id="node1" title="OnSendMessageChanged." alt="" coords="207,5,388,47"/>
+<area shape="rect" id="node2" href="$classmtcl_1_1_tcp_socket_base.html#aaf4dd8891afb3f825c1a7d3585fa8f1d" title="HandleSendMessage. Using slot to send message to target. To handle cross&#45;thread issue." alt="" coords="5,5,159,47"/>
+</map>

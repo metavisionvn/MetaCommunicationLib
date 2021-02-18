@@ -1,0 +1,298 @@
+\hypertarget{classmtcl_1_1_i_robot}{}\doxysection{mtcl\+::I\+Robot Class Reference}
+\label{classmtcl_1_1_i_robot}\index{mtcl::IRobot@{mtcl::IRobot}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_i_robot}{I\+Robot}} class.  
+
+
+
+
+{\ttfamily \#include $<$I\+Robot.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::I\+Robot\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{classmtcl_1_1_i_robot__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::I\+Robot\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classmtcl_1_1_i_robot__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmtcl_1_1_i_robot_aa793eb9b522d335a413977662bc1ca2a}{On\+Connection\+Status\+Changed}} (int status)
+\begin{DoxyCompactList}\small\item\em On\+Connection\+Status\+Changed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmtcl_1_1_i_robot_ab5d34ac0c356650dd2b7b15a6fad742d}{On\+Moving\+Status\+Changed}} (int status)
+\begin{DoxyCompactList}\small\item\em On\+Moving\+Status\+Changed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a6fd221b8aef9e719198e3b81928da59e}\label{classmtcl_1_1_i_robot_a6fd221b8aef9e719198e3b81928da59e}} 
+void \mbox{\hyperlink{classmtcl_1_1_i_robot_a6fd221b8aef9e719198e3b81928da59e}{On\+Position\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em On\+Position\+Changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Robot\+Connection\+Status \mbox{\hyperlink{classmtcl_1_1_i_robot_a51526019b128cd3626d4aaf3bb4461b8}{Get\+Connection\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get\+Connection\+Status. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmtcl_1_1_i_robot_a862a2b7bd68ea89ae1de02c3f2a28ab8}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start. Initialize, establish connection with robot. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a42f4fe11b083f3c0449ded7d4f3c37bb}\label{classmtcl_1_1_i_robot_a42f4fe11b083f3c0449ded7d4f3c37bb}} 
+bool {\bfseries Stop} ()
+\item 
+void \mbox{\hyperlink{classmtcl_1_1_i_robot_a65c2e152e4e142dda88311478d271323}{Set\+Refresh\+Time\+Interval}} (double interval\+In\+Milisecs)
+\begin{DoxyCompactList}\small\item\em Set\+Refresh\+Time\+Interval\+: time to update robot\textquotesingle{}s status. Default value is 200ms. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $\ast$ \mbox{\hyperlink{classmtcl_1_1_i_robot_aa3028d3d2ec3bec6aa64ea9f779ac32c}{Get\+Current\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Get\+Current\+Position. Position of robot which updated time-\/by-\/time. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classmtcl_1_1_i_robot_a6e578e0bc6ae4b9e79d564655a0f0775}{Move\+Position}} (unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$ position)=0
+\begin{DoxyCompactList}\small\item\em Move\+Position. Move robot to the pre-\/set position. When robot reaches to that position, one signal is emitted. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classmtcl_1_1_i_robot_ad57f943932b5697fc1440bcb989c8944}{Get\+Robot\+Serial\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Get\+Robot\+Serial\+Number. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classmtcl_1_1_i_robot_ab0864a0cbc36076c4b22455b326668a8}{Get\+Robot\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get\+Robot\+Name. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classmtcl_1_1_i_robot_a7e3e7300a0c13a430bc4216250c16451}{Get\+Robot\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Get\+Robot\+Version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a412ac9c9af3c2564b653c29df5aa4c5e}\label{classmtcl_1_1_i_robot_a412ac9c9af3c2564b653c29df5aa4c5e}} 
+virtual void \mbox{\hyperlink{classmtcl_1_1_i_robot_a412ac9c9af3c2564b653c29df5aa4c5e}{Start\+Background\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Start\+Background\+Thread. Start worker-\/thread to update position of robot. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classmtcl_1_1_i_robot_a290504b4bd2679642946ffc0f04e1d00}{Update\+Current\+Position}} ()=0
+\begin{DoxyCompactList}\small\item\em Update\+Current\+Position. For Internal use. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a34436ab4417a551b0694b5ff89a8225e}\label{classmtcl_1_1_i_robot_a34436ab4417a551b0694b5ff89a8225e}} 
+virtual bool {\bfseries On\+Start} ()=0
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_af92c2ddc367f1d4fefce8bc2062d0cd1}\label{classmtcl_1_1_i_robot_af92c2ddc367f1d4fefce8bc2062d0cd1}} 
+virtual void {\bfseries On\+Stop} ()=0
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_ac471a2dd13c8dd49e7fe0ac844f65e97}\label{classmtcl_1_1_i_robot_ac471a2dd13c8dd49e7fe0ac844f65e97}} 
+virtual void {\bfseries On\+Do\+Work} ()=0
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_ad72386efa809e8067c32c19b566bb232}\label{classmtcl_1_1_i_robot_ad72386efa809e8067c32c19b566bb232}} 
+void {\bfseries Set\+Connection\+Status} (Robot\+Connection\+Status status)
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_aabcb8be1041fd579cde5405927af7fd9}\label{classmtcl_1_1_i_robot_aabcb8be1041fd579cde5405927af7fd9}} 
+void {\bfseries Set\+Moving\+Status} (Robot\+Moving\+Status status)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $\ast$ \mbox{\hyperlink{classmtcl_1_1_i_robot_abc42e09e8f8b7f1b95fbfe5eaa062167}{m\+Current\+Position}}
+\item 
+string \mbox{\hyperlink{classmtcl_1_1_i_robot_a87104d032a4a610f3c4116d5e666d1a6}{m\+Device\+Serial\+Number}}
+\item 
+string \mbox{\hyperlink{classmtcl_1_1_i_robot_ab3658c6e584477344c527f749ac6df8e}{m\+Device\+Name}}
+\item 
+string \mbox{\hyperlink{classmtcl_1_1_i_robot_a295510baa64c2bd51bf973426d211db6}{m\+Device\+Version}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_i_robot}{I\+Robot}} class. 
+
+Interface of Robot (abstract class). To instantiate, use concreate factory. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a51526019b128cd3626d4aaf3bb4461b8}\label{classmtcl_1_1_i_robot_a51526019b128cd3626d4aaf3bb4461b8}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!GetConnectionStatus@{GetConnectionStatus}}
+\index{GetConnectionStatus@{GetConnectionStatus}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{GetConnectionStatus()}{GetConnectionStatus()}}
+{\footnotesize\ttfamily Robot\+Connection\+Status mtcl\+::\+I\+Robot\+::\+Get\+Connection\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get\+Connection\+Status. 
+
+0 undefined; 1 connected; 2 disconnected \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_aa3028d3d2ec3bec6aa64ea9f779ac32c}\label{classmtcl_1_1_i_robot_aa3028d3d2ec3bec6aa64ea9f779ac32c}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!GetCurrentPosition@{GetCurrentPosition}}
+\index{GetCurrentPosition@{GetCurrentPosition}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{GetCurrentPosition()}{GetCurrentPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $\ast$ mtcl\+::\+I\+Robot\+::\+Get\+Current\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get\+Current\+Position. Position of robot which updated time-\/by-\/time. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_ab0864a0cbc36076c4b22455b326668a8}\label{classmtcl_1_1_i_robot_ab0864a0cbc36076c4b22455b326668a8}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!GetRobotName@{GetRobotName}}
+\index{GetRobotName@{GetRobotName}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{GetRobotName()}{GetRobotName()}}
+{\footnotesize\ttfamily string mtcl\+::\+I\+Robot\+::\+Get\+Robot\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get\+Robot\+Name. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_ad57f943932b5697fc1440bcb989c8944}\label{classmtcl_1_1_i_robot_ad57f943932b5697fc1440bcb989c8944}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!GetRobotSerialNumber@{GetRobotSerialNumber}}
+\index{GetRobotSerialNumber@{GetRobotSerialNumber}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{GetRobotSerialNumber()}{GetRobotSerialNumber()}}
+{\footnotesize\ttfamily string mtcl\+::\+I\+Robot\+::\+Get\+Robot\+Serial\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get\+Robot\+Serial\+Number. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a7e3e7300a0c13a430bc4216250c16451}\label{classmtcl_1_1_i_robot_a7e3e7300a0c13a430bc4216250c16451}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!GetRobotVersion@{GetRobotVersion}}
+\index{GetRobotVersion@{GetRobotVersion}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{GetRobotVersion()}{GetRobotVersion()}}
+{\footnotesize\ttfamily string mtcl\+::\+I\+Robot\+::\+Get\+Robot\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get\+Robot\+Version. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a6e578e0bc6ae4b9e79d564655a0f0775}\label{classmtcl_1_1_i_robot_a6e578e0bc6ae4b9e79d564655a0f0775}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!MovePosition@{MovePosition}}
+\index{MovePosition@{MovePosition}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{MovePosition()}{MovePosition()}}
+{\footnotesize\ttfamily virtual bool mtcl\+::\+I\+Robot\+::\+Move\+Position (\begin{DoxyParamCaption}\item[{unique\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}} $>$}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Move\+Position. Move robot to the pre-\/set position. When robot reaches to that position, one signal is emitted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classmtcl_1_1_janome_a89454ec60888e10d881c26f9be782b6e}{mtcl\+::\+Janome}}, \mbox{\hyperlink{classmtcl_1_1_dobot_a3bae7969b07e932337d3e07e710389c5}{mtcl\+::\+Dobot}}, and \mbox{\hyperlink{classmtcl_1_1_techman_addbe346a4ca1d2895770fa0191edc783}{mtcl\+::\+Techman}}.
+
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_aa793eb9b522d335a413977662bc1ca2a}\label{classmtcl_1_1_i_robot_aa793eb9b522d335a413977662bc1ca2a}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!OnConnectionStatusChanged@{OnConnectionStatusChanged}}
+\index{OnConnectionStatusChanged@{OnConnectionStatusChanged}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{OnConnectionStatusChanged}{OnConnectionStatusChanged}}
+{\footnotesize\ttfamily void mtcl\+::\+I\+Robot\+::\+On\+Connection\+Status\+Changed (\begin{DoxyParamCaption}\item[{int}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Connection\+Status\+Changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & 0 (undefined); 1(connected); 2(disconnected) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_ab5d34ac0c356650dd2b7b15a6fad742d}\label{classmtcl_1_1_i_robot_ab5d34ac0c356650dd2b7b15a6fad742d}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!OnMovingStatusChanged@{OnMovingStatusChanged}}
+\index{OnMovingStatusChanged@{OnMovingStatusChanged}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{OnMovingStatusChanged}{OnMovingStatusChanged}}
+{\footnotesize\ttfamily void mtcl\+::\+I\+Robot\+::\+On\+Moving\+Status\+Changed (\begin{DoxyParamCaption}\item[{int}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+On\+Moving\+Status\+Changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & 0 (moving); 1 (move done) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a65c2e152e4e142dda88311478d271323}\label{classmtcl_1_1_i_robot_a65c2e152e4e142dda88311478d271323}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!SetRefreshTimeInterval@{SetRefreshTimeInterval}}
+\index{SetRefreshTimeInterval@{SetRefreshTimeInterval}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{SetRefreshTimeInterval()}{SetRefreshTimeInterval()}}
+{\footnotesize\ttfamily void mtcl\+::\+I\+Robot\+::\+Set\+Refresh\+Time\+Interval (\begin{DoxyParamCaption}\item[{double}]{interval\+In\+Milisecs }\end{DoxyParamCaption})}
+
+
+
+Set\+Refresh\+Time\+Interval\+: time to update robot\textquotesingle{}s status. Default value is 200ms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval\+In\+Milisecs} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a862a2b7bd68ea89ae1de02c3f2a28ab8}\label{classmtcl_1_1_i_robot_a862a2b7bd68ea89ae1de02c3f2a28ab8}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!Start@{Start}}
+\index{Start@{Start}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily bool mtcl\+::\+I\+Robot\+::\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start. Initialize, establish connection with robot. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_a290504b4bd2679642946ffc0f04e1d00}\label{classmtcl_1_1_i_robot_a290504b4bd2679642946ffc0f04e1d00}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!UpdateCurrentPosition@{UpdateCurrentPosition}}
+\index{UpdateCurrentPosition@{UpdateCurrentPosition}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{UpdateCurrentPosition()}{UpdateCurrentPosition()}}
+{\footnotesize\ttfamily virtual bool mtcl\+::\+I\+Robot\+::\+Update\+Current\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Update\+Current\+Position. For Internal use. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classmtcl_1_1_janome_a3768bc47772335be10154950828a0af6}{mtcl\+::\+Janome}}, \mbox{\hyperlink{classmtcl_1_1_dobot_a16eb0176ca06f369b1311ff24d39dac9}{mtcl\+::\+Dobot}}, and \mbox{\hyperlink{classmtcl_1_1_techman_aad647950ce66f212ce912cbfe595d954}{mtcl\+::\+Techman}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_abc42e09e8f8b7f1b95fbfe5eaa062167}\label{classmtcl_1_1_i_robot_abc42e09e8f8b7f1b95fbfe5eaa062167}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!mCurrentPosition@{mCurrentPosition}}
+\index{mCurrentPosition@{mCurrentPosition}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{mCurrentPosition}{mCurrentPosition}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmtcl_1_1_i_robot_position}{I\+Robot\+Position}}$\ast$ mtcl\+::\+I\+Robot\+::m\+Current\+Position\hspace{0.3cm}{\ttfamily [protected]}}
+
+Current position of robot \mbox{\Hypertarget{classmtcl_1_1_i_robot_ab3658c6e584477344c527f749ac6df8e}\label{classmtcl_1_1_i_robot_ab3658c6e584477344c527f749ac6df8e}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!mDeviceName@{mDeviceName}}
+\index{mDeviceName@{mDeviceName}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{mDeviceName}{mDeviceName}}
+{\footnotesize\ttfamily string mtcl\+::\+I\+Robot\+::m\+Device\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+Name of robot \mbox{\Hypertarget{classmtcl_1_1_i_robot_a87104d032a4a610f3c4116d5e666d1a6}\label{classmtcl_1_1_i_robot_a87104d032a4a610f3c4116d5e666d1a6}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!mDeviceSerialNumber@{mDeviceSerialNumber}}
+\index{mDeviceSerialNumber@{mDeviceSerialNumber}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{mDeviceSerialNumber}{mDeviceSerialNumber}}
+{\footnotesize\ttfamily string mtcl\+::\+I\+Robot\+::m\+Device\+Serial\+Number\hspace{0.3cm}{\ttfamily [protected]}}
+
+Serial number of robot \mbox{\Hypertarget{classmtcl_1_1_i_robot_a295510baa64c2bd51bf973426d211db6}\label{classmtcl_1_1_i_robot_a295510baa64c2bd51bf973426d211db6}} 
+\index{mtcl::IRobot@{mtcl::IRobot}!mDeviceVersion@{mDeviceVersion}}
+\index{mDeviceVersion@{mDeviceVersion}!mtcl::IRobot@{mtcl::IRobot}}
+\doxysubsubsection{\texorpdfstring{mDeviceVersion}{mDeviceVersion}}
+{\footnotesize\ttfamily string mtcl\+::\+I\+Robot\+::m\+Device\+Version\hspace{0.3cm}{\ttfamily [protected]}}
+
+Version of robot 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/include/metacommlib/I\+Robot.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/I\+Robot.\+cpp\end{DoxyCompactItemize}

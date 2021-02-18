@@ -1,0 +1,82 @@
+\hypertarget{classmtcl_1_1_i_robot_user_control}{}\doxysection{mtcl\+::I\+Robot\+User\+Control Class Reference}
+\label{classmtcl_1_1_i_robot_user_control}\index{mtcl::IRobotUserControl@{mtcl::IRobotUserControl}}
+
+
+The \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control}{I\+Robot\+User\+Control}} class. Abstract class of robot user control.  
+
+
+
+
+{\ttfamily \#include $<$I\+Robot\+User\+Control.\+h$>$}
+
+
+
+Inheritance diagram for mtcl\+::I\+Robot\+User\+Control\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmtcl_1_1_i_robot_user_control__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mtcl\+::I\+Robot\+User\+Control\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classmtcl_1_1_i_robot_user_control__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_user_control_aa214e98be47f33608f21689b38a98bcf}\label{classmtcl_1_1_i_robot_user_control_aa214e98be47f33608f21689b38a98bcf}} 
+{\bfseries I\+Robot\+User\+Control} (Q\+Widget $\ast$parent=nullptr)
+\item 
+virtual bool \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control_af00c274ff8348b534c9692be4d3214f6}{Set\+Robot}} (shared\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot}{mtcl\+::\+I\+Robot}} $>$ robot)=0
+\begin{DoxyCompactList}\small\item\em Set\+Robot. Set instantiate of robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_user_control_a9218ef9511fd270cf2fb544cbf3c8c3c}\label{classmtcl_1_1_i_robot_user_control_a9218ef9511fd270cf2fb544cbf3c8c3c}} 
+virtual void \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control_a9218ef9511fd270cf2fb544cbf3c8c3c}{Init\+Control}} ()=0
+\begin{DoxyCompactList}\small\item\em Init\+Control. Initialize control components. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_user_control_a34b2fe17284620e6a55b9d866ea8271c}\label{classmtcl_1_1_i_robot_user_control_a34b2fe17284620e6a55b9d866ea8271c}} 
+virtual void \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control_a34b2fe17284620e6a55b9d866ea8271c}{Refresh\+Btn}} ()=0
+\begin{DoxyCompactList}\small\item\em Refresh\+Btn. Set status of control components (enable/disable even hide) depends on status of robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_user_control_af16fd61f92263f08e4ff3225a7224da5}\label{classmtcl_1_1_i_robot_user_control_af16fd61f92263f08e4ff3225a7224da5}} 
+bool {\bfseries m\+Connect\+Status}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classmtcl_1_1_i_robot_user_control}{I\+Robot\+User\+Control}} class. Abstract class of robot user control. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmtcl_1_1_i_robot_user_control_af00c274ff8348b534c9692be4d3214f6}\label{classmtcl_1_1_i_robot_user_control_af00c274ff8348b534c9692be4d3214f6}} 
+\index{mtcl::IRobotUserControl@{mtcl::IRobotUserControl}!SetRobot@{SetRobot}}
+\index{SetRobot@{SetRobot}!mtcl::IRobotUserControl@{mtcl::IRobotUserControl}}
+\doxysubsubsection{\texorpdfstring{SetRobot()}{SetRobot()}}
+{\footnotesize\ttfamily virtual bool mtcl\+::\+I\+Robot\+User\+Control\+::\+Set\+Robot (\begin{DoxyParamCaption}\item[{shared\+\_\+ptr$<$ \mbox{\hyperlink{classmtcl_1_1_i_robot}{mtcl\+::\+I\+Robot}} $>$}]{robot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Set\+Robot. Set instantiate of robot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/include/metacommlib/I\+Robot\+User\+Control.\+h\item 
+F\+:/\+Workspace/baotrung.\+nguyen/\+Meta\+Vision/\+Vision\+Projects/\+Meta\+Communication\+Lib/\+Meta\+Comm\+Lib/I\+Robot\+User\+Control.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,7 @@
+<map id="CDobot" name="CDobot">
+<area shape="rect" id="node1" title=" " alt="" coords="145,171,211,197"/>
+<area shape="rect" id="node2" title=" " alt="" coords="111,5,181,32"/>
+<area shape="rect" id="node3" href="$class_c_dobot_communicator.html" title=" " alt="" coords="23,81,173,108"/>
+<area shape="rect" id="node4" href="$class_c_dobot_connector.html" title=" " alt="" coords="197,81,321,108"/>
+<area shape="rect" id="node5" href="$class_c_dobot_protocol.html" title=" " alt="" coords="345,81,459,108"/>
+</map>

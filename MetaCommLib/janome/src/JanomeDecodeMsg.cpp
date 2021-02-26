@@ -1,6 +1,7 @@
 #include <metacommlib/janome/JanomeDecodeMsg.h>
 #include <metacommlib/janome/Janome.h>
 #include <metacommlib/janome/JanomeRobotInformation.h>
+#include <cmath>
 
 namespace mtcl {
 

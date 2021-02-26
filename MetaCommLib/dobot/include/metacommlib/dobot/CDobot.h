@@ -28,4 +28,5 @@ public:
     QCoreApplication *app;
 };
 
+
 #endif // CDOBOT_H

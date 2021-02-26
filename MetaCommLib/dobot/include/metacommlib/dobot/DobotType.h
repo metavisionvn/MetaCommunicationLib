@@ -1,4 +1,4 @@
-﻿#ifndef DOBOTTYPE_H
+#ifndef DOBOTTYPE_H
 #define DOBOTTYPE_H
 
 #ifdef _MSC_VER

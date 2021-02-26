@@ -38,4 +38,4 @@ private:
     QScopedArrayPointer<Packet> rxPacketBuffer;
 };
 
-#endif // DOBOTPROTOCOL_H
+#endif // CDOBOTPROTOCOL_H

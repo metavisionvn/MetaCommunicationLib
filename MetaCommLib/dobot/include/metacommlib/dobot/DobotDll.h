@@ -1,4 +1,4 @@
-﻿#ifndef DOBOTDLL_H
+#ifndef DOBOTDLL_H
 #define DOBOTDLL_H
 
 #include "dobotdll_global.h"

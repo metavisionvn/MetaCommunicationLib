@@ -20,6 +20,8 @@ public:
     void GetConnectionAddress(string &ipAddress, int &port);
     bool GetCurrentPosition(double &x, double &y, double &z, double &thetaInDegs);
     bool MovePosition(double x, double y, double z, double thetaInDegs);
+    bool MovePosition(double x, double y) override;
+    bool MovePosition(double x, double y, double thetaInDegrees) override;
     bool MovePosition(unique_ptr<IRobotPosition> position) override;
 
     bool CmdReturnToHome();

@@ -52,6 +52,8 @@ public:
      * @return
      */
     bool MovePosition(double x, double y, double z, double thetaInDegs);
+    bool MovePosition(double x, double y) override;
+    bool MovePosition(double x, double y, double thetaInDegrees) override;
     /**
      * @brief MovePosition
      * @param position

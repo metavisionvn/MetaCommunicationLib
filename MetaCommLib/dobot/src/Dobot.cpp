@@ -85,6 +85,20 @@ bool Dobot::MovePosition(double x, double y, double z, double thetaInDegs)
     return true;
 }
 
+bool Dobot::MovePosition(double x, double y)
+{
+    double currentX = 0, currentY = 0, currentZ = 0, currentThetaInDegs = 0;
+    GetCurrentPosition(currentX, currentY, currentZ, currentThetaInDegs);
+    return MovePosition(x, y, currentZ, currentThetaInDegs);
+}
+
+bool Dobot::MovePosition(double x, double y, double thetaInDegrees)
+{
+    double currentX = 0, currentY = 0, currentZ = 0, currentThetaInDegs = 0;
+    GetCurrentPosition(currentX, currentY, currentZ, currentThetaInDegs);
+    return MovePosition(x, y, currentZ, thetaInDegrees);
+}
+
 bool Dobot::MovePosition(unique_ptr<IRobotPosition> position)
 {
     DobotPosition* pos = dynamic_cast<DobotPosition*>(position.get());

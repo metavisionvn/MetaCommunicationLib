@@ -75,6 +75,20 @@ bool Janome::MovePosition(double x, double y, double z, double thetaInDegs)
     return true;
 }
 
+bool Janome::MovePosition(double x, double y)
+{
+    double currentX = 0, currentY = 0, currentZ = 0, currentThetaInDegs = 0;
+    GetCurrentPosition(currentX, currentY, currentZ, currentThetaInDegs);
+    return MovePosition(x, y, currentZ, currentThetaInDegs);
+}
+
+bool Janome::MovePosition(double x, double y, double thetaInDegrees)
+{
+    double currentX = 0, currentY = 0, currentZ = 0, currentThetaInDegs = 0;
+    GetCurrentPosition(currentX, currentY, currentZ, currentThetaInDegs);
+    return MovePosition(x, y, currentZ, thetaInDegrees);
+}
+
 bool Janome::MovePosition(unique_ptr<IRobotPosition> position)
 {
     JanomePosition* pos = dynamic_cast<JanomePosition*>(position.get());

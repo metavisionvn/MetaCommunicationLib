@@ -34,6 +34,16 @@ bool Techman::MovePosition(double x, double y, double z, double thetaInDegs)
     return false;
 }
 
+bool Techman::MovePosition(double x, double y)
+{
+    return false;
+}
+
+bool Techman::MovePosition(double x, double y, double thetaInDegrees)
+{
+    return false;
+}
+
 bool Techman::MovePosition(unique_ptr<IRobotPosition> position)
 {
     return false;

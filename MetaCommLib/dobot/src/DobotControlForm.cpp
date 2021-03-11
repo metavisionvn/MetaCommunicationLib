@@ -31,6 +31,7 @@ DobotControlForm::DobotControlForm(QWidget *parent)
 
     connect(ui->ctrlSuckOn, SIGNAL(released()), this, SLOT(HandleSuckOn()));
     connect(ui->ctrlSuckOff, SIGNAL(released()), this, SLOT(HandleSuckOff()));
+    connect(ui->ctrlBtnHome, SIGNAL(released()), this, SLOT(onHome()));
 }
 
 DobotControlForm::~DobotControlForm()

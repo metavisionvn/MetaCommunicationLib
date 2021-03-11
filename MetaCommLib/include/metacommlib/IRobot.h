@@ -60,6 +60,8 @@ public:
      * @return
      */
     virtual bool MovePosition(unique_ptr<IRobotPosition> position) = 0;
+    virtual bool MovePosition(double x, double y) = 0;
+    virtual bool MovePosition(double x, double y, double thetaInDegrees) = 0;
 
     /**
      * @brief GetRobotSerialNumber

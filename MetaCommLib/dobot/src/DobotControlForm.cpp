@@ -45,6 +45,7 @@ DobotControlForm::~DobotControlForm()
 
 bool DobotControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
 {
+    cout << __FUNCTION__ << endl;
     bool ret = false;
     shared_ptr<mtcl::Dobot> derived = dynamic_pointer_cast<mtcl::Dobot>(robot);
     if (derived != nullptr)
@@ -54,6 +55,7 @@ bool DobotControlForm::SetRobot(shared_ptr<mtcl::IRobot> robot)
         connect(mptrDobot.get(), &mtcl::Dobot::OnConnectionStatusChanged, this, &DobotControlForm::HandleConnectionStatusChanged);
 
         ret = true;
+
     }
     return ret;
 }
